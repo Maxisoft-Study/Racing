@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Fichiers sources">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Fichiers de ressources">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Fichiers sources\EventHandler">
+      <UniqueIdentifier>{c6863bd1-efad-4d5e-bb3b-9e2442ac0c82}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\EventHandler">
+      <UniqueIdentifier>{a493c159-cd32-4cca-92e5-08dfc79b8e38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\GameBase">
+      <UniqueIdentifier>{1a65625a-ba5b-4453-bb67-f0bdb2bdef74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\GameBase">
+      <UniqueIdentifier>{a6eae9c2-6008-4770-ab00-0255fff3eb6d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\UI">
+      <UniqueIdentifier>{37e928c3-bb57-4777-b8b6-1d727c6e84b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\UI">
+      <UniqueIdentifier>{c19c367b-9cf7-4d1b-800b-9ec3f3655046}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="EventHandler.h">
+      <Filter>Fichiers d%27en-tête\EventHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="InGameEventHandler.h">
+      <Filter>Fichiers d%27en-tête\EventHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="GConst.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseEventHandler.h">
+      <Filter>Fichiers d%27en-tête\EventHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Fichiers d%27en-tête\GameBase</Filter>
+    </ClInclude>
+    <ClInclude Include="Car.h">
+      <Filter>Fichiers d%27en-tête\GameBase</Filter>
+    </ClInclude>
+    <ClInclude Include="Level.h">
+      <Filter>Fichiers d%27en-tête\GameBase</Filter>
+    </ClInclude>
+    <ClInclude Include="Ground.h">
+      <Filter>Fichiers d%27en-tête\GameBase</Filter>
+    </ClInclude>
+    <ClInclude Include="InGameOverlay.h">
+      <Filter>Fichiers d%27en-tête\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionHandler.h">
+      <Filter>Fichiers d%27en-tête\GameBase</Filter>
+    </ClInclude>
+    <ClInclude Include="Obstacle.h">
+      <Filter>Fichiers d%27en-tête\GameBase</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteGameObject.h">
+      <Filter>Fichiers d%27en-tête\GameBase</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Racing.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="InGameEventHandler.cpp">
+      <Filter>Fichiers sources\EventHandler</Filter>
+    </ClCompile>
+    <ClCompile Include="EventHandler.cpp">
+      <Filter>Fichiers sources\EventHandler</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseEventHandler.cpp">
+      <Filter>Fichiers sources\EventHandler</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Fichiers sources\GameBase</Filter>
+    </ClCompile>
+    <ClCompile Include="Car.cpp">
+      <Filter>Fichiers sources\GameBase</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionHandler.cpp">
+      <Filter>Fichiers sources\GameBase</Filter>
+    </ClCompile>
+    <ClCompile Include="Level.cpp">
+      <Filter>Fichiers sources\GameBase</Filter>
+    </ClCompile>
+    <ClCompile Include="Ground.cpp">
+      <Filter>Fichiers sources\GameBase</Filter>
+    </ClCompile>
+    <ClCompile Include="InGameOverlay.cpp">
+      <Filter>Fichiers sources\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Obstacle.cpp">
+      <Filter>Fichiers sources\GameBase</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteGameObject.cpp">
+      <Filter>Fichiers sources\GameBase</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Racing.rc">
+      <Filter>Fichiers de ressources</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\ressources\voituretest.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+  </ItemGroup>
+</Project>

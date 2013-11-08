@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Comment CommentText="Singletons&#xD;&#xA;coeff glissement ?">
+    <Position X="13.344" Y="6.083" Height="0.76" Width="1.7" />
+  </Comment>
+  <Comment CommentText="A serialiser &#xD;&#xA;&#xD;&#xA;Pour affichage,&#xD;&#xA;voir tutoriel vertex Array dernier exemple">
+    <Position X="14.062" Y="3.552" Height="1.162" Width="1.7" />
+  </Comment>
+  <Class Name="GameObject">
+    <Position X="7.75" Y="2.5" Width="2.5" />
+    <Members>
+      <Method Name="~GameObject" Hidden="true" />
+      <Method Name="GameObject" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAAAACAAIAAIAAAAAAAAAAAAAAAAAIAAAA=</HashCode>
+      <FileName>GameObject.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CollisionHandler">
+    <Position X="1.25" Y="0.5" Width="4" />
+    <Members>
+      <Method Name="~CollisionHandler" Hidden="true" />
+      <Method Name="CollisionHandler" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>BAAAAABAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAKEAAA=</HashCode>
+      <FileName>CollisionHandler.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="sf::Drawable">
+    <Position X="12" Y="0.5" Width="1.5" />
+    <Members>
+      <Method Name="~Drawable" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAIABAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>c:\users\i5\documents\visual studio 2012\projects\racing\vs-2012-sfml-2.1\include\sfml\graphics\drawable.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ground">
+    <Position X="11.5" Y="5.75" Width="1.75" />
+    <Members>
+      <Method Name="~Ground" Hidden="true" />
+      <Method Name="Ground" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAECA=</HashCode>
+      <FileName>Ground.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Level" HideInheritanceLine="true">
+    <Position X="11.25" Y="3" Width="2.75" />
+    <Members>
+      <Method Name="~Level" Hidden="true" />
+      <Method Name="Level" Hidden="true" />
+    </Members>
+    <InheritanceLine Type="sf::Drawable" ManuallyRouted="true" FixedToPoint="true">
+      <Path>
+        <Point X="12.75" Y="1.603" />
+        <Point X="12.75" Y="2.876" />
+        <Point X="12.75" Y="2.876" />
+        <Point X="12.75" Y="3" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAAAAIAAAAAAAAQAAABIgAAAAAAAAA=</HashCode>
+      <FileName>Level.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Obstacle" Collapsed="true">
+    <Position X="8.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAA=</HashCode>
+      <FileName>Obstacle.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Car">
+    <Position X="5.25" Y="7.75" Width="2.5" />
+    <Members>
+      <Method Name="~Car" Hidden="true" />
+      <Method Name="Car" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAQAAACAAAAQAAAAAAAAEARgAAQABAAAAAI=</HashCode>
+      <FileName>Car.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SpriteGameObject">
+    <Position X="5.5" Y="5" Width="2" />
+    <Members>
+      <Method Name="~SpriteGameObject" Hidden="true" />
+      <Method Name="SpriteGameObject" Hidden="true" />
+    </Members>
+    <InheritanceLine Type="GameObject">
+      <InheritanceModifierLabel ManuallyPlaced="true">
+        <Position X="-1.671" Y="0.122" />
+      </InheritanceModifierLabel>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAEAACAAAAAIAAAAAAAAAAgAAAAAAAAAAAAA=</HashCode>
+      <FileName>SpriteGameObject.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
