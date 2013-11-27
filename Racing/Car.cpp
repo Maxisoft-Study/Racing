@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Car.h"
 
-Car::Car(sf::Vector2u vector, const std::string &file) : SpriteGameObject(vector, file), velocity(sf::Vector2f()), acceleration(sf::Vector2f())
+Car::Car(sf::Vector2u vector, const std::string &file) : SpriteGameObject(vector, file)
 {
 }
 

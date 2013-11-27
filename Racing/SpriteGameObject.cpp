@@ -10,7 +10,7 @@ SpriteGameObject::SpriteGameObject(sf::Vector2u vector, const std::string &file,
 	if (auto_center)
 	{
 		sf::Vector2u tmp_texture_size = texture.getSize();
-		base_sprite.setOrigin( tmp_texture_size.x / 2.f, tmp_texture_size.y / 2.f ) ; // Centre pour futures transformation
+		base_sprite.setOrigin( tmp_texture_size.x / 2.f, tmp_texture_size.y / 2.f ) ; // Centre pour futures transformations
 	}
 	
 }

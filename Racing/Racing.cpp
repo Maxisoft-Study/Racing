@@ -6,7 +6,7 @@
 
 using std::cout;
 
-
+//TODO
 class CarControler
 {
 public:
@@ -48,7 +48,6 @@ private:
 
 int main()
 {
-	int rot = 0;
 	racing::init();
 	Car testcar( sf::Vector2u(500,250) ,"voituretest.png");
 	testcar.rotate(90);
@@ -69,7 +68,7 @@ int main()
         sf::Event event;
         while (window.pollEvent(event))
         {
-			for(auto handler : racing::EVENTS_HANDLERS)
+			for(auto handler : racing::EVENTS_HANDLERS) // TEST C++11
 			{
 				if (handler->on_event(event))
 				{
@@ -83,13 +82,11 @@ int main()
 
         window.clear();
 		window.draw(testcar);
-		auto vect = testcar.getPositionInt();
 		/*
 		//Center
 		view.setCenter(testcar.getPosition());
 		window.setView(view);
 		*/
-		cout << "(" << vect.x << ", "<< vect.y << ")" << std::endl;
         window.display();
     }
 

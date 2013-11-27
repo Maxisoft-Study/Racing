@@ -4,9 +4,9 @@
 class SpriteGameObject :
 	public GameObject,
 	public sf::Drawable
-
 {
 public:
+	virtual void update(float delta) {}; //TODO
 protected:
 	sf::Sprite base_sprite;
 	sf::Texture texture;

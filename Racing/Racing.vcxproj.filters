@@ -33,13 +33,12 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="ReadMe.txt" />
+    <Text Include="..\Idées.txt" />
+    <Text Include="..\Liens.txt" />
+    <Text Include="..\TODO.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="targetver.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="EventHandler.h">
@@ -69,23 +68,14 @@
     <ClInclude Include="InGameOverlay.h">
       <Filter>Fichiers d%27en-tête\UI</Filter>
     </ClInclude>
-    <ClInclude Include="CollisionHandler.h">
-      <Filter>Fichiers d%27en-tête\GameBase</Filter>
-    </ClInclude>
     <ClInclude Include="Obstacle.h">
       <Filter>Fichiers d%27en-tête\GameBase</Filter>
-    </ClInclude>
-    <ClInclude Include="resource.h">
-      <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="SpriteGameObject.h">
       <Filter>Fichiers d%27en-tête\GameBase</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="stdafx.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
     <ClCompile Include="Racing.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
@@ -104,9 +94,6 @@
     <ClCompile Include="Car.cpp">
       <Filter>Fichiers sources\GameBase</Filter>
     </ClCompile>
-    <ClCompile Include="CollisionHandler.cpp">
-      <Filter>Fichiers sources\GameBase</Filter>
-    </ClCompile>
     <ClCompile Include="Level.cpp">
       <Filter>Fichiers sources\GameBase</Filter>
     </ClCompile>
@@ -122,14 +109,13 @@
     <ClCompile Include="SpriteGameObject.cpp">
       <Filter>Fichiers sources\GameBase</Filter>
     </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="Racing.rc">
-      <Filter>Fichiers de ressources</Filter>
-    </ResourceCompile>
+    <None Include="..\ReadMe.md" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\ressources\voituretest.png">

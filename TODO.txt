@@ -1,0 +1,1 @@
+Faire un TextureLoader (factory) et refactor SpriteGameObject + fils (plus de paramettre string a passer)

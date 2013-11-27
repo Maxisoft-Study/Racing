@@ -13,19 +13,8 @@
       <Method Name="GameObject" Hidden="true" />
     </Members>
     <TypeIdentifier>
-      <HashCode>ABAAAAAAAAAAAACAAIAAIAAAAAAAAAAAAAAAAAIAAAA=</HashCode>
+      <HashCode>ABAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAIEAAA=</HashCode>
       <FileName>GameObject.h</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="CollisionHandler">
-    <Position X="1.25" Y="0.5" Width="4" />
-    <Members>
-      <Method Name="~CollisionHandler" Hidden="true" />
-      <Method Name="CollisionHandler" Hidden="true" />
-    </Members>
-    <TypeIdentifier>
-      <HashCode>BAAAAABAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAKEAAA=</HashCode>
-      <FileName>CollisionHandler.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="sf::Drawable">
@@ -55,24 +44,10 @@
       <Method Name="~Level" Hidden="true" />
       <Method Name="Level" Hidden="true" />
     </Members>
-    <InheritanceLine Type="sf::Drawable" ManuallyRouted="true" FixedToPoint="true">
-      <Path>
-        <Point X="12.75" Y="1.603" />
-        <Point X="12.75" Y="2.876" />
-        <Point X="12.75" Y="2.876" />
-        <Point X="12.75" Y="3" />
-      </Path>
-    </InheritanceLine>
+    <InheritanceLine Type="sf::Drawable" IsHidden="true" />
     <TypeIdentifier>
       <HashCode>AACAAAAAAAAAAAAAAAIAAAAAAAAQAAABIgAAAAAAAAA=</HashCode>
       <FileName>Level.h</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Obstacle" Collapsed="true">
-    <Position X="8.75" Y="7.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAA=</HashCode>
-      <FileName>Obstacle.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Car">
@@ -98,7 +73,7 @@
       </InheritanceModifierLabel>
     </InheritanceLine>
     <TypeIdentifier>
-      <HashCode>AIAAAAAAAEAACAAAAAIAAAAAAAAAAgAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AIAAAAAAAEAACAAAAAIAAAAAAAAAAgAAAAAAAAAEAAA=</HashCode>
       <FileName>SpriteGameObject.h</FileName>
     </TypeIdentifier>
   </Class>

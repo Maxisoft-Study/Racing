@@ -15,7 +15,5 @@ private:
 	unsigned short base_acceleration;
 	unsigned short base_speed;
 	float handiness;
-	sf::Vector2f velocity;
-	sf::Vector2f acceleration;
 };
 

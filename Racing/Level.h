@@ -3,9 +3,10 @@
 #include "Ground.h"
 
 class Level :
-	sf::Drawable,
-	sf::Transformable
+	public sf::Drawable,
+	public sf::Transformable
 {
+	friend class sf::RenderTarget;
 private:
 	sf::VertexArray vertices;
 	sf::Texture tileset;

@@ -100,12 +100,13 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Text Include="ReadMe.txt" />
+    <Text Include="..\Idées.txt" />
+    <Text Include="..\Liens.txt" />
+    <Text Include="..\TODO.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseEventHandler.h" />
     <ClInclude Include="Car.h" />
-    <ClInclude Include="CollisionHandler.h" />
     <ClInclude Include="EventHandler.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GConst.h" />
@@ -114,15 +115,12 @@
     <ClInclude Include="InGameOverlay.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="Obstacle.h" />
-    <ClInclude Include="resource.h" />
     <ClInclude Include="SpriteGameObject.h" />
     <ClInclude Include="stdafx.h" />
-    <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BaseEventHandler.cpp" />
     <ClCompile Include="Car.cpp" />
-    <ClCompile Include="CollisionHandler.cpp" />
     <ClCompile Include="EventHandler.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Ground.cpp" />
@@ -134,14 +132,11 @@
     <ClCompile Include="SpriteGameObject.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\ReadMe.md" />
     <None Include="ClassDiagram.cd" />
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="Racing.rc" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\ressources\voituretest.png" />
