@@ -74,6 +74,9 @@
     <ClInclude Include="SpriteGameObject.h">
       <Filter>Fichiers d%27en-tête\GameBase</Filter>
     </ClInclude>
+    <ClInclude Include="BoxGameObject.h">
+      <Filter>Fichiers d%27en-tête\GameBase</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Racing.cpp">
@@ -111,6 +114,9 @@
     </ClCompile>
     <ClCompile Include="stdafx.cpp">
       <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="BoxGameObject.cpp">
+      <Filter>Fichiers sources\GameBase</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

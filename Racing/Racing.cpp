@@ -36,8 +36,8 @@ public:
 		move.x *= 3;
 		move.y *= 3;
 
-		car_ptr->move(move);
-		car_ptr->rotate(rot);
+		//car_ptr->move(move);
+		//car_ptr->rotate(rot);
 		return move.x || move.y || rot;
 	}
 protected:
@@ -48,10 +48,16 @@ private:
 
 int main()
 {
+
+	sf::Clock clock;
+
+	b2Vec2 gravity(0.0f, 0.0f);
+	b2World world(gravity);
+
 	racing::init();
-	Car testcar( sf::Vector2u(500,250) ,"voituretest.png");
+	Car testcar(&world, "voituretest.png");
 	testcar.rotate(90);
-	testcar.move(sf::Vector2f(1280/2, 600));
+	//testcar.move(sf::Vector2f(1280/2, 600));
 
 	CarControler ccontroler(&testcar);
 
@@ -77,16 +83,26 @@ int main()
 			}
         }
 
+		sf::Time elapsed = clock.restart();
+
+		world.Step(elapsed.asSeconds(), 20, 20);
+		world.ClearForces();
+
+		
+
+		b2Vec2 position = testcar.getBody()->GetWorldCenter();
+		cout << printf("%4.2f %4.2f\n\n", position.x, position.y);
+		testcar.getBody()->ApplyLinearImpulse(b2Vec2(0.0f, 50.0f), testcar.getBody()->GetWorldCenter(), true);
 
 		ccontroler.parseKeys();
 
         window.clear();
 		window.draw(testcar);
-		/*
+		
 		//Center
-		view.setCenter(testcar.getPosition());
+		view.setCenter(position.x, position.y);
 		window.setView(view);
-		*/
+		
         window.display();
     }
 

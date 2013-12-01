@@ -18,7 +18,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Window/Event.hpp>
-
+#include <Box2D/Box2D.h>
 
 
 // TODO: faites référence ici aux en-têtes supplémentaires nécessaires au programme

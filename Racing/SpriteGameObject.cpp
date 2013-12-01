@@ -2,7 +2,7 @@
 #include "SpriteGameObject.h"
 
 
-SpriteGameObject::SpriteGameObject(sf::Vector2u vector, const std::string &file, bool auto_center) : GameObject(vector)
+SpriteGameObject::SpriteGameObject(const std::string &file, bool auto_center) : GameObject()
 {
 	texture.loadFromFile(file);
 	texture.setSmooth(true);
