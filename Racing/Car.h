@@ -3,20 +3,21 @@
 #include "BoxGameObject.h"
 
 class Car :
-	public SpriteGameObject,
-	public BoxGameObject
+        public SpriteGameObject,
+        public BoxGameObject
 {
-	friend class sf::RenderTarget;
+        friend class sf::RenderTarget;
 public:
-	Car(b2World *world, const std::string &file);
-	~Car(void);
+        Car(b2World *world, const std::string &file);
+        ~Car(void);
 
-	void move(const sf::Vector2f vect);
-	void rotate(const float f);
+        void move(const sf::Vector2f vect);
+        void rotate(const float f);
+        virtual void update(float delta);
+
 private:
-	unsigned short weight;
-	unsigned short base_acceleration;
-	unsigned short base_speed;
-	float handiness;
+        unsigned short weight;
+        unsigned short base_acceleration;
+        unsigned short base_speed;
+        float handiness;
 };
-

@@ -3,11 +3,10 @@
 
 class EventHandler
 {
-	
+
 public:
-	EventHandler(void);
-	virtual ~EventHandler(void);
+        EventHandler(void);
+        virtual ~EventHandler(void);
 
-	virtual bool on_event(const sf::Event &e) = 0;
+        virtual bool on_event(const sf::Event &e) = 0;
 };
-

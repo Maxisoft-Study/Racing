@@ -4,7 +4,7 @@
 
 Ground::Ground(void)
 {
-	frictionCoeff = 0.0f;
+        frictionCoeff = 0.0f;
 }
 
 

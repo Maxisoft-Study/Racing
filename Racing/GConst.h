@@ -9,7 +9,7 @@ sf::ContextSettings settings;
 
 void init()
 {
-	settings.antialiasingLevel = 8;
+        settings.antialiasingLevel = 16;
 }
 
 }

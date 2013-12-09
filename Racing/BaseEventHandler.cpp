@@ -14,21 +14,25 @@ BaseEventHandler::~BaseEventHandler(void)
 bool BaseEventHandler::on_event(const sf::Event &e)
 {
 
-	// on regarde le type de l'évènement...
+        // on regarde le type de l'évènement...
     switch (e.type)
     {
         // fenêtre fermée
         case sf::Event::Closed:
-			this->window_ptr->close();
+            this->window_ptr->close();
             return true;
+
+
 
         // touche pressée
         case sf::Event::KeyPressed:
+
+
             break;
 
         // on ne traite pas les autres types d'évènements
         default:
             return false;
     }
-	return false;
+        return false;
 }
