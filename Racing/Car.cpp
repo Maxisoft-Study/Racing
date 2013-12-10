@@ -31,7 +31,7 @@ Car::~Car(void)
 void Car::update(float delta)
 {
     auto position = getBody()->GetWorldCenter();
-    base_sprite.setPosition(position.x*72.33333333f - 96/2, position.y*72.f);
+    base_sprite.setPosition(position.x*72.f, position.y*72.f);
     auto angle = getBody()->GetAngle();
     base_sprite.setRotation(angle * 180.f/3.14159265358979f);
 }

@@ -118,6 +118,7 @@
     <ClInclude Include="Obstacle.h" />
     <ClInclude Include="SpriteGameObject.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="Utils.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BaseEventHandler.cpp" />
@@ -135,6 +136,7 @@
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\ReadMe.md" />
