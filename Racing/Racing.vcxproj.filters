@@ -31,6 +31,12 @@
     <Filter Include="Fichiers sources\UI">
       <UniqueIdentifier>{c19c367b-9cf7-4d1b-800b-9ec3f3655046}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers d%27en-tête\GameBase\Car">
+      <UniqueIdentifier>{cc145132-4273-4258-93db-5f64ff695be7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\GameBase\Car">
+      <UniqueIdentifier>{ae5e3b51-0a19-4592-a841-cc6d9497ed93}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\Idées.txt" />
@@ -56,9 +62,6 @@
     <ClInclude Include="GameObject.h">
       <Filter>Fichiers d%27en-tête\GameBase</Filter>
     </ClInclude>
-    <ClInclude Include="Car.h">
-      <Filter>Fichiers d%27en-tête\GameBase</Filter>
-    </ClInclude>
     <ClInclude Include="Level.h">
       <Filter>Fichiers d%27en-tête\GameBase</Filter>
     </ClInclude>
@@ -80,6 +83,18 @@
     <ClInclude Include="Utils.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
+    <ClInclude Include="SFMLDebugDraw.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="Car.h">
+      <Filter>Fichiers d%27en-tête\GameBase\Car</Filter>
+    </ClInclude>
+    <ClInclude Include="Wheel.h">
+      <Filter>Fichiers d%27en-tête\GameBase\Car</Filter>
+    </ClInclude>
+    <ClInclude Include="MixedGameObject.h">
+      <Filter>Fichiers d%27en-tête\GameBase</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Racing.cpp">
@@ -95,9 +110,6 @@
       <Filter>Fichiers sources\EventHandler</Filter>
     </ClCompile>
     <ClCompile Include="GameObject.cpp">
-      <Filter>Fichiers sources\GameBase</Filter>
-    </ClCompile>
-    <ClCompile Include="Car.cpp">
       <Filter>Fichiers sources\GameBase</Filter>
     </ClCompile>
     <ClCompile Include="Level.cpp">
@@ -123,6 +135,18 @@
     </ClCompile>
     <ClCompile Include="Utils.cpp">
       <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="SFMLDebugDraw.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Car.cpp">
+      <Filter>Fichiers sources\GameBase\Car</Filter>
+    </ClCompile>
+    <ClCompile Include="Wheel.cpp">
+      <Filter>Fichiers sources\GameBase\Car</Filter>
+    </ClCompile>
+    <ClCompile Include="MixedGameObject.cpp">
+      <Filter>Fichiers sources\GameBase</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

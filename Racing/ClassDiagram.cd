@@ -6,17 +6,6 @@
   <Comment CommentText="A serialiser &#xD;&#xA;&#xD;&#xA;Pour affichage,&#xD;&#xA;voir tutoriel vertex Array dernier exemple">
     <Position X="14.062" Y="3.552" Height="1.162" Width="1.7" />
   </Comment>
-  <Class Name="GameObject">
-    <Position X="1.5" Y="1.75" Width="2.5" />
-    <Members>
-      <Method Name="~GameObject" Hidden="true" />
-      <Method Name="GameObject" Hidden="true" />
-    </Members>
-    <TypeIdentifier>
-      <HashCode>ABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAA=</HashCode>
-      <FileName>GameObject.h</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="sf::Drawable">
     <Position X="12" Y="0.5" Width="1.5" />
     <Members>
@@ -57,7 +46,7 @@
       <Method Name="Car" Hidden="true" />
     </Members>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAQAAACAAAAQAAAAAAAAEABgAAAABAAAAAI=</HashCode>
+      <HashCode>CAAAAAAAAAQAAAAAAAIAAAAAAAAAEABgAAAAFAAEIAI=</HashCode>
       <FileName>Car.h</FileName>
     </TypeIdentifier>
   </Class>
@@ -67,13 +56,8 @@
       <Method Name="~SpriteGameObject" Hidden="true" />
       <Method Name="SpriteGameObject" Hidden="true" />
     </Members>
-    <InheritanceLine Type="GameObject">
-      <InheritanceModifierLabel ManuallyPlaced="true">
-        <Position X="-1.671" Y="0.122" />
-      </InheritanceModifierLabel>
-    </InheritanceLine>
     <TypeIdentifier>
-      <HashCode>AIAAAAAAAEAACAAAAAIAAAAAAAAAAgAAAAAAAAAEAAA=</HashCode>
+      <HashCode>AIAAAAAAAEAACAAAAAICCAAAAAAAAgAAAAQEAAAEAAA=</HashCode>
       <FileName>SpriteGameObject.h</FileName>
     </TypeIdentifier>
   </Class>

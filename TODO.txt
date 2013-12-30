@@ -1,1 +1,2 @@
 Faire un TextureLoader (factory) et refactor SpriteGameObject + fils (plus de paramettre string a passer)
+Faire du yaml (http://code.google.com/p/yaml-cpp/wiki/Tutorial) + factory CarCreator

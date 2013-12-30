@@ -3,13 +3,6 @@
 #include "EventHandler.h"
 
 namespace racing{
-
-std::list<EventHandler*> EVENTS_HANDLERS;
-sf::ContextSettings settings;
-
-void init()
-{
-        settings.antialiasingLevel = 16;
-}
-
+	const sf::ContextSettings settings{0, 0, 2, 0, 0};
+	const float BOX2D_METERS_TO_PIXEL = 72.f;
 }

@@ -16,14 +16,26 @@
 #include <memory>
 #include <thread>
 
+#include <sstream>
+
 #include <cmath>
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Window/Event.hpp>
 #include <Box2D/Box2D.h>
 
-#include "Utils.h"
+typedef unsigned int uint;
 
+#include "GConst.h"
+#include "Utils.h"
+#include "GameObject.h"
+
+inline void dassert(bool b)
+{
+#ifdef _DEBUG
+	assert(b);
+#endif // _DEBUG
+}
 
 
 // TODO: faites référence ici aux en-têtes supplémentaires nécessaires au programme
