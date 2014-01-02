@@ -9,10 +9,10 @@ class Car;
 class CarControl
 {
 public:
-	CarControl::CarControl(const char dir = 0, const char rot = 0) : rotation(rot), direction(dir){};
+	CarControl::CarControl(const float dir = 0.f, const float rot = 0.f) : rotation(rot), direction(dir){};
 	CarControl::~CarControl(void){};
-	char rotation;
-	char direction;
+	float rotation;
+	float direction;
 };
 
 class Car :

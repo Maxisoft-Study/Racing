@@ -23,5 +23,5 @@ void GameObject::setGType(const GameObject::GameObjectTypes typeparam)
 
 bool GameObject::IsThisType(const GameObject &gobj, const GameObject::GameObjectTypes t)
 {
-	return gobj.getGType() == t;
+	return (gobj.getGType() & t) != 0;
 }

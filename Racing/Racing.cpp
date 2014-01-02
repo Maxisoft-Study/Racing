@@ -96,23 +96,23 @@ public:
 	CarControler(Car *car): car_ptr(car){}
 	virtual bool parseKeys(const float updatetime)
 	{
-		char dir = 0;
-		char rot = 0;
+		float dir = 0.f;
+		float rot = 0.f;
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 		{
-			rot -= 1;
+			rot -= 1.f;
 		}
 		if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 		{
-			dir -= 1;
+			dir -= 1.f;
 		}
 		if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 		{
-			rot += 1;
+			rot += 1.f;
 		}
 		if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 		{
-			dir += 1;
+			dir += 1.f;
 		}
 
 		car_ptr->lastcontrol = { dir, rot };

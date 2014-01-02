@@ -38,6 +38,7 @@ void Wheel::update(float delta)
 	killOrthogonalVelocity();
 	if (wheeltype == Wheel::FRONTLEFT || wheeltype == Wheel::FRONTRIGHT) // les pneux de devant
 	{
+		
 		float carangle = car_ptr->getBody()->GetAngle();
 
 		if (car_ptr->lastcontrol.rotation) // l'utilisateur veut tourner.
@@ -65,11 +66,12 @@ void Wheel::update(float delta)
 		else if (getBody()->IsAwake())
 		{
 			joint->SetMotorSpeed(0.f);
+			getBody()->SetTransform(getBody()->GetPosition(), carangle); //recentrage des roues par rapport au vehicule
 		}
 
 		if (car_ptr->lastcontrol.direction) //l'utilisateur veut faire fonctionner le moteur
 		{
-			b2Vec2 force(0.f, 50.f * delta * car_ptr->lastcontrol.direction);
+			b2Vec2 force(0.f, 200.f * delta * car_ptr->lastcontrol.direction);
 			force = Utils::RotateVect(force, getBody()->GetAngle());
 			getBody()->ApplyLinearImpulse(force, getBody()->GetWorldCenter(), true);
 		}
@@ -85,5 +87,5 @@ void Wheel::killOrthogonalVelocity(void)
 	auto sidewayaxis = getBody()->GetTransform().q.GetYAxis();
 	sidewayaxis *= b2Dot(velocity, sidewayaxis);
 	getBody()->SetLinearVelocity(sidewayaxis);
-	getBody()->ApplyAngularImpulse(0.1f * getBody()->GetInertia() * -getBody()->GetAngularVelocity(), true);
+	//getBody()->ApplyAngularImpulse(0.1f * getBody()->GetInertia() * -getBody()->GetAngularVelocity(), true);
 }
