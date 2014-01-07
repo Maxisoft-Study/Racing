@@ -38,7 +38,6 @@ void Wheel::update(float delta)
 	killOrthogonalVelocity();
 	if (wheeltype == Wheel::FRONTLEFT || wheeltype == Wheel::FRONTRIGHT) // les pneux de devant
 	{
-		
 		float carangle = car_ptr->getBody()->GetAngle();
 
 		if (car_ptr->lastcontrol.rotation) // l'utilisateur veut tourner.
@@ -55,11 +54,11 @@ void Wheel::update(float delta)
 		float angle = getBody()->GetAngle();
 		const float diffangle = angle - carangle;
 		b2RevoluteJoint *joint = static_cast<b2RevoluteJoint *> (car_ptr->wheelsJoints[wheeltype]);
-		if (diffangle > 0.01f)
+		if (diffangle > 0.005f)
 		{
 			joint->SetMotorSpeed(-1.2f);
 		}
-		else if (diffangle < -0.01f)
+		else if (diffangle < -0.005f)
 		{
 			joint->SetMotorSpeed(+1.2f);
 		}
@@ -83,9 +82,8 @@ void Wheel::update(float delta)
 
 void Wheel::killOrthogonalVelocity(void)
 {
-	b2Vec2 velocity = getBody()->GetLinearVelocityFromLocalPoint(b2Vec2(0, 0));
+	b2Vec2 velocity = getBody()->GetLinearVelocity();
 	auto sidewayaxis = getBody()->GetTransform().q.GetYAxis();
 	sidewayaxis *= b2Dot(velocity, sidewayaxis);
 	getBody()->SetLinearVelocity(sidewayaxis);
-	//getBody()->ApplyAngularImpulse(0.1f * getBody()->GetInertia() * -getBody()->GetAngularVelocity(), true);
 }

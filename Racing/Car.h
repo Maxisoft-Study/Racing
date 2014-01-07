@@ -36,5 +36,7 @@ private:
 	CarControl lastcontrol;
 	std::vector<Wheel*> wheels;
 	std::vector<b2Joint*> wheelsJoints;
+
+	void applyInertia(void);
 };
 

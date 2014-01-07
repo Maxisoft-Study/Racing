@@ -97,8 +97,12 @@ void Car::update(const float delta)
 	{
 		wheel->update(delta);
 	}
+	
+	applyInertia();
 
 	lastcontrol = {}; //reset
+	printf("Vitesse : %f\n", getBody()->GetLinearVelocity().Length() * 3.6f);
+
 }
 
 
@@ -109,4 +113,9 @@ void Car::draw(sf::RenderTarget& target, sf::RenderStates states) const
 		wheel->draw(target, states);
 	}
 	MixedGameObject::draw(target, states);
+}
+
+void Car::applyInertia(void)
+{
+	getBody()->ApplyAngularImpulse(0.01f * getBody()->GetInertia() * -getBody()->GetAngularVelocity() * getBody()->GetLinearVelocity().Length(), true);
 }
