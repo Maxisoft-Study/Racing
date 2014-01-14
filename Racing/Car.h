@@ -2,10 +2,7 @@
 #include "stdafx.h"
 #include "MixedGameObject.h"
 
-class Car;
-
-#include "Wheel.h"
-
+class Wheel;
 class CarControl
 {
 public:

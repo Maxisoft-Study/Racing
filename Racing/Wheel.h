@@ -1,8 +1,7 @@
 #pragma once
 #include "stdafx.h"
 #include "MixedGameObject.h"
-class Wheel;
-#include "Car.h"
+class Car;
 
 class Wheel:
 	public MixedGameObject

@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Wheel.h"
+#include "Car.h"
 
 
 Wheel::Wheel(b2World *world, const std::string &file, Car* car, const WheelType type, const float init_pos_x, const float init_pos_y) :
@@ -62,7 +63,7 @@ void Wheel::update(float delta)
 		{
 			joint->SetMotorSpeed(+1.2f);
 		}
-		else if (getBody()->IsAwake())
+		else if (getBody()->IsAwake() && diffangle != 0.f)
 		{
 			joint->SetMotorSpeed(0.f);
 			getBody()->SetTransform(getBody()->GetPosition(), carangle); //recentrage des roues par rapport au vehicule
@@ -74,7 +75,6 @@ void Wheel::update(float delta)
 			force = Utils::RotateVect(force, getBody()->GetAngle());
 			getBody()->ApplyLinearImpulse(force, getBody()->GetWorldCenter(), true);
 		}
-
 	}
 
 	MixedGameObject::update(delta);
@@ -83,7 +83,7 @@ void Wheel::update(float delta)
 void Wheel::killOrthogonalVelocity(void)
 {
 	b2Vec2 velocity = getBody()->GetLinearVelocity();
-	auto sidewayaxis = getBody()->GetTransform().q.GetYAxis();
+	b2Vec2 sidewayaxis = getBody()->GetTransform().q.GetYAxis();
 	sidewayaxis *= b2Dot(velocity, sidewayaxis);
 	getBody()->SetLinearVelocity(sidewayaxis);
 }

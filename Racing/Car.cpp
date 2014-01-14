@@ -1,12 +1,14 @@
 #include "stdafx.h"
 #include "Car.h"
+#include "Wheel.h"
 
-b2Vec2 Car::DIM = b2Vec2(1.33333333333f/2, 3.01388888889f/2);
+
+b2Vec2 Car::DIM = b2Vec2(1.33333333333f / 2, 2.68055555556f / 2);
 
 Car::Car(b2World *world, const std::string &file, const float init_pos_x, const float init_pos_y) :
 MixedGameObject(world, file, init_pos_x, init_pos_y), wheels(Wheel::Count), wheelsJoints(Wheel::Count), maxfrontwheelsangle(Utils::DegreeToRadian(30))
 {
-	setGType(GameObject::CarType);
+	GameObject::setGType(GameObject::CarType);
 	bodydef->type = b2_dynamicBody;
 	bodydef->linearDamping = 0.7f;
 	bodydef->angularDamping = 0.7f;
@@ -97,8 +99,10 @@ void Car::update(const float delta)
 	{
 		wheel->update(delta);
 	}
-	
+
 	applyInertia();
+	
+	
 
 	lastcontrol = {}; //reset
 	printf("Vitesse : %f\n", getBody()->GetLinearVelocity().Length() * 3.6f);
