@@ -19,7 +19,8 @@ public:
 		MixedGameObjectType = 1 << 3 | BoxGameObjectType | SpriteGameObjectType,
 
 		CarType = 1 << 4 | MixedGameObjectType,
-		WheelType = 1 << 5 | MixedGameObjectType
+		WheelType = 1 << 5 | MixedGameObjectType,
+		CarEngineType = 1 << 6 | GameObjectType
 	};
 
 	GameObject::GameObjectTypes getGType(void) const;

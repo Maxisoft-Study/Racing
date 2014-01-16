@@ -95,6 +95,9 @@
     <ClInclude Include="MixedGameObject.h">
       <Filter>Fichiers d%27en-tête\GameBase</Filter>
     </ClInclude>
+    <ClInclude Include="CarEngine.h">
+      <Filter>Fichiers d%27en-tête\GameBase\Car</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Racing.cpp">
@@ -147,6 +150,9 @@
     </ClCompile>
     <ClCompile Include="MixedGameObject.cpp">
       <Filter>Fichiers sources\GameBase</Filter>
+    </ClCompile>
+    <ClCompile Include="CarEngine.cpp">
+      <Filter>Fichiers sources\GameBase\Car</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

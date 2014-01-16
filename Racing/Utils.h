@@ -6,7 +6,6 @@ class Utils
 public:
 	static b2Vec2 RotateVect(const b2Vec2 vect, const float angle);
 	static sf::Vector2f RotateVect(const sf::Vector2f vect, const float angle);
-	static b2Vec2 RotatePoint(const b2Vec2 vect, const float angle);
 	static float RadianToDegree(const float angle);
 	static float DegreeToRadian(const float angle);
 	static sf::Vector2f Box2DVectToSfVectPixel(const b2Vec2 v);

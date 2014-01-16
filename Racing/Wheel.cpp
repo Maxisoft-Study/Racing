@@ -38,6 +38,7 @@ void Wheel::update(float delta)
 	killOrthogonalVelocity();
 	if (wheeltype == Wheel::FRONTLEFT || wheeltype == Wheel::FRONTRIGHT) // les pneux de devant
 	{
+		
 		float carangle = car_ptr->getBody()->GetAngle();
 
 		if (car_ptr->lastcontrol.rotation) // l'utilisateur veut tourner.
@@ -70,11 +71,18 @@ void Wheel::update(float delta)
 
 		if (car_ptr->lastcontrol.direction) //l'utilisateur veut faire fonctionner le moteur
 		{
-			b2Vec2 force(0.f, 200.f * delta * car_ptr->lastcontrol.direction);
+			b2Vec2 force(0.f, car_ptr->engine->getBaseImpulseY() * delta * car_ptr->lastcontrol.direction);
 			force = Utils::RotateVect(force, getBody()->GetAngle());
 			getBody()->ApplyLinearImpulse(force, getBody()->GetWorldCenter(), true);
 		}
 
+	}
+	else
+	{
+		b2Vec2 rightNormal = getBody()->GetWorldVector(b2Vec2(1, 0));
+		const float speed = car_ptr->getSpeed();
+		b2Vec2 force = -0.0045f * getBody()->GetAngularVelocity() * speed * rightNormal;
+		getBody()->ApplyLinearImpulse(force, getBody()->GetWorldCenter(), false);
 	}
 
 	MixedGameObject::update(delta);
@@ -83,7 +91,7 @@ void Wheel::update(float delta)
 void Wheel::killOrthogonalVelocity(void)
 {
 	b2Vec2 velocity = getBody()->GetLinearVelocity();
-	auto sidewayaxis = getBody()->GetTransform().q.GetYAxis();
+	b2Vec2 sidewayaxis = getBody()->GetTransform().q.GetYAxis();
 	sidewayaxis *= b2Dot(velocity, sidewayaxis);
 	getBody()->SetLinearVelocity(sidewayaxis);
 }

@@ -109,6 +109,7 @@
     <ClInclude Include="BaseEventHandler.h" />
     <ClInclude Include="BoxGameObject.h" />
     <ClInclude Include="Car.h" />
+    <ClInclude Include="CarEngine.h" />
     <ClInclude Include="EventHandler.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GConst.h" />
@@ -128,6 +129,7 @@
     <ClCompile Include="BaseEventHandler.cpp" />
     <ClCompile Include="BoxGameObject.cpp" />
     <ClCompile Include="Car.cpp" />
+    <ClCompile Include="CarEngine.cpp" />
     <ClCompile Include="EventHandler.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Ground.cpp" />

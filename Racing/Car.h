@@ -5,6 +5,7 @@
 class Car;
 
 #include "Wheel.h"
+#include "CarEngine.h"
 
 class CarControl
 {
@@ -13,6 +14,12 @@ public:
 	CarControl::~CarControl(void){};
 	float rotation;
 	float direction;
+};
+
+enum CarSide
+{
+	ahead,
+	back
 };
 
 class Car :
@@ -27,16 +34,20 @@ public:
 	static b2Vec2 DIM;
 	virtual void update(float delta) final;
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const final;
+	const float getSpeed(void) const;
+	const CarControl getlastControl() const;
+	const CarSide getSide() const;
 private:
 	unsigned short weight;
 	unsigned short base_acceleration;
 	unsigned short base_speed;
 	float handiness;
 	float maxfrontwheelsangle;
+	float lastspeed;
+	CarEngine *engine;
 	CarControl lastcontrol;
 	std::vector<Wheel*> wheels;
 	std::vector<b2Joint*> wheelsJoints;
-
-	void applyInertia(void);
+	void applyInertia(const float delta);
 };
 

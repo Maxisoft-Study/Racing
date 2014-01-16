@@ -4,7 +4,7 @@
 b2Vec2 Car::DIM = b2Vec2(1.33333333333f/2, 3.01388888889f/2);
 
 Car::Car(b2World *world, const std::string &file, const float init_pos_x, const float init_pos_y) :
-MixedGameObject(world, file, init_pos_x, init_pos_y), wheels(Wheel::Count), wheelsJoints(Wheel::Count), maxfrontwheelsangle(Utils::DegreeToRadian(30))
+MixedGameObject(world, file, init_pos_x, init_pos_y), wheels(Wheel::Count), wheelsJoints(Wheel::Count), maxfrontwheelsangle(Utils::DegreeToRadian(30)), lastspeed(-1)
 {
 	setGType(GameObject::CarType);
 	bodydef->type = b2_dynamicBody;
@@ -29,6 +29,8 @@ MixedGameObject(world, file, init_pos_x, init_pos_y), wheels(Wheel::Count), whee
 
 	b2Vec2 wheelsinitpos[4] = { b2Vec2(-0.7f, -0.8f), b2Vec2(0.7f, -0.8f), b2Vec2(-0.7f, 1.f), b2Vec2(0.7f, 1.f) };
 	auto bodyworldcenterPos = body->GetWorldCenter();
+	//crée le simulateur de moteur
+	engine = new CarEngine(this);
 
 	//crée les roue
 	for (uint i = 0; i < Wheel::WheelType::Count; ++i)
@@ -40,8 +42,8 @@ MixedGameObject(world, file, init_pos_x, init_pos_y), wheels(Wheel::Count), whee
 
 	//crée les jointures
 
-	//roues arrieres
-	//On les fixe au vehicule
+	//roues arrières
+	//On les fixe au véhicule
 	auto tmpbody = wheels[Wheel::REARLEFT]->getBody();
 	b2PrismaticJointDef *leftrearjoindef = new b2PrismaticJointDef();
 	leftrearjoindef->Initialize(getBody(), tmpbody, tmpbody->GetWorldCenter(), b2Vec2(1, 0));
@@ -86,11 +88,14 @@ Car::~Car(void)
 		Wheel *curr = wheels[i];
 		delete curr;
 	}
+	delete engine;
 }
 
 
 void Car::update(const float delta)
 {
+	lastspeed = getBody()->GetLinearVelocity().Length() * 3.6f;
+
 	MixedGameObject::update(delta);
 
 	for (Wheel* wheel : wheels)
@@ -98,10 +103,11 @@ void Car::update(const float delta)
 		wheel->update(delta);
 	}
 	
-	applyInertia();
+	applyInertia(delta);
 
 	lastcontrol = {}; //reset
-	printf("Vitesse : %f\n", getBody()->GetLinearVelocity().Length() * 3.6f);
+	
+	printf("Vitesse : %f\n", lastspeed);
 
 }
 
@@ -115,7 +121,46 @@ void Car::draw(sf::RenderTarget& target, sf::RenderStates states) const
 	MixedGameObject::draw(target, states);
 }
 
-void Car::applyInertia(void)
+void Car::applyInertia(const float delta)
 {
-	getBody()->ApplyAngularImpulse(0.01f * getBody()->GetInertia() * -getBody()->GetAngularVelocity() * getBody()->GetLinearVelocity().Length(), true);
+	//contrôle de la rotation du véhicule par rapport a son centre d'inertie.
+	getBody()->ApplyAngularImpulse(delta * .15f * getBody()->GetInertia() * -getBody()->GetAngularVelocity() * getSpeed(), false);
+
+	//applique une force simulant l'inertie pour les dérapages
+	
+	// vecteur a ajouter par rapport au centre
+	b2Vec2 basepointapplication(0, 0);
+	basepointapplication = Utils::RotateVect(basepointapplication, getBody()->GetAngle());
+
+	// le point d'application de la force
+	b2Vec2 pointapplication = getBody()->GetWorldCenter();
+	pointapplication += basepointapplication;
+
+	
+	b2Vec2 rightNormal = getBody()->GetWorldVector(b2Vec2(1, 0));
+	//la norme de la force:
+	b2Vec2 force = -0.00005f * getBody()->GetAngularVelocity() * getSpeed() * getSpeed() * rightNormal;
+	//getBody()->ApplyLinearImpulse(force, pointapplication, false);
+	//getBody()->ApplyForce(force, pointapplication, false);
+	std::cout << getSide() << std::endl;
+}
+
+const float Car::getSpeed(void) const
+{
+	return lastspeed;
+}
+
+const CarControl Car::getlastControl() const
+{
+	return lastcontrol;
+}
+
+
+const CarSide Car::getSide() const
+{
+	//dot product
+	b2Vec2 v1 = getBody()->GetLinearVelocity();
+	b2Vec2 v2 = getBody()->GetTransform().q.GetYAxis();
+
+	return b2Dot(v1, v2) > 0 ? CarSide::back : CarSide::ahead;
 }
