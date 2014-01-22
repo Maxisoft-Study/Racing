@@ -227,7 +227,6 @@ int main(int argc, char** argv)
 	CarControler ccontroler(&testcar);
 
 	sf::RenderWindow window(sf::VideoMode(1280, 720), "SFML works!", sf::Style::Default, racing::settings);
-
 	sf::View view(window.getDefaultView());
 	view.zoom(2); // zoom out
 	window.setView(view);
@@ -391,8 +390,9 @@ int main(int argc, char** argv)
 
 		//Center
 		view.setCenter(Utils::Box2DVectToSfVectPixel(position));
-
 		window.setView(view);
+
+		
 		for(int i = 0; i< 50; ++i){
 			for(int j = 0; j < 50; ++j)
 			{

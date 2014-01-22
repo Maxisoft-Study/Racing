@@ -101,7 +101,8 @@ xcopy /Y "$(SolutionDir)\ressources" "$(OutDir)\ressources"</Command>
     </Link>
     <PostBuildEvent>
       <Command>xcopy /Y  "$(SolutionDir)\VS-2012-SFML-2.1\bin\*.dll" "$(OutDir)"
-xcopy /Y "$(SolutionDir)\ressources" "$(OutDir)"</Command>
+mkdir "$(OutDir)\ressources"
+xcopy /Y "$(SolutionDir)\ressources" "$(OutDir)\ressources"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

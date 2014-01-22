@@ -16,23 +16,23 @@ MixedGameObject(world, file, init_pos_x, init_pos_y), wheels(Wheel::Count), whee
 
 
 	YAML::Node caryaml = YAML::LoadFile("ressources/car.yaml");
-	const float scale = caryaml["scale"].as<float>();
+	const float scale = caryaml["polygonsscale"].as<float>();
 	YAML::Node polygonsyaml = caryaml["polygons"];
 
 
-	std::vector<b2Vec2> parsedpolygonpoint(0);
+	std::vector<b2Vec2> parsedpolygonpoints(0);
 
 	for (YAML::Node polygon : polygonsyaml)
 	{
 		//remplis le vector de points
 		for (YAML::Node point : polygon)
 		{
-			parsedpolygonpoint.emplace_back(point['x'].as<float>() * scale, point['y'].as<float>() * scale);
+			parsedpolygonpoints.emplace_back(point['x'].as<float>() * scale, point['y'].as<float>() * scale);
 		}
 
 		//crée la fixture.
 		b2PolygonShape *dynamicBox = new b2PolygonShape();
-		dynamicBox->Set(&(parsedpolygonpoint[0]), parsedpolygonpoint.size());
+		dynamicBox->Set(&(parsedpolygonpoints[0]), parsedpolygonpoints.size());
 
 		b2FixtureDef *fixtureDef = new b2FixtureDef();
 		fixtureDef->shape = dynamicBox;
@@ -45,7 +45,7 @@ MixedGameObject(world, file, init_pos_x, init_pos_y), wheels(Wheel::Count), whee
 		delete fixtureDef;
 		delete dynamicBox;
 
-		parsedpolygonpoint.clear();
+		parsedpolygonpoints.clear();
 	}
 		
 	
