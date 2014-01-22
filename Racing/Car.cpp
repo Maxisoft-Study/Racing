@@ -1,10 +1,8 @@
 #include "stdafx.h"
 #include "Car.h"
 
-b2Vec2 Car::DIM = b2Vec2(1.33333333333f/2, 3.01388888889f/2);
-
 Car::Car(b2World *world, const std::string &file, const float init_pos_x, const float init_pos_y) :
-MixedGameObject(world, file, init_pos_x, init_pos_y), wheels(Wheel::Count), wheelsJoints(Wheel::Count), maxfrontwheelsangle(Utils::DegreeToRadian(30)), lastspeed(-1)
+MixedGameObject(world, file, init_pos_x, init_pos_y), wheels(Wheel::Count), wheelsJoints(Wheel::Count), maxfrontwheelsangle(Utils::DegreeToRadian(38)), lastspeed(-1)
 {
 	setGType(GameObject::CarType);
 	bodydef->type = b2_dynamicBody;
@@ -16,18 +14,44 @@ MixedGameObject(world, file, init_pos_x, init_pos_y), wheels(Wheel::Count), whee
 	body = world->CreateBody(bodydef);
 	body->SetUserData(this);
 
-	b2PolygonShape dynamicBox;
-	dynamicBox.SetAsBox(Car::DIM.x, Car::DIM.y);
 
-	b2FixtureDef *fixtureDef = new b2FixtureDef();
-	fixtureDef->shape = &dynamicBox;
-	fixtureDef->density = 1.5f;
-	fixtureDef->friction = 0.5f;
-	body->CreateFixture(fixtureDef);
+	YAML::Node caryaml = YAML::LoadFile("ressources/car.yaml");
+	const float scale = caryaml["scale"].as<float>();
+	YAML::Node polygonsyaml = caryaml["polygons"];
 
-	delete fixtureDef;
 
-	b2Vec2 wheelsinitpos[4] = { b2Vec2(-0.7f, -0.8f), b2Vec2(0.7f, -0.8f), b2Vec2(-0.7f, 1.f), b2Vec2(0.7f, 1.f) };
+	std::vector<b2Vec2> parsedpolygonpoint(0);
+
+	for (YAML::Node polygon : polygonsyaml)
+	{
+		//remplis le vector de points
+		for (YAML::Node point : polygon)
+		{
+			parsedpolygonpoint.emplace_back(point['x'].as<float>() * scale, point['y'].as<float>() * scale);
+		}
+
+		//crée la fixture.
+		b2PolygonShape *dynamicBox = new b2PolygonShape();
+		dynamicBox->Set(&(parsedpolygonpoint[0]), parsedpolygonpoint.size());
+
+		b2FixtureDef *fixtureDef = new b2FixtureDef();
+		fixtureDef->shape = dynamicBox;
+		fixtureDef->density = 1.6f;
+		fixtureDef->friction = 0.5f;
+
+
+		body->CreateFixture(fixtureDef);
+
+		delete fixtureDef;
+		delete dynamicBox;
+
+		parsedpolygonpoint.clear();
+	}
+		
+	
+	
+
+	b2Vec2 wheelsinitpos[4] = { b2Vec2(-0.65f, -1.f), b2Vec2(0.65f, -1.f), b2Vec2(-0.65f, 1.f), b2Vec2(0.65f, 1.f) };
 	auto bodyworldcenterPos = body->GetWorldCenter();
 	//crée le simulateur de moteur
 	engine = new CarEngine(this);
@@ -107,7 +131,7 @@ void Car::update(const float delta)
 
 	lastcontrol = {}; //reset
 	
-	printf("Vitesse : %f\n", lastspeed);
+	//printf("Vitesse : %f\n", lastspeed);
 
 }
 
@@ -140,9 +164,10 @@ void Car::applyInertia(const float delta)
 	b2Vec2 rightNormal = getBody()->GetWorldVector(b2Vec2(1, 0));
 	//la norme de la force:
 	b2Vec2 force = -0.00005f * getBody()->GetAngularVelocity() * getSpeed() * getSpeed() * rightNormal;
+
 	//getBody()->ApplyLinearImpulse(force, pointapplication, false);
 	//getBody()->ApplyForce(force, pointapplication, false);
-	std::cout << getSide() << std::endl;
+	//std::cout << getSide() << std::endl;
 }
 
 const float Car::getSpeed(void) const

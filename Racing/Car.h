@@ -31,7 +31,6 @@ class Car :
 public:
 	Car(b2World *world, const std::string &file, const float init_pos_x = 0.f, const float init_pos_y = 0.f);
 	~Car(void);
-	static b2Vec2 DIM;
 	virtual void update(float delta) final;
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const final;
 	const float getSpeed(void) const;

@@ -21,7 +21,7 @@ wheeltype(type)
 
 	//Permet de ne plus avoir de collision avec les roues
 	fixtureDef->filter.maskBits = 0x0;
-	fixtureDef->filter.groupIndex = -8;
+	//fixtureDef->filter.groupIndex = -8;
 
 	body->CreateFixture(fixtureDef);
 

@@ -23,10 +23,15 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window/Event.hpp>
 #include <Box2D/Box2D.h>
+#include <yaml-cpp/yaml.h>
+
+#include "boost/filesystem/operations.hpp"
+#include "boost/filesystem/path.hpp"
 
 typedef unsigned int uint;
 
 #include "GConst.h"
+#include "GGlobals.h"
 #include "Utils.h"
 #include "GameObject.h"
 

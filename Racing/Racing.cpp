@@ -7,6 +7,7 @@
 #define _DEBUG_DRAW 1
 #ifdef _DEBUG_DRAW
 #include "SFMLDebugDraw.h"
+
 #endif // _DEBUG_DRAW
 
 //Class copied from http://code.google.com/p/box2d/source/browse/trunk/Box2D/Testbed/Framework/Test.cpp
@@ -125,11 +126,27 @@ private:
 };
 
 
+//////////////////////////////////////////////////////////////////////////
+/// Register and set WORKING_DIRECTORY according to argv parameters.
+//////////////////////////////////////////////////////////////////////////
+void Set_WORKING_DIRECTORY(char** argv)
+{
+	boost::filesystem::path full_path(boost::filesystem::initial_path<boost::filesystem::path>());
+	full_path = boost::filesystem::system_complete(boost::filesystem::path(argv[0]));
+
+	racing::WORKING_DIRECTORY = full_path.remove_filename();
+	boost::filesystem::current_path(racing::WORKING_DIRECTORY);
+
+}
+
+
 
 std::list<EventHandler*> EVENTS_HANDLERS;
 
-int main()
+int main(int argc, char** argv)
 {
+	Set_WORKING_DIRECTORY(argv);
+
 	vector<vector<int> > *map = new vector<vector<int> >(50);
 
 	for (size_t i = 0; i < map->size(); ++i)
@@ -137,8 +154,8 @@ int main()
 		(*map)[i].resize(50);
 	}
 
-	SpriteGameObject sprite_herbe("texture_herbe.png");
-	SpriteGameObject sprite_route("texture_route.png");
+	SpriteGameObject sprite_herbe("ressources/texture_herbe.png");
+	SpriteGameObject sprite_route("ressources/texture_route.png");
 
 
 	sf::Clock clock;
@@ -202,8 +219,8 @@ int main()
 
 
 
-	Car testcar(&world, "voituretest.png");
-	Car testcar2(&world, "voituretest.png", 5.f, 5.f);
+	Car testcar(&world, "ressources/voituretest.png");
+	Car testcar2(&world, "ressources/voituretest.png", 5.f, 5.f);
 	//testcar.rotate(90);
 	//testcar.move(sf::Vector2f(1280/2, 600));
 

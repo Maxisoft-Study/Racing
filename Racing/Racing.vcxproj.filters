@@ -98,6 +98,9 @@
     <ClInclude Include="CarEngine.h">
       <Filter>Fichiers d%27en-tête\GameBase\Car</Filter>
     </ClInclude>
+    <ClInclude Include="GGlobals.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Racing.cpp">
