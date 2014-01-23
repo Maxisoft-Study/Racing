@@ -168,7 +168,6 @@ $RECYCLE.BIN/
 
 
 Racing.zip
-VS-2012-SFML-2.1/*
 Racing/voituretest.png
 /Box2D
 
@@ -178,3 +177,4 @@ Racing/voituretest.png
 /physics-body-editor
 /Boost
 /Yaml-cpp
+/VS-2013-SFML-2.1

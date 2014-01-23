@@ -55,7 +55,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)\VS-2012-SFML-2.1\include;$(SolutionDir)\Box2D;$(SolutionDir)\Yaml-cpp\include;$(SolutionDir)\Boost\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\VS-2013-SFML-2.1\include;$(SolutionDir)\Box2D;$(SolutionDir)\Yaml-cpp\include;$(SolutionDir)\Boost\include</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <FloatingPointModel>Fast</FloatingPointModel>
@@ -64,12 +64,12 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)\VS-2012-SFML-2.1\lib\;$(SolutionDir)\Box2D\lib\debug\;$(SolutionDir)\Yaml-cpp\lib\debug;$(SolutionDir)\Boost\lib32-msvc-12.0</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)\VS-2013-SFML-2.1\lib\;$(SolutionDir)\Box2D\lib\debug\;$(SolutionDir)\Yaml-cpp\lib\debug;$(SolutionDir)\Boost\lib32-msvc-12.0</AdditionalLibraryDirectories>
       <AdditionalDependencies>sfml-audio-d.lib;sfml-graphics-d.lib;sfml-main-d.lib;sfml-network-d.lib;sfml-system-d.lib;sfml-window-d.lib;Box2D.lib;FreeGLUT.lib;GLUI.lib;libyaml-cpp.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SuppressStartupBanner>true</SuppressStartupBanner>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /Y  "$(SolutionDir)\VS-2012-SFML-2.1\bin\*.dll" "$(OutDir)"
+      <Command>xcopy /Y  "$(SolutionDir)\VS-2013-SFML-2.1\bin\*.dll" "$(OutDir)"
 mkdir "$(OutDir)\ressources"
 xcopy /Y "$(SolutionDir)\ressources" "$(OutDir)\ressources"</Command>
     </PostBuildEvent>
@@ -83,7 +83,7 @@ xcopy /Y "$(SolutionDir)\ressources" "$(OutDir)\ressources"</Command>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)\VS-2012-SFML-2.1\include;$(SolutionDir)\Box2D;$(SolutionDir)\Yaml-cpp\include;$(SolutionDir)\Boost\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\VS-2013-SFML-2.1\include;$(SolutionDir)\Box2D;$(SolutionDir)\Yaml-cpp\include;$(SolutionDir)\Boost\include</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <FloatingPointModel>Fast</FloatingPointModel>
@@ -96,11 +96,11 @@ xcopy /Y "$(SolutionDir)\ressources" "$(OutDir)\ressources"</Command>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>$(SolutionDir)\VS-2012-SFML-2.1\lib;$(SolutionDir)\Box2D\lib;$(SolutionDir)\Yaml-cpp\lib\release;$(SolutionDir)\Boost\lib32-msvc-12.0</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)\VS-2013-SFML-2.1\lib;$(SolutionDir)\Box2D\lib;$(SolutionDir)\Yaml-cpp\lib\release;$(SolutionDir)\Boost\lib32-msvc-12.0</AdditionalLibraryDirectories>
       <AdditionalDependencies>sfml-audio.lib;sfml-graphics.lib;sfml-main.lib;sfml-network.lib;sfml-system.lib;sfml-window.lib;Box2D.lib;FreeGLUT.lib;GLUI.lib;libyaml-cpp.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /Y  "$(SolutionDir)\VS-2012-SFML-2.1\bin\*.dll" "$(OutDir)"
+      <Command>xcopy /Y  "$(SolutionDir)\VS-2013-SFML-2.1\bin\*.dll" "$(OutDir)"
 mkdir "$(OutDir)\ressources"
 xcopy /Y "$(SolutionDir)\ressources" "$(OutDir)\ressources"</Command>
     </PostBuildEvent>

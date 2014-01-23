@@ -11,7 +11,7 @@ GameObject::~GameObject(void)
 }
 
 
-GameObject::GameObjectTypes GameObject::getGType(void) const
+const GameObject::GameObjectTypes& GameObject::getGType(void) const
 {
 	return gtype;
 }
@@ -21,7 +21,7 @@ void GameObject::setGType(const GameObject::GameObjectTypes typeparam)
 	gtype = typeparam;
 }
 
-bool GameObject::IsThisType(const GameObject &gobj, const GameObject::GameObjectTypes t)
+bool GameObject::IsTypeOf(const GameObject &gobj, const GameObject::GameObjectTypes t)
 {
 	return (gobj.getGType() & t) != 0;
 }

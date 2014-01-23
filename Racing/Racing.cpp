@@ -149,6 +149,8 @@ int main(int argc, char** argv)
 
 	vector<vector<int> > *map = new vector<vector<int> >(50);
 
+	cout << sf::Texture::getMaximumSize() << std::endl;
+
 	for (size_t i = 0; i < map->size(); ++i)
 	{
 		(*map)[i].resize(50);
@@ -228,7 +230,7 @@ int main(int argc, char** argv)
 
 	sf::RenderWindow window(sf::VideoMode(1280, 720), "SFML works!", sf::Style::Default, racing::settings);
 	sf::View view(window.getDefaultView());
-	view.zoom(2); // zoom out
+	view.zoom(2.5f); // zoom out
 	window.setView(view);
 
 	window.setVerticalSyncEnabled(true);
@@ -367,6 +369,9 @@ int main(int argc, char** argv)
 		debugwindow.display();
 #endif // _DEBUG_DRAW
 
+
+
+
 		sf::Time elapsed = clock.restart();
 
 		const float elapsedassecond = elapsed.asSeconds();
@@ -399,7 +404,7 @@ int main(int argc, char** argv)
 				sprite_herbe.setSpritePosition(sf::Vector2f(i*200.f, j*200.f));
 				if((*map)[i][j] == 0)
 				{
-					window.draw(sprite_herbe);
+					//window.draw(sprite_herbe);
 				}
 			}
 		}

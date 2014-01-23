@@ -9,7 +9,7 @@ public:
 	/// \brief Enumeration des types des GameObjects present dans le jeu
 	///
 	////////////////////////////////////////////////////////////
-	enum GameObjectTypes : unsigned int
+	enum GameObjectTypes : unsigned long long
 	{
 		UnsetType = 0,
 		GameObjectType = 1,
@@ -22,9 +22,9 @@ public:
 		WheelType = 1 << 5 | MixedGameObjectType,
 	};
 
-	GameObject::GameObjectTypes getGType(void) const;
+	const GameObject::GameObjectTypes& getGType(void) const;
 
-	static bool IsThisType(const GameObject &gobj, const GameObject::GameObjectTypes t);
+	static bool IsTypeOf(const GameObject &gobj, const GameObject::GameObjectTypes t);
 protected:
         GameObject();
         virtual ~GameObject(void);

@@ -36,6 +36,8 @@ public:
 		base_sprite.setPosition(x, y);
 	}
 
+	sf::Vector2u getImageSize(void) const;
+
 protected:
 	sf::Sprite base_sprite;
 	sf::Texture texture;

@@ -1,2 +1,6 @@
 http://www.iforce2d.net/b2dtut/top-down-car Pour voir voiture Box2d
 http://www.sfml-dev.org/tutorials/2.1/graphics-vertex-array-fr.php pour niveau
+http://www.aurelienribon.com/blog/projects/physics-body-editor/ pour convertir les images en polygones 2d
+
+http://gamedev.stackexchange.com/questions/20/where-can-i-find-free-sprites-and-images 
+http://opengameart.org/sites/default/files/192%20racetrack%20Divided.svg
