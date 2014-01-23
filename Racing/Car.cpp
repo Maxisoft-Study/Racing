@@ -148,10 +148,10 @@ void Car::draw(sf::RenderTarget& target, sf::RenderStates states) const
 void Car::applyInertia(const float delta)
 {
 	//contrôle de la rotation du véhicule par rapport a son centre d'inertie.
-	getBody()->ApplyAngularImpulse(delta * .15f * getBody()->GetInertia() * -getBody()->GetAngularVelocity() * getSpeed(), false);
+	getBody()->ApplyAngularImpulse(0.0025f * getBody()->GetInertia() * -getBody()->GetAngularVelocity() * getSpeed(), false);
 
 	//applique une force simulant l'inertie pour les dérapages
-	
+	/*
 	// vecteur a ajouter par rapport au centre
 	b2Vec2 basepointapplication(0, 0);
 	basepointapplication = Utils::RotateVect(basepointapplication, getBody()->GetAngle());
@@ -162,12 +162,17 @@ void Car::applyInertia(const float delta)
 
 	
 	b2Vec2 rightNormal = getBody()->GetWorldVector(b2Vec2(1, 0));
+	b2Vec2 impulse = getBody()->GetMass() * -rightNormal;
+
+	
 	//la norme de la force:
-	b2Vec2 force = -0.00005f * getBody()->GetAngularVelocity() * getSpeed() * getSpeed() * rightNormal;
+	b2Vec2 force = 0.06f * getBody()->GetAngularVelocity() * getBody()->GetInertia() * impulse;
+	//getBody()->ApplyLinearImpulse(force, getBody()->GetWorldCenter(), false);
 
 	//getBody()->ApplyLinearImpulse(force, pointapplication, false);
 	//getBody()->ApplyForce(force, pointapplication, false);
 	//std::cout << getSide() << std::endl;
+	*/
 }
 
 const float Car::getSpeed(void) const
@@ -175,17 +180,23 @@ const float Car::getSpeed(void) const
 	return lastspeed;
 }
 
-const CarControl Car::getlastControl() const
+const CarControl Car::getlastControl(void) const
 {
 	return lastcontrol;
 }
 
 
-const CarSide Car::getSide() const
+const CarSide Car::getSide(void) const
 {
 	//dot product
 	b2Vec2 v1 = getBody()->GetLinearVelocity();
 	b2Vec2 v2 = getBody()->GetTransform().q.GetYAxis();
 
 	return b2Dot(v1, v2) > 0 ? CarSide::back : CarSide::ahead;
+}
+
+
+float Car::getMaxFrontWheelsAngle(void) const
+{
+	return maxfrontwheelsangle;
 }

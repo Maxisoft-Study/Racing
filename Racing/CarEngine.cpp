@@ -4,7 +4,6 @@
 
 CarEngine::CarEngine(Car *carp) : car_ptr(carp), speed_pad(0)
 {
-	setGType(CarEngineType);
 }
 
 
@@ -34,4 +33,10 @@ float CarEngine::getBaseImpulseY(void)
 	}
 	speed_pad = static_cast<int>(2.02E-06f * speed3 + -5.53E-04f * speed2 + 7.09E-02f * speed);
 	return -6.93E-06f*speed3 + 2.56E-03f*speed2 + 2.33E-01f*speed + 3.99E+01f;
+}
+
+
+int CarEngine::getSpeedPad(void) const
+{
+	return speed_pad;
 }

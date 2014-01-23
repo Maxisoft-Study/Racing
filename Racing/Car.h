@@ -7,7 +7,7 @@ class Car;
 #include "Wheel.h"
 #include "CarEngine.h"
 
-class CarControl
+struct CarControl
 {
 public:
 	CarControl::CarControl(const float dir = 0.f, const float rot = 0.f) : rotation(rot), direction(dir){};
@@ -34,13 +34,11 @@ public:
 	virtual void update(float delta) final;
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const final;
 	const float getSpeed(void) const;
-	const CarControl getlastControl() const;
-	const CarSide getSide() const;
+	const CarControl getlastControl(void) const;
+	const CarSide getSide(void) const;
+	float getMaxFrontWheelsAngle(void) const;
 private:
 	unsigned short weight;
-	unsigned short base_acceleration;
-	unsigned short base_speed;
-	float handiness;
 	float maxfrontwheelsangle;
 	float lastspeed;
 	CarEngine *engine;

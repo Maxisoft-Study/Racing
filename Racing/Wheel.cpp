@@ -41,17 +41,19 @@ void Wheel::update(float delta)
 		
 		float carangle = car_ptr->getBody()->GetAngle();
 
-		if (car_ptr->lastcontrol.rotation) // l'utilisateur veut tourner.
+		if (car_ptr->getlastControl().rotation) // l'utilisateur veut tourner.
 		{
-			float angle = car_ptr->lastcontrol.rotation * 1.6f * delta + getBody()->GetAngle();
+			float angle = car_ptr->getlastControl().rotation * 1.6f * delta;
 
-			if (std::abs(angle - carangle) <= car_ptr->maxfrontwheelsangle) // verification de l'angle max que peut avoir un pneu par rapport a la voiture
+			angle += getBody()->GetAngle();
+
+			if (std::abs(angle - carangle) <= car_ptr->getMaxFrontWheelsAngle()) // verification de l'angle max que peut avoir un pneu par rapport a la voiture
 			{
 				getBody()->SetTransform(getBody()->GetPosition(), angle);
 			}
 		}
 
-		//autocentrage des pneux
+		//auto centrage des pneux
 		float angle = getBody()->GetAngle();
 		const float diffangle = angle - carangle;
 		b2RevoluteJoint *joint = static_cast<b2RevoluteJoint *> (car_ptr->wheelsJoints[wheeltype]);
@@ -63,21 +65,21 @@ void Wheel::update(float delta)
 		{
 			joint->SetMotorSpeed(+1.2f);
 		}
-		else if (getBody()->IsAwake())
+		else if (getBody()->IsAwake()) //condition pour ne pas réveiller inutilement le body
 		{
 			joint->SetMotorSpeed(0.f);
-			getBody()->SetTransform(getBody()->GetPosition(), carangle); //recentrage des roues par rapport au vehicule
+			getBody()->SetTransform(getBody()->GetPosition(), carangle); //centrages des roues par rapport au vehicle
 		}
 
-		if (car_ptr->lastcontrol.direction) //l'utilisateur veut faire fonctionner le moteur
+		if (car_ptr->getlastControl().direction) //l'utilisateur veut faire fonctionner le moteur
 		{
-			b2Vec2 force(0.f, car_ptr->engine->getBaseImpulseY() * delta * car_ptr->lastcontrol.direction);
+			b2Vec2 force(0.f, car_ptr->engine->getBaseImpulseY() * 0.016666666666666666666666666666f * car_ptr->getlastControl().direction);
 			force = Utils::RotateVect(force, getBody()->GetAngle());
 			getBody()->ApplyLinearImpulse(force, getBody()->GetWorldCenter(), true);
 		}
 
 	}
-	else
+	else // pneux arrieres
 	{
 		b2Vec2 rightNormal = getBody()->GetWorldVector(b2Vec2(1, 0));
 		const float speed = car_ptr->getSpeed();

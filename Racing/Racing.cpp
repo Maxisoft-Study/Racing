@@ -372,7 +372,7 @@ int main(int argc, char** argv)
 		const float elapsedassecond = elapsed.asSeconds();
 
 		world.Step(elapsedassecond, 20, 20);
-		world.ClearForces();
+		//world.ClearForces();
 
 
 
