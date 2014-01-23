@@ -37,6 +37,12 @@
     <Filter Include="Fichiers sources\GameBase\Car">
       <UniqueIdentifier>{ae5e3b51-0a19-4592-a841-cc6d9497ed93}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers d%27en-tête\GameBase\Level">
+      <UniqueIdentifier>{6b0b067f-b877-409e-83be-667628ccc420}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\GameBase\Level">
+      <UniqueIdentifier>{14621366-ba75-4184-9824-2b6efe27e242}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\Idées.txt" />
@@ -60,9 +66,6 @@
       <Filter>Fichiers d%27en-tête\EventHandler</Filter>
     </ClInclude>
     <ClInclude Include="GameObject.h">
-      <Filter>Fichiers d%27en-tête\GameBase</Filter>
-    </ClInclude>
-    <ClInclude Include="Level.h">
       <Filter>Fichiers d%27en-tête\GameBase</Filter>
     </ClInclude>
     <ClInclude Include="Ground.h">
@@ -101,6 +104,15 @@
     <ClInclude Include="GGlobals.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
+    <ClInclude Include="Level.h">
+      <Filter>Fichiers d%27en-tête\GameBase\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="TileMap.h">
+      <Filter>Fichiers d%27en-tête\GameBase</Filter>
+    </ClInclude>
+    <ClInclude Include="Checkpoint.h">
+      <Filter>Fichiers d%27en-tête\GameBase\Level</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Racing.cpp">
@@ -116,9 +128,6 @@
       <Filter>Fichiers sources\EventHandler</Filter>
     </ClCompile>
     <ClCompile Include="GameObject.cpp">
-      <Filter>Fichiers sources\GameBase</Filter>
-    </ClCompile>
-    <ClCompile Include="Level.cpp">
       <Filter>Fichiers sources\GameBase</Filter>
     </ClCompile>
     <ClCompile Include="Ground.cpp">
@@ -156,6 +165,12 @@
     </ClCompile>
     <ClCompile Include="CarEngine.cpp">
       <Filter>Fichiers sources\GameBase\Car</Filter>
+    </ClCompile>
+    <ClCompile Include="Level.cpp">
+      <Filter>Fichiers sources\GameBase\Level</Filter>
+    </ClCompile>
+    <ClCompile Include="Checkpoint.cpp">
+      <Filter>Fichiers sources\GameBase\Level</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

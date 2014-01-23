@@ -20,6 +20,8 @@ public:
 
 		CarType = 1 << 4 | MixedGameObjectType,
 		WheelType = 1 << 5 | MixedGameObjectType,
+
+		CheckpointType = 1 << 6 | BoxGameObjectType,
 	};
 
 	const GameObject::GameObjectTypes& getGType(void) const;

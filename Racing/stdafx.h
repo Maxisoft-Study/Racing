@@ -30,17 +30,20 @@
 
 typedef unsigned int uint;
 
-#include "GConst.h"
-#include "GGlobals.h"
-#include "Utils.h"
-#include "GameObject.h"
-
 inline void dassert(bool b)
 {
 #ifdef _DEBUG
 	assert(b);
 #endif // _DEBUG
 }
+
+#include "GConst.h"
+#include "GGlobals.h"
+#include "Utils.h"
+#include "GameObject.h"
+#include "TileMap.h"
+
+
 
 
 // TODO: faites référence ici aux en-têtes supplémentaires nécessaires au programme

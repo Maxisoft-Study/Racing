@@ -1,18 +1,40 @@
 #pragma once
 #include "stdafx.h"
 #include "Ground.h"
+#include "Checkpoint.h"
 
 class Level :
-        sf::Drawable,
-        sf::Transformable
+    sf::Drawable
 {
 private:
-        sf::VertexArray vertices;
-        sf::Texture tileset;
-        std::vector<std::vector<Ground*> > grounds; // TODO singleton ground
-        virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const; //TODO http://www.sfml-dev.org/tutorials/2.1/graphics-vertex-array-fr.php
+	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
+	//////////////////////////////////////////////////////////////////////////
+	/// Les tableau de tuiles
+	//////////////////////////////////////////////////////////////////////////
+	std::vector<TileMap> tilemaps;
+
+	//////////////////////////////////////////////////////////////////////////
+	/// les checkpoints
+	//////////////////////////////////////////////////////////////////////////
+	std::vector<Checkpoint> checkpoints;
+
+
+	//////////////////////////////////////////////////////////////////////////
+	/// Taille de base des tuiles
+	//////////////////////////////////////////////////////////////////////////
+	b2Vec2 tileLenght;
+
+	//////////////////////////////////////////////////////////////////////////
+	/// taile en nombre de tuiles
+	//////////////////////////////////////////////////////////////////////////
+	b2Vec2 lenght;
+
+
+	
 public:
-        Level(void);
-        ~Level(void);
+	Level(void);
+	~Level(void);
+	const b2Vec2 getRawLenght() const { return lenght; }
+	const b2Vec2 getLenght() const { return b2Vec2(lenght.x * tileLenght.x, lenght.y * tileLenght.y); }
 };
