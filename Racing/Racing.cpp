@@ -95,7 +95,7 @@ class CarControler
 {
 public:
 	CarControler(Car *car): car_ptr(car){}
-	virtual bool parseKeys(const float updatetime)
+	virtual bool parseKeys()
 	{
 		float dir = 0.f;
 		float rot = 0.f;
@@ -142,6 +142,7 @@ void Set_WORKING_DIRECTORY(char** argv)
 
 std::list<EventHandler*> EVENTS_HANDLERS;
 
+
 int main(int argc, char** argv)
 {
 	Set_WORKING_DIRECTORY(argv);
@@ -152,11 +153,11 @@ int main(int argc, char** argv)
 
 
 	sf::Clock clock;
+	sf::Clock processingClock;
 
 	b2Vec2 gravity(0.0f, 0.0f);
 	b2World world(gravity);
 	world.SetAllowSleeping(true);
-
 
 #ifdef _DEBUG_DRAW
 	/* Create window */
@@ -419,14 +420,11 @@ int main(int argc, char** argv)
 
 
 
-
+		processingClock.restart();
 		sf::Time elapsed = clock.restart();
-
-		const float elapsedassecond = elapsed.asSeconds();
-
+		float elapsedassecond = elapsed.asSeconds();
 		world.Step(elapsedassecond, 20, 20);
 		//world.ClearForces();
-
 
 
 		b2Vec2 position = testcar.getBody()->GetWorldCenter();
@@ -434,14 +432,13 @@ int main(int argc, char** argv)
 
 		//printf("Position Car Axle : %4.2f %4.2f\n\n", testcar.getFrontWheelAxle().x, testcar.getFrontWheelAxle().y);
 
+		ccontroler.parseKeys();
 
-		ccontroler.parseKeys(elapsedassecond);
-
-		window.clear();
-
+		elapsedassecond += processingClock.restart().asSeconds();
 		testcar.update(elapsedassecond);
 		testcar2.update(elapsedassecond);
 
+		window.clear();
 		//Center
 		view.setCenter(Utils::Box2DVectToSfVectPixel(position));
 		window.setView(view);

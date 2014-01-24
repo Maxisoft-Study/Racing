@@ -148,7 +148,7 @@ void Car::draw(sf::RenderTarget& target, sf::RenderStates states) const
 void Car::applyInertia(const float delta)
 {
 	//contrôle de la rotation du véhicule par rapport a son centre d'inertie.
-	getBody()->ApplyAngularImpulse(0.0025f * getBody()->GetInertia() * -getBody()->GetAngularVelocity() * getSpeed(), false);
+	getBody()->ApplyAngularImpulse(0.0017f * getBody()->GetInertia() * -getBody()->GetAngularVelocity() * getSpeed(), false);
 
 	//applique une force simulant l'inertie pour les dérapages
 	/*
