@@ -2,8 +2,8 @@
 #include "Wheel.h"
 
 
-Wheel::Wheel(b2World *world, const std::string &file, Car* car, const WheelType type, const float init_pos_x, const float init_pos_y) :
-MixedGameObject(world, file, init_pos_x, init_pos_y),
+Wheel::Wheel(b2World *world, Car* car, const WheelType type, const float init_pos_x, const float init_pos_y) :
+BoxGameObject(world, init_pos_x, init_pos_y),
 car_ptr(car), 
 wheeltype(type)
 {
@@ -87,7 +87,7 @@ void Wheel::update(float delta)
 		getBody()->ApplyLinearImpulse(force, getBody()->GetWorldCenter(), false);
 	}
 
-	MixedGameObject::update(delta);
+	//MixedGameObject::update(delta);
 }
 
 void Wheel::killOrthogonalVelocity(void)

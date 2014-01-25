@@ -129,6 +129,7 @@ xcopy /Y "$(SolutionDir)\ressources" "$(OutDir)\ressources"</Command>
     <ClInclude Include="SFMLDebugDraw.h" />
     <ClInclude Include="SpriteGameObject.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="TextureLoader.h" />
     <ClInclude Include="TileMap.h" />
     <ClInclude Include="Utils.h" />
     <ClInclude Include="Wheel.h" />

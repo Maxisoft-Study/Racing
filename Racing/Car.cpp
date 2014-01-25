@@ -60,7 +60,7 @@ MixedGameObject(world, file, init_pos_x, init_pos_y), wheels(Wheel::Count), whee
 	for (uint i = 0; i < Wheel::WheelType::Count; ++i)
 	{
 		wheelsinitpos[i] += bodyworldcenterPos;
-		Wheel *curr = new Wheel(getWorld(), "ressources/wheel.png", this, static_cast<Wheel::WheelType> (i), wheelsinitpos[i].x, wheelsinitpos[i].y);
+		Wheel *curr = new Wheel(getWorld(), this, static_cast<Wheel::WheelType> (i), wheelsinitpos[i].x, wheelsinitpos[i].y);
 		wheels[i] = curr;
 	}
 
@@ -138,10 +138,6 @@ void Car::update(const float delta)
 
 void Car::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-	for (Wheel* wheel : wheels)
-	{
-		wheel->draw(target, states);
-	}
 	MixedGameObject::draw(target, states);
 }
 

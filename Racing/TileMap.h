@@ -1,5 +1,6 @@
 #pragma once
 #include "stdafx.h"
+#include "TextureLoader.h"
 
 //////////////////////////////////////////////////////////////////////////
 /// basée sur http://www.sfml-dev.org/tutorials/2.1/graphics-vertex-array-fr.php
@@ -11,8 +12,7 @@ public:
 	bool load(const std::string& tileset, sf::Vector2u tileSize, const std::vector<uint> &tiles, uint width, uint height, uint min_val, uint max_val, uint spacing = 0)
 	{
 		// on charge la texture du tileset
-		if (!m_tileset.loadFromFile(tileset))
-			return false;
+		m_tileset = racing::TEXTURE_LOADER.get(tileset);
 
 		// on redimensionne le tableau de vertex pour qu'il puisse contenir tout le niveau
 		m_vertices.setPrimitiveType(sf::Quads);
@@ -34,8 +34,8 @@ public:
 			tileNumber -= min_val;
 
 			// on en déduit sa position dans la texture du tileset
-			int tu = tileNumber % (m_tileset.getSize().x / tileSize.x);
-			int tv = tileNumber / (m_tileset.getSize().x / tileSize.x);
+			int tu = tileNumber % (m_tileset->getSize().x / tileSize.x);
+			int tv = tileNumber / (m_tileset->getSize().x / tileSize.x);
 
 			// on récupère un pointeur vers le quad à définir dans le tableau de vertex
 			sf::Vertex* quad = &m_vertices[(tileIndex)* 4];
@@ -66,12 +66,12 @@ private:
 		states.transform *= getTransform();
 
 		// on applique la texture du tileset
-		states.texture = &m_tileset;
+		states.texture = m_tileset.get();
 
 		// et on dessine enfin le tableau de vertex
 		target.draw(m_vertices, states);
 	}
 
 	sf::VertexArray m_vertices;
-	sf::Texture m_tileset;
+	texture_ptr m_tileset;
 };

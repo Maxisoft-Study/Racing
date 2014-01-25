@@ -1,6 +1,7 @@
 #pragma once
 #include "stdafx.h"
 #include "GameObject.h"
+#include "TextureLoader.h"
 class SpriteGameObject :
 	public GameObject,
 	public sf::Drawable
@@ -8,7 +9,7 @@ class SpriteGameObject :
 
 friend class sf::RenderTarget;
 public:
-	virtual void update(float delta) {}; //TODO
+	virtual void update(float delta) = 0;
 	SpriteGameObject(const std::string &file, bool center = true);
 	~SpriteGameObject(void);
 
@@ -40,7 +41,7 @@ public:
 
 protected:
 	sf::Sprite base_sprite;
-	sf::Texture texture;
+	texture_ptr texture;
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 private:
 };

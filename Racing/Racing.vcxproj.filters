@@ -113,6 +113,9 @@
     <ClInclude Include="Checkpoint.h">
       <Filter>Fichiers d%27en-tête\GameBase\Level</Filter>
     </ClInclude>
+    <ClInclude Include="TextureLoader.h">
+      <Filter>Fichiers d%27en-tête\GameBase</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Racing.cpp">

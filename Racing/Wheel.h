@@ -5,7 +5,7 @@ class Wheel;
 #include "Car.h"
 
 class Wheel:
-	public MixedGameObject
+	public BoxGameObject
 {
 	friend class sf::RenderTarget;
 	friend class Car;
@@ -23,7 +23,7 @@ public:
 		Count // nombre de pneu (4)
 	};
 
-	Wheel(b2World *world, const std::string &file, Car *car, const WheelType type, const float init_pos_x, const float init_pos_y);
+	Wheel(b2World *world, Car *car, const WheelType type, const float init_pos_x, const float init_pos_y);
 	~Wheel();
 	virtual void update(float delta) final;
 	const WheelType wheeltype;

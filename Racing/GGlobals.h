@@ -1,10 +1,10 @@
 #pragma once
 
 #include "stdafx.h"
+#include "TextureLoader.h"
 
 namespace racing{
 
 	//RUNTIME GLOBALS
-	static boost::filesystem::path WORKING_DIRECTORY;
-	static unsigned int MAXIMUM_TEXTURE_SIZE;
+	extern TextureLoader TEXTURE_LOADER;
 }
