@@ -29,6 +29,11 @@
 
 #include "boost/filesystem/operations.hpp"
 #include "boost/filesystem/path.hpp"
+#ifdef _MSC_VER
+#include <boost/config/compiler/visualc.hpp>
+#endif
+#include <boost/property_tree/ptree.hpp>
+#include <boost/property_tree/json_parser.hpp>
 
 typedef unsigned int uint;
 

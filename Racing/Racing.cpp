@@ -4,12 +4,11 @@
 #include "BaseEventHandler.h"
 #include "Car.h"
 #include "TextureLoader.h"
+#include "Level.h"
 
-#define _DEBUG_DRAW 1
+//#define _DEBUG_DRAW 
 #ifdef _DEBUG_DRAW
 #include "SFMLDebugDraw.h"
-
-#endif // _DEBUG_DRAW
 
 //Class copied from http://code.google.com/p/box2d/source/browse/trunk/Box2D/Testbed/Framework/Test.cpp
 //Copyright (c) 2011 Erin Catto http://box2d.org
@@ -86,7 +85,7 @@ b2Body* createCircle(b2World &world, sf::RenderWindow &window)
 	return body;
 }
 
-
+#endif // _DEBUG_DRAW
 using std::cout;
 using std::vector;
 
@@ -146,16 +145,13 @@ TextureLoader racing::TEXTURE_LOADER = TextureLoader();
 int main(int argc, char** argv)
 {
 	set_working_dir(argv);
-	
-	//racing::TEXTURE_LOADER = new TextureLoader();
-
 
 	sf::Clock clock;
 	sf::Clock processingClock;
 
 	b2Vec2 gravity(0.0f, 0.0f);
-	b2World world(gravity);
-	world.SetAllowSleeping(true);
+	b2World *world = new b2World(gravity);
+	world->SetAllowSleeping(true);
 
 #ifdef _DEBUG_DRAW
 	/* Create window */
@@ -209,11 +205,9 @@ int main(int argc, char** argv)
 	sf::Clock deltaClock; //Clock used to measure FPS
 #endif // _DEBUG_DRAW
 
-	Car testcar(&world, "ressources/voituretest.png");
+	
 	//testcar.rotate(90);
 	//testcar.move(sf::Vector2f(1280/2, 600));
-
-	CarControler ccontroler(&testcar);
 
 	sf::RenderWindow window(sf::VideoMode(1280, 720), "SFML works!", sf::Style::Default, racing::settings);
 	sf::View view(window.getDefaultView());
@@ -269,17 +263,25 @@ int main(int argc, char** argv)
 	std::string imagepath("ressources/simpleroads.png");
 	uint height = 30;
 	uint width = 30;
-	uint tilewidth = 679;
-	uint tileheight = 679;
+	uint tilewidth = 678;
+	uint tileheight = 678;
 
 
 	// on crée la tilemap avec le niveau précédemment défini
 
 	TileMap tmap;
-	if (!tmap.load(imagepath, sf::Vector2u(tilewidth, tileheight), level, width, height, 1, 20, 41))
+	if (!tmap.load(imagepath, sf::Vector2u(tilewidth, tileheight), level, width, height, 1, 20, 43))
 		return -1;
+	Car testcar(world, "ressources/voituretest.png");
+	CarControler ccontroler(&testcar);
+	Car testcar2(world, "ressources/voituretest.png", 5.f, 5.f);
 
-	Car testcar2(&world, "ressources/voituretest.png", 5.f, 5.f);
+
+	Level lvl;
+	lvl.load("ressources/test3.json", world);
+
+
+
 
 	while (window.isOpen())
 	{
@@ -420,14 +422,11 @@ int main(int argc, char** argv)
 		processingClock.restart();
 		sf::Time elapsed = clock.restart();
 		float elapsedassecond = elapsed.asSeconds();
-		world.Step(elapsedassecond, 20, 20);
+		world->Step(elapsedassecond, 20, 20);
 		//world.ClearForces();
 
 
-		b2Vec2 position = testcar.getBody()->GetWorldCenter();
-		//printf("Position WorldCenter : %4.2f %4.2f\n\n", position.x, position.y);
-
-		//printf("Position Car Axle : %4.2f %4.2f\n\n", testcar.getFrontWheelAxle().x, testcar.getFrontWheelAxle().y);
+		const b2Vec2 position = testcar.getBody()->GetWorldCenter();
 
 		ccontroler.parseKeys();
 
@@ -436,6 +435,7 @@ int main(int argc, char** argv)
 		testcar2.update(elapsedassecond);
 
 		window.clear();
+
 		//Center
 		view.setCenter(Utils::Box2DVectToSfVectPixel(position));
 		window.setView(view);

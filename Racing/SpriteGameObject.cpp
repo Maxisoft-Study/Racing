@@ -23,6 +23,7 @@ SpriteGameObject::~SpriteGameObject(void)
 
 void SpriteGameObject::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
+	states.texture = texture.get();
     target.draw(base_sprite, states);
 }
 

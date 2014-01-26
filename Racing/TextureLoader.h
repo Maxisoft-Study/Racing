@@ -51,7 +51,6 @@ public:
 	{
 		for (auto &pair : textures)
 		{
-			std::cout << pair.second.use_count() << std::endl;
 			if (pair.second.use_count() == 1)
 			{
 				textures.erase(pair.first);

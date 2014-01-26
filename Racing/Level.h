@@ -23,18 +23,25 @@ private:
 	//////////////////////////////////////////////////////////////////////////
 	/// Taille de base des tuiles
 	//////////////////////////////////////////////////////////////////////////
-	b2Vec2 tileLenght;
+	sf::Vector2u tileLenght;
 
 	//////////////////////////////////////////////////////////////////////////
 	/// taile en nombre de tuiles
 	//////////////////////////////////////////////////////////////////////////
-	b2Vec2 lenght;
+	sf::Vector2u lenght;
+
+
+
 
 
 	
 public:
+
 	Level(void);
 	~Level(void);
-	const b2Vec2 getRawLenght() const { return lenght; }
-	const b2Vec2 getLenght() const { return b2Vec2(lenght.x * tileLenght.x, lenght.y * tileLenght.y); }
+
+	bool load(const std::string &jsonfilename, b2World *world);
+
+	const sf::Vector2u getRawLenght() const { return lenght; }
+	const sf::Vector2u getLenght() const { return sf::Vector2u(lenght.x * tileLenght.x, lenght.y * tileLenght.y); }
 };
