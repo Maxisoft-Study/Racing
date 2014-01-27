@@ -450,7 +450,7 @@ int main(int argc, char** argv)
 
 		window.draw(testcar);
 		window.draw(testcar2);
-		LOG_DEBUG << checkpointlistener->getCheckpointCount(&testcar);
+		//LOG_DEBUG << checkpointlistener->getCheckpointCount(&testcar);
 		
 
 

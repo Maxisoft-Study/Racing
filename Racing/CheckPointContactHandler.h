@@ -44,9 +44,10 @@ public:
 	//////////////////////////////////////////////////////////////////////////
 	/// Permet de savoir le nombre de checkpoint que la voiture a parcouru
 	//////////////////////////////////////////////////////////////////////////
-	uint getCheckpointCount(const Car* car_ptr)
+	uint getCheckpointCount(const Car* car_ptr) const
 	{
-		return savedcheckpoints[car_ptr].size();
+		auto it = savedcheckpoints.find(car_ptr);
+		return it == savedcheckpoints.end() ? 0 : it->second.size();
 	}
 private:
 	//////////////////////////////////////////////////////////////////////////
