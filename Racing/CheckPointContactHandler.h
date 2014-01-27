@@ -1,36 +1,32 @@
 #pragma once
 #include "stdafx.h"
 #include "GameContactListener.h"
+#include "Checkpoint.h"
 #include "LoggerConfig.h"
 
 class CheckpointContactHandler : public ContactListenerHandler
 {
-	bool BeginContact(b2Contact* contact, GameObject* A, GameObject* B)
+
+public:
+
+	bool BeginContact(b2Contact* contact, BoxGameObject* A, BoxGameObject* B)
 	{
-		Checkpoint* checkpoint(nullptr);
-		Car* car(nullptr);
+		Wheel* wheel = nullptr;
+		Checkpoint* cp = nullptr;
 
 		//CAST
-		if (A->getGType() == GameObject::CheckpointType)
+		if (cp = dynamic_cast<Checkpoint*>(A))
 		{
-			checkpoint = dynamic_cast<Checkpoint*>(A);
-			if (B->getGType() == GameObject::CarType)
-			{
-				car = dynamic_cast<Car*>(B);
-			}
-			else
+			wheel = dynamic_cast<Wheel*>(B);
+			if (!wheel)
 			{
 				return false;
 			}
 		}
-		else if (B->getGType() == GameObject::CheckpointType)
+		else if (cp = dynamic_cast<Checkpoint*>(B))
 		{
-			checkpoint = dynamic_cast<Checkpoint*>(B);
-			if (A->getGType() == GameObject::CarType)
-			{
-				car = dynamic_cast<Car*>(A);
-			}
-			else
+			wheel = dynamic_cast<Wheel*>(A);
+			if (!wheel)
 			{
 				return false;
 			}
@@ -40,23 +36,21 @@ class CheckpointContactHandler : public ContactListenerHandler
 			return false;
 		}
 
-		if (!car)
-		{
-			LOG_ERR << "Cannot cast car";
-			return false;
-		}
-		if (!checkpoint)
-		{
-			LOG_ERR << "Cannot cast checkpoint";
-			return false;
-		}
-
-		LOG_INFO << "CHECKPOINT OK";
-
-
-
+		savedcheckpoints[wheel->getCar()].emplace(cp);
 
 		return true;
 	}
-	
+
+	//////////////////////////////////////////////////////////////////////////
+	/// Permet de savoir le nombre de checkpoint que la voiture a parcouru
+	//////////////////////////////////////////////////////////////////////////
+	uint getCheckpointCount(const Car* car_ptr)
+	{
+		return savedcheckpoints[car_ptr].size();
+	}
+private:
+	//////////////////////////////////////////////////////////////////////////
+	/// Sauvegarde des checkpoints par voiture
+	//////////////////////////////////////////////////////////////////////////
+	std::unordered_map<const Car*, std::set<const Checkpoint*>> savedcheckpoints;
 };

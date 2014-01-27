@@ -4,7 +4,7 @@
 #include "TextureLoader.h"
 class SpriteGameObject :
 	virtual public GameObject,
-	public sf::Drawable
+	virtual public sf::Drawable
 {
 
 friend class sf::RenderTarget;
@@ -39,6 +39,7 @@ public:
 
 	sf::Vector2u getImageSize(void) const;
 
+	//const virtual GameObject::GameObjectTypes getGType(void) const;
 protected:
 	sf::Sprite base_sprite;
 	texture_ptr texture;

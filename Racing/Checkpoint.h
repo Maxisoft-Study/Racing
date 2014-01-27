@@ -6,6 +6,6 @@ class Checkpoint :
 public:
 	Checkpoint(b2World* world, const float init_pos_x, const float init_pos_y, const sf::Vector2u size);
 	~Checkpoint(void);
-	const virtual GameObject::GameObjectTypes getGType(void) const final;
+	const virtual GameObjectTypes getGType(void) const;
 };
 

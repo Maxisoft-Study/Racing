@@ -32,3 +32,8 @@ sf::Vector2u SpriteGameObject::getImageSize(void) const
 {
 	return texture->getSize();
 }
+
+/*const GameObject::GameObjectTypes SpriteGameObject::getGType(void) const
+{
+	return GameObject::SpriteGameObjectType;
+}*/

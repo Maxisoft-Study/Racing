@@ -12,23 +12,23 @@ BoxGameObject(world)
 	body->SetUserData(this);
 
 	b2PolygonShape *dynamicBox = new b2PolygonShape();
-	dynamicBox->SetAsBox(size.x, size.y);
+	dynamicBox->SetAsBox(static_cast<float>(size.x), static_cast<float>(size.y));
 
 	b2FixtureDef *fixtureDef = new b2FixtureDef();
 	fixtureDef->shape = dynamicBox;
 	fixtureDef->filter.categoryBits = BoxGameObject::CHECKPOINT_MASK;
 
-	//actives la detection des collisions seulement pour les voiture
-	fixtureDef->filter.maskBits = BoxGameObject::CAR_MASK;
+	//actives la detection des collisions seulement pour les roues des voiture
+	fixtureDef->filter.maskBits = BoxGameObject::WHEEL_MASK;
 
 	// la voiture passe au travers
 	fixtureDef->isSensor = true;
-
 
 	body->CreateFixture(fixtureDef);
 
 	delete fixtureDef;
 	delete dynamicBox;
+	
 }
 
 
@@ -37,7 +37,7 @@ Checkpoint::~Checkpoint()
 }
 
 
-const GameObject::GameObjectTypes Checkpoint::getGType(void) const
+const GameObjectTypes Checkpoint::getGType(void) const
 {
-	return GameObject::CheckpointType;
+	return GameObjectTypes::CheckpointType;
 }

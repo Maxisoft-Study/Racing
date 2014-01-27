@@ -6,8 +6,8 @@
 class ContactListenerHandler
 {
 public:
-	virtual bool BeginContact(b2Contact* contact, GameObject* A, GameObject* B) { return false; }
-	virtual bool EndContact(b2Contact* contact, GameObject* A, GameObject* B) { return false; };
+	virtual bool BeginContact(b2Contact* contact, BoxGameObject* A, BoxGameObject* B) { return false; }
+	virtual bool EndContact(b2Contact* contact, BoxGameObject* A, BoxGameObject* B) { return false; };
 
 	/*
 	virtual bool PreSolve(b2Contact* contact, const b2Manifold* oldManifold) = 0;
@@ -34,8 +34,8 @@ public:
 
 	virtual void BeginContact(b2Contact* contact)
 	{
-		GameObject* A = static_cast<GameObject*>(contact->GetFixtureA()->GetBody()->GetUserData());
-		GameObject* B = static_cast<GameObject*>(contact->GetFixtureB()->GetBody()->GetUserData());
+		BoxGameObject* A = static_cast<BoxGameObject*>(contact->GetFixtureA()->GetBody()->GetUserData());
+		BoxGameObject* B = static_cast<BoxGameObject*>(contact->GetFixtureB()->GetBody()->GetUserData());
 		if (!A || !B)
 		{
 			LOG_WARN << "Unknow Object Type";
@@ -53,8 +53,8 @@ public:
 
 	virtual void EndContact(b2Contact* contact)
 	{
-		GameObject* A = static_cast<GameObject*>(contact->GetFixtureA()->GetBody()->GetUserData());
-		GameObject* B = static_cast<GameObject*>(contact->GetFixtureB()->GetBody()->GetUserData());
+		BoxGameObject* A = static_cast<BoxGameObject*>(contact->GetFixtureA()->GetBody()->GetUserData());
+		BoxGameObject* B = static_cast<BoxGameObject*>(contact->GetFixtureB()->GetBody()->GetUserData());
 		if (!A || !B)
 		{
 			LOG_WARN << "Unknow Object Type";

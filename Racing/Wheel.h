@@ -27,7 +27,8 @@ public:
 	~Wheel();
 	virtual void update(float delta) final;
 	const WheelType wheeltype;
-	const virtual GameObject::GameObjectTypes getGType(void) const final;
+	const virtual GameObjectTypes getGType(void) const final;
+	const Car* getCar(void) const{ return car_ptr; }
 protected:
 	b2Vec2 getLateralVelocity(void) const;
 	void killOrthogonalVelocity(void);

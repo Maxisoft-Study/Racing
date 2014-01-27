@@ -19,3 +19,9 @@ void MixedGameObject::update(const float delta)
 	auto angle = getBody()->GetAngle();
 	setSpriteRotation(Utils::RadianToDegree(angle));
 }
+
+
+const GameObjectTypes MixedGameObject::getGType(void) const
+{
+	return GameObjectTypes::MixedGameObjectType;
+}

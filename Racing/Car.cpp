@@ -197,7 +197,7 @@ float Car::getMaxFrontWheelsAngle(void) const
 	return maxfrontwheelsangle;
 }
 
-const GameObject::GameObjectTypes Car::getGType(void) const
+const GameObjectTypes Car::getGType(void) const 
 {
-	return GameObject::CarType;
+	return GameObjectTypes::CarType;
 }

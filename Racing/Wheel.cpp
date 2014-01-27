@@ -20,8 +20,8 @@ wheeltype(type)
 	fixtureDef->density = 1.f;
 	fixtureDef->friction = 0.5f;
 
-	//Permet de ne plus avoir de collision avec les roues
-	fixtureDef->filter.maskBits = 0x0;
+	//Permet de ne plus avoir des collision avec les roues qu'avec les checkpoints (sensor)
+	fixtureDef->filter.maskBits = BoxGameObject::CHECKPOINT_MASK;
 	fixtureDef->filter.categoryBits = BoxGameObject::WHEEL_MASK;
 	//fixtureDef->filter.groupIndex = -8;
 
@@ -100,7 +100,7 @@ void Wheel::killOrthogonalVelocity(void)
 	getBody()->SetLinearVelocity(sidewayaxis);
 }
 
-const GameObject::GameObjectTypes Wheel::getGType(void) const
+const GameObjectTypes Wheel::getGType(void) const
 {
-	return GameObject::WheelType;
+	return GameObjectTypes::WheelType;
 }

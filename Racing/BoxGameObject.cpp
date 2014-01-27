@@ -25,3 +25,8 @@ b2Body* BoxGameObject::getBody(void) const
 {
     return body;
 }
+
+/*const GameObject::GameObjectTypes BoxGameObject::getGType(void) const
+{
+	return GameObject::BoxGameObjectType;
+}*/

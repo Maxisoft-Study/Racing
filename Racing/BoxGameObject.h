@@ -6,13 +6,14 @@ class BoxGameObject :
 public:
 	
 	enum b2xGameObjectCategory{
-		CAR_MASK = 1 << 4,
-		WHEEL_MASK = 1 << 5,
-		CHECKPOINT_MASK = 1 << 6
+		CAR_MASK = 1,
+		WHEEL_MASK = 1 << 1,
+		CHECKPOINT_MASK = 1 << 2
 	};
 
     b2World* getWorld(void) const;
     b2Body* getBody(void) const;
+	//const virtual GameObject::GameObjectTypes getGType(void) const;
 protected:
 	BoxGameObject(b2World* world);
     ~BoxGameObject();

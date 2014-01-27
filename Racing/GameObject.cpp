@@ -10,12 +10,7 @@ GameObject::~GameObject(void)
 {
 }
 
-bool GameObject::IsTypeOf(const GameObject &gobj, const GameObject::GameObjectTypes t)
+bool GameObject::IsTypeOf(const GameObject &gobj, const GameObjectTypes t)
 {
 	return (gobj.getGType() & t) != 0;
-}
-
-const GameObject::GameObjectTypes GameObject::getGType(void) const
-{
-	return GameObject::UnsetType;
 }

@@ -12,8 +12,10 @@
 #include <list>
 #include <string>
 #include <vector>
+#include <set>
 
 #include <unordered_map>
+
 
 #include <memory>
 #include <thread>
@@ -64,6 +66,7 @@ inline void dassert(bool b)
 //////////////////////////////////////////////////////////////////////////
 /// PROJECT HEADERS
 //////////////////////////////////////////////////////////////////////////
+#include "GameObjectTypes.h"
 #include "GConst.h"
 #include "GGlobals.h"
 #include "Utils.h"

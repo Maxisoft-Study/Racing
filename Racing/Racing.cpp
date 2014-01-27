@@ -284,7 +284,7 @@ int main(int argc, char** argv)
 	
 	GameContactListener *contactlistener = new GameContactListener();
 	
-	contact_listner_ptr checkpointlistener = contact_listner_ptr(new CheckpointContactHandler());
+	std::shared_ptr<CheckpointContactHandler> checkpointlistener(new CheckpointContactHandler());
 
 	contactlistener->add(checkpointlistener);
 	world->SetContactListener(contactlistener);
@@ -440,9 +440,7 @@ int main(int argc, char** argv)
 		elapsedassecond += processingClock.restart().asSeconds();
 		testcar.update(elapsedassecond);
 		testcar2.update(elapsedassecond);
-
 		window.clear();
-
 		//Center
 		view.setCenter(Utils::Box2DVectToSfVectPixel(position));
 		window.setView(view);
@@ -452,7 +450,7 @@ int main(int argc, char** argv)
 
 		window.draw(testcar);
 		window.draw(testcar2);
-		
+		LOG_DEBUG << checkpointlistener->getCheckpointCount(&testcar);
 		
 
 

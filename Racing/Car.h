@@ -37,7 +37,7 @@ public:
 	const CarControl getlastControl(void) const;
 	const CarSide getSide(void) const;
 	float getMaxFrontWheelsAngle(void) const;
-	const virtual GameObject::GameObjectTypes getGType(void) const final;
+	const virtual GameObjectTypes getGType(void) const final;
 private:
 	unsigned short weight;
 	float maxfrontwheelsangle;
