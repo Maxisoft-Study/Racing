@@ -38,6 +38,7 @@ MixedGameObject(world, file, init_pos_x, init_pos_y), wheels(Wheel::Count), whee
 		fixtureDef->shape = dynamicBox;
 		fixtureDef->density = 1.6f;
 		fixtureDef->friction = 0.5f;
+		fixtureDef->filter.categoryBits = BoxGameObject::CAR_MASK;
 
 
 		body->CreateFixture(fixtureDef);

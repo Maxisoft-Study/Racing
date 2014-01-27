@@ -21,6 +21,7 @@ wheeltype(type)
 
 	//Permet de ne plus avoir de collision avec les roues
 	fixtureDef->filter.maskBits = 0x0;
+	fixtureDef->filter.categoryBits = BoxGameObject::WHEEL_MASK;
 	//fixtureDef->filter.groupIndex = -8;
 
 	body->CreateFixture(fixtureDef);
