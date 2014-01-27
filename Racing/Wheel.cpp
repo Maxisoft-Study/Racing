@@ -3,13 +3,14 @@
 
 
 Wheel::Wheel(b2World *world, Car* car, const WheelType type, const float init_pos_x, const float init_pos_y) :
-BoxGameObject(world, init_pos_x, init_pos_y),
+BoxGameObject(world),
 car_ptr(car), 
 wheeltype(type)
 {
-	setGType(GameObject::WheelType);
-	bodydef->type = b2_dynamicBody;
-	body = world->CreateBody(bodydef);
+	b2BodyDef bodydef;
+	bodydef.type = b2_dynamicBody;
+	bodydef.position.Set(init_pos_x, init_pos_y);
+	body = world->CreateBody(&bodydef);
 	body->SetUserData(this);
 	b2PolygonShape dynamicBox;
 	dynamicBox.SetAsBox(0.1f, 0.3f);
@@ -97,4 +98,9 @@ void Wheel::killOrthogonalVelocity(void)
 	b2Vec2 sidewayaxis = getBody()->GetTransform().q.GetYAxis();
 	sidewayaxis *= b2Dot(velocity, sidewayaxis);
 	getBody()->SetLinearVelocity(sidewayaxis);
+}
+
+const GameObject::GameObjectTypes Wheel::getGType(void) const
+{
+	return GameObject::WheelType;
 }

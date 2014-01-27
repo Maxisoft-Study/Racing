@@ -119,6 +119,15 @@
     <ClInclude Include="YamlConverter.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
+    <ClInclude Include="LoggerConfig.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="GameContactListener.h">
+      <Filter>Fichiers d%27en-tête\GameBase</Filter>
+    </ClInclude>
+    <ClInclude Include="CheckPointContactHandler.h">
+      <Filter>Fichiers d%27en-tête\GameBase\Level</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Racing.cpp">

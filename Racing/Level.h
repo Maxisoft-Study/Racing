@@ -30,17 +30,12 @@ private:
 	//////////////////////////////////////////////////////////////////////////
 	sf::Vector2u lenght;
 
-
-
-
-
-	
 public:
 
 	Level(void);
 	~Level(void);
 
-	bool load(const std::string &jsonfilename, b2World *world);
+	bool load(const std::string& jsonfilename, b2World* world);
 
 	const sf::Vector2u getRawLenght() const { return lenght; }
 	const sf::Vector2u getLenght() const { return sf::Vector2u(lenght.x * tileLenght.x, lenght.y * tileLenght.y); }

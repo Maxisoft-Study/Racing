@@ -8,12 +8,9 @@ class MixedGameObject :
 {
 	friend class sf::RenderTarget;
 public:
-	using GameObject::getGType;
 	~MixedGameObject();
 	virtual void update(float delta);
 protected:
-	using GameObject::gtype;
-	using GameObject::setGType;
-	MixedGameObject(b2World *world, const std::string &file, const float init_pos_x = 0.f, const float init_pos_y = 0.f);
+	MixedGameObject(b2World* world, const std::string& file);
 };
 

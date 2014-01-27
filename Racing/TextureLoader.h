@@ -1,7 +1,8 @@
 #pragma once
 
-
 #include "stdafx.h"
+#include "LoggerConfig.h"
+
 typedef std::shared_ptr<sf::Texture> texture_ptr;
 
 class TextureLoader
@@ -10,7 +11,7 @@ public:
 	TextureLoader(void) :textures(){};
 	~TextureLoader(){};
 
-	texture_ptr get(const std::string &s)
+	texture_ptr get(const std::string& s)
 	{
 		std::string fs = pathFormat(s);
 		std::unordered_map<std::string, std::shared_ptr<sf::Texture>>::iterator it = textures.find(fs);
@@ -28,19 +29,20 @@ public:
 		return get(s);
 	}
 
-	const std::string pathFormat(const std::string &s)
+	const std::string pathFormat(const std::string& s)
 	{
 		boost::filesystem::path full_path(boost::filesystem::initial_path<boost::filesystem::path>());
 		full_path = boost::filesystem::system_complete(boost::filesystem::path(s));
 		return full_path.generic_string();
 	}
 
-	bool load(const std::string &s)
+	bool load(const std::string& s)
 	{
 		std::string fs = pathFormat(s);
 		texture_ptr texture = std::shared_ptr<sf::Texture>(new sf::Texture());
 		if (!texture->loadFromFile(fs))
 		{
+			LOG_WARN << "Unable to load file " << fs;
 			return false;
 		}
 		textures[fs] = texture;

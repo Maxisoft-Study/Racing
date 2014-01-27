@@ -29,7 +29,7 @@ class Car :
 	friend class CarControler;
 	friend class Wheel;
 public:
-	Car(b2World *world, const std::string &file, const float init_pos_x = 0.f, const float init_pos_y = 0.f);
+	Car(b2World* world, const std::string& file, const float init_pos_x = 0.f, const float init_pos_y = 0.f);
 	~Car(void);
 	virtual void update(float delta) final;
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const final;
@@ -37,11 +37,12 @@ public:
 	const CarControl getlastControl(void) const;
 	const CarSide getSide(void) const;
 	float getMaxFrontWheelsAngle(void) const;
+	const virtual GameObject::GameObjectTypes getGType(void) const final;
 private:
 	unsigned short weight;
 	float maxfrontwheelsangle;
 	float lastspeed;
-	CarEngine *engine;
+	CarEngine* engine;
 	CarControl lastcontrol;
 	std::vector<Wheel*> wheels;
 	std::vector<b2Joint*> wheelsJoints;

@@ -5,8 +5,10 @@
 #include "Car.h"
 #include "TextureLoader.h"
 #include "Level.h"
+#include "GameContactListener.h"
+#include "CheckPointContactHandler.h"
 
-//#define _DEBUG_DRAW 
+#define _DEBUG_DRAW 
 #ifdef _DEBUG_DRAW
 #include "SFMLDebugDraw.h"
 
@@ -190,7 +192,7 @@ int main(int argc, char** argv)
 	std::stringstream sstream;
 	/* Initialize SFML Debug Draw */
 	SFMLDebugDraw debugDraw(debugwindow);
-	world.SetDebugDraw(&debugDraw);
+	world->SetDebugDraw(&debugDraw);
 
 	/* Set initial flags for what to draw */
 	debugDraw.SetFlags(b2Draw::e_shapeBit); //Only draw shapes
@@ -198,7 +200,7 @@ int main(int argc, char** argv)
 	/* Mouse Joint */
 	b2MouseJoint* mouseJoint = nullptr;
 	b2BodyDef bodyDef;
-	b2Body* ground = world.CreateBody(&bodyDef); //This is not the body of the bounding box
+	b2Body* ground = world->CreateBody(&bodyDef); //This is not the body of the bounding box
 	//This body exists to serve as an anchor point for the mouse joint
 	bool helpTextEnabled = true;
 	std::vector<b2Body*> bodies;
@@ -277,10 +279,15 @@ int main(int argc, char** argv)
 	Car testcar2(world, "ressources/voituretest.png", 5.f, 5.f);
 
 
-	Level lvl;
-	lvl.load("ressources/test3.json", world);
+	Level *lvl = new Level();
+	lvl->load("ressources/test3.json", world);
+	
+	GameContactListener *contactlistener = new GameContactListener();
+	
+	contact_listner_ptr checkpointlistener = contact_listner_ptr(new CheckpointContactHandler());
 
-
+	contactlistener->add(checkpointlistener);
+	world->SetContactListener(contactlistener);
 
 
 	while (window.isOpen())
@@ -325,11 +332,11 @@ int main(int argc, char** argv)
 			}
 			else if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Num1)
 			{
-				bodies.push_back(createSquare(world, debugwindow));
+				bodies.push_back(createSquare(*world, debugwindow));
 			}
 			else if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Num2)
 			{
-				bodies.push_back(createCircle(world, debugwindow));
+				bodies.push_back(createCircle(*world, debugwindow));
 			}
 			else if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Subtract)
 			{
@@ -347,7 +354,7 @@ int main(int argc, char** argv)
 			{
 				if (!bodies.empty())
 				{
-					world.DestroyBody(bodies.back());
+					world->DestroyBody(bodies.back());
 					bodies.pop_back();
 				}
 			}
@@ -368,7 +375,7 @@ int main(int argc, char** argv)
 
 				// Query the world for overlapping shapes.
 				QueryCallback callback(mousePos);
-				world.QueryAABB(&callback, aabb);
+				world->QueryAABB(&callback, aabb);
 
 				if (callback.m_fixture)
 				{
@@ -378,7 +385,7 @@ int main(int argc, char** argv)
 					md.bodyB = body;
 					md.target = mousePos;
 					md.maxForce = 1000.0f * body->GetMass();
-					mouseJoint = (b2MouseJoint*)world.CreateJoint(&md);
+					mouseJoint = (b2MouseJoint*)world->CreateJoint(&md);
 					body->SetAwake(true);
 				}
 			}
@@ -389,7 +396,7 @@ int main(int argc, char** argv)
 			}
 			else if (event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left && mouseJoint != nullptr)
 			{
-				world.DestroyJoint(mouseJoint);
+				world->DestroyJoint(mouseJoint);
 				mouseJoint = nullptr;
 			}
 		}
@@ -412,7 +419,7 @@ int main(int argc, char** argv)
 		contentview.setCenter(sf::Vector2f(tmp.x * sfdd::SCALE, tmp.y * sfdd::SCALE));
 		contentview.zoom(debugviewzoom);
 		debugwindow.setView(contentview);
-		world.DrawDebugData();
+		world->DrawDebugData();
 
 		debugwindow.display();
 #endif // _DEBUG_DRAW

@@ -3,7 +3,7 @@
 #include "GameObject.h"
 #include "TextureLoader.h"
 class SpriteGameObject :
-	public GameObject,
+	virtual public GameObject,
 	public sf::Drawable
 {
 

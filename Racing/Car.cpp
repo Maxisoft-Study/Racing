@@ -1,28 +1,26 @@
 #include "stdafx.h"
 #include "Car.h"
 
-Car::Car(b2World *world, const std::string &file, const float init_pos_x, const float init_pos_y) :
-MixedGameObject(world, file, init_pos_x, init_pos_y), wheels(Wheel::Count), wheelsJoints(Wheel::Count), maxfrontwheelsangle(Utils::DegreeToRadian(38)), lastspeed(-1)
+Car::Car(b2World* world, const std::string& file, const float init_pos_x, const float init_pos_y) :
+MixedGameObject(world, file), wheels(Wheel::Count), wheelsJoints(Wheel::Count), maxfrontwheelsangle(Utils::DegreeToRadian(38)), lastspeed(-1)
 {
-	setGType(GameObject::CarType);
-	bodydef->type = b2_dynamicBody;
-	bodydef->linearDamping = 0.7f;
-	bodydef->angularDamping = 0.7f;
-	//bodydef->position.Set(0.f, 0.f);
-	bodydef->bullet = true;
+	b2BodyDef bodydef;
+	bodydef.type = b2_dynamicBody;
+	bodydef.linearDamping = 0.7f;
+	bodydef.angularDamping = 0.7f;
+	bodydef.position.Set(init_pos_x, init_pos_y);
+	bodydef.bullet = true;
 
-	body = world->CreateBody(bodydef);
+	body = world->CreateBody(&bodydef);
 	body->SetUserData(this);
 
 
 	YAML::Node caryaml = YAML::LoadFile("ressources/car.yaml");
 	const float scale = caryaml["polygonsscale"].as<float>();
-	YAML::Node polygonsyaml = caryaml["polygons"];
-
 
 	std::vector<b2Vec2> parsedpolygonpoints(0);
 
-	for (YAML::Node polygon : polygonsyaml)
+	for (YAML::Node polygon : caryaml["polygons"])
 	{
 		//remplis le vector de points
 		for (YAML::Node point : polygon)
@@ -39,6 +37,7 @@ MixedGameObject(world, file, init_pos_x, init_pos_y), wheels(Wheel::Count), whee
 		fixtureDef->density = 1.6f;
 		fixtureDef->friction = 0.5f;
 		fixtureDef->filter.categoryBits = BoxGameObject::CAR_MASK;
+		//fixtureDef->filter.maskBits |= BoxGameObject::CHECKPOINT_MASK;
 
 
 		body->CreateFixture(fixtureDef);
@@ -196,4 +195,9 @@ const CarSide Car::getSide(void) const
 float Car::getMaxFrontWheelsAngle(void) const
 {
 	return maxfrontwheelsangle;
+}
+
+const GameObject::GameObjectTypes Car::getGType(void) const
+{
+	return GameObject::CarType;
 }

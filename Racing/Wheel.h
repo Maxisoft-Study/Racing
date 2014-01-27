@@ -23,14 +23,15 @@ public:
 		Count // nombre de pneu (4)
 	};
 
-	Wheel(b2World *world, Car *car, const WheelType type, const float init_pos_x, const float init_pos_y);
+	Wheel(b2World* world, Car* car, const WheelType type, const float init_pos_x, const float init_pos_y);
 	~Wheel();
 	virtual void update(float delta) final;
 	const WheelType wheeltype;
+	const virtual GameObject::GameObjectTypes getGType(void) const final;
 protected:
 	b2Vec2 getLateralVelocity(void) const;
 	void killOrthogonalVelocity(void);
 private:
-	const Car * const car_ptr;
+	const Car* const car_ptr;
 };
 

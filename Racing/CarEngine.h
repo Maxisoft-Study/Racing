@@ -12,7 +12,7 @@ public:
 	float getBaseImpulseY(void);
 	int getSpeedPad(void) const;
 private:
-	Car *car_ptr;
+	Car* car_ptr;
 	int speed_pad;
 };
 

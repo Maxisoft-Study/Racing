@@ -55,22 +55,17 @@ bool Level::load(const std::string &jsonfilename, b2World *world)
 
 				if (objecttype == "checkpoint")
 				{
-					checkpoints.emplace_back(world,
+					checkpoints.emplace_back(
+						world,
 						jsonobject.get<int>("x") / racing::BOX2D_METERS_TO_PIXEL,
 						jsonobject.get<int>("y") / racing::BOX2D_METERS_TO_PIXEL,
-						sf::Vector2u(jsonobject.get<uint>("width") / racing::BOX2D_METERS_TO_PIXEL,
-						jsonobject.get<uint>("height") / racing::BOX2D_METERS_TO_PIXEL));
+						sf::Vector2u(static_cast<uint>(jsonobject.get<uint>("width") / racing::BOX2D_METERS_TO_PIXEL),
+							static_cast<uint>(jsonobject.get<uint>("height") / racing::BOX2D_METERS_TO_PIXEL))
+						);
 				}
 			}
 		}
 	}
-
-	std::cout << tilemapdata.size();
-
-
-
-
-
 
 	return true;
 }

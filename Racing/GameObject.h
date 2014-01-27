@@ -24,12 +24,10 @@ public:
 		CheckpointType = 1 << 6 | BoxGameObjectType,
 	};
 
-	const GameObject::GameObjectTypes& getGType(void) const;
+	const virtual GameObject::GameObjectTypes getGType(void) const;
 
-	static bool IsTypeOf(const GameObject &gobj, const GameObject::GameObjectTypes t);
+	static bool IsTypeOf(const GameObject& gobj, const GameObject::GameObjectTypes t);
 protected:
         GameObject();
         virtual ~GameObject(void);
-		GameObjectTypes gtype;
-		void setGType(const GameObject::GameObjectTypes typeparam);
 };

@@ -116,6 +116,8 @@ xcopy /Y "$(SolutionDir)\ressources" "$(OutDir)\ressources"</Command>
     <ClInclude Include="Car.h" />
     <ClInclude Include="CarEngine.h" />
     <ClInclude Include="Checkpoint.h" />
+    <ClInclude Include="CheckPointContactHandler.h" />
+    <ClInclude Include="GameContactListener.h" />
     <ClInclude Include="EventHandler.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GConst.h" />
@@ -124,6 +126,7 @@ xcopy /Y "$(SolutionDir)\ressources" "$(OutDir)\ressources"</Command>
     <ClInclude Include="InGameEventHandler.h" />
     <ClInclude Include="InGameOverlay.h" />
     <ClInclude Include="Level.h" />
+    <ClInclude Include="LoggerConfig.h" />
     <ClInclude Include="MixedGameObject.h" />
     <ClInclude Include="Obstacle.h" />
     <ClInclude Include="SFMLDebugDraw.h" />

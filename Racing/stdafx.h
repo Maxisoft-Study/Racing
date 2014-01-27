@@ -22,18 +22,34 @@
 
 #include <cmath>
 
+//////////////////////////////////////////////////////////////////////////
+/// EXTERNAL HEADERS
+//////////////////////////////////////////////////////////////////////////
 #include <SFML/Graphics.hpp>
 #include <SFML/Window/Event.hpp>
 #include <Box2D/Box2D.h>
 #include <yaml-cpp/yaml.h>
+//////////////////////////////////////////////////////////////////////////
 
-#include "boost/filesystem/operations.hpp"
-#include "boost/filesystem/path.hpp"
+//////////////////////////////////////////////////////////////////////////
+/// BOOST HEADERS
+//////////////////////////////////////////////////////////////////////////
 #ifdef _MSC_VER
 #include <boost/config/compiler/visualc.hpp>
 #endif
+
+//FILESYSTEM
+#include "boost/filesystem/operations.hpp"
+#include "boost/filesystem/path.hpp"
+//JSON
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/json_parser.hpp>
+//LOG
+#include <boost/log/sources/basic_logger.hpp>
+#include <boost/log/sources/record_ostream.hpp>
+#include <boost/log/sources/severity_feature.hpp>
+#include <boost/log/sources/severity_logger.hpp>
+//////////////////////////////////////////////////////////////////////////
 
 typedef unsigned int uint;
 
@@ -44,13 +60,13 @@ inline void dassert(bool b)
 #endif // _DEBUG
 }
 
+
+//////////////////////////////////////////////////////////////////////////
+/// PROJECT HEADERS
+//////////////////////////////////////////////////////////////////////////
 #include "GConst.h"
 #include "GGlobals.h"
 #include "Utils.h"
 #include "GameObject.h"
 #include "TileMap.h"
-
-
-
-
-// TODO: faites référence ici aux en-têtes supplémentaires nécessaires au programme
+//////////////////////////////////////////////////////////////////////////

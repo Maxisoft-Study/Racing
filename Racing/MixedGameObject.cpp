@@ -2,8 +2,8 @@
 #include "MixedGameObject.h"
 
 
-MixedGameObject::MixedGameObject(b2World *world, const std::string &file, const float init_pos_x, const float init_pos_y) :
-SpriteGameObject(file), BoxGameObject(world, init_pos_x, init_pos_y)
+MixedGameObject::MixedGameObject(b2World *world, const std::string &file) :
+SpriteGameObject(file), BoxGameObject(world)
 {
 }
 

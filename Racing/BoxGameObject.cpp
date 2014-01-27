@@ -2,28 +2,26 @@
 #include "BoxGameObject.h"
 
 
-BoxGameObject::BoxGameObject(b2World *world, const float init_pos_x, const float init_pos_y) : GameObject(), body(NULL)
+BoxGameObject::BoxGameObject(b2World *world) : GameObject(), body(NULL)
 {
-    bodydef = new b2BodyDef();
-	bodydef->position.Set(init_pos_x, init_pos_y);
 }
 
 BoxGameObject::~BoxGameObject()
 {
-    if (body)
-    {
+	if (body)
+	{
 		getWorld()->DestroyBody(body);
+		body = nullptr;
     }
-    delete bodydef;
 }
 
 
-b2World *BoxGameObject::getWorld(void) const
+b2World* BoxGameObject::getWorld(void) const
 {
     return body->GetWorld();
 }
 
-b2Body *BoxGameObject::getBody(void) const
+b2Body* BoxGameObject::getBody(void) const
 {
     return body;
 }
