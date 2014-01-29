@@ -1,15 +1,13 @@
 #pragma once
 #include "stdafx.h"
 #include "MixedGameObject.h"
-
-class Car;
-
 #include "Wheel.h"
 #include "CarEngine.h"
 
+class CarControler;
+
 struct CarControl
 {
-public:
 	CarControl::CarControl(const float dir = 0.f, const float rot = 0.f) : rotation(rot), direction(dir){};
 	CarControl::~CarControl(void){};
 	float rotation;

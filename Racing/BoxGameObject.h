@@ -15,7 +15,7 @@ public:
     b2Body* getBody(void) const;
 	//const virtual GameObject::GameObjectTypes getGType(void) const;
 protected:
-	BoxGameObject(b2World* world);
+	explicit BoxGameObject(b2World* world);
     ~BoxGameObject();
     b2Body* body;
 };

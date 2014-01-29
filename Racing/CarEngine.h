@@ -7,7 +7,7 @@ class CarEngine
 {
 	friend class Car;
 public:
-	CarEngine(Car* carp);
+	explicit CarEngine(Car* carp);
 	~CarEngine();
 	float getBaseImpulseY(void);
 	int getSpeedPad(void) const;

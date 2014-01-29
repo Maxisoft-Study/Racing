@@ -14,7 +14,7 @@ public:
 	texture_ptr get(const std::string& s)
 	{
 		std::string fs = pathFormat(s);
-		std::unordered_map<std::string, std::shared_ptr<sf::Texture>>::iterator it = textures.find(fs);
+		auto it = textures.find(fs);
 		if (it != textures.end())
 			return it->second;
 
@@ -61,5 +61,5 @@ public:
 	}
 
 private:
-	std::unordered_map<std::string, std::shared_ptr<sf::Texture>> textures;
+	std::map<std::string, std::shared_ptr<sf::Texture>> textures;
 };

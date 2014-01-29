@@ -131,6 +131,9 @@
     <ClInclude Include="GameObjectTypes.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
+    <ClInclude Include="CarControler.h">
+      <Filter>Fichiers d%27en-tête\GameBase\Car</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Racing.cpp">

@@ -6,7 +6,7 @@ class BaseEventHandler :
         public EventHandler
 {
 public:
-        BaseEventHandler(sf::RenderWindow* wptr);
+        explicit BaseEventHandler(sf::RenderWindow* wptr);
         ~BaseEventHandler(void);
         virtual bool on_event(const sf::Event &e);
 protected:

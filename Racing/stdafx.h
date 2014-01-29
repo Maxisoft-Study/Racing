@@ -17,8 +17,8 @@
 #include <unordered_map>
 
 
-#include <memory>
-#include <thread>
+//#include <memory>
+//#include <thread>
 
 #include <sstream>
 
@@ -39,6 +39,9 @@
 #ifdef _MSC_VER
 #include <boost/config/compiler/visualc.hpp>
 #endif
+
+
+#include <boost/bimap.hpp>
 
 //FILESYSTEM
 #include "boost/filesystem/operations.hpp"
@@ -72,4 +75,6 @@ inline void dassert(bool b)
 #include "Utils.h"
 #include "GameObject.h"
 #include "TileMap.h"
+
+#include "YamlConverter.h"
 //////////////////////////////////////////////////////////////////////////
