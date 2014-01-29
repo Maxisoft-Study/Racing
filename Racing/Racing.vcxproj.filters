@@ -190,6 +190,9 @@
     <ClCompile Include="Checkpoint.cpp">
       <Filter>Fichiers sources\GameBase\Level</Filter>
     </ClCompile>
+    <ClCompile Include="GConst.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

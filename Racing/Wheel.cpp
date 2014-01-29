@@ -20,7 +20,7 @@ wheeltype(type)
 	fixtureDef->density = 1.f;
 	fixtureDef->friction = 0.5f;
 
-	//Permet de ne plus avoir des collision avec les roues qu'avec les checkpoints (sensor)
+	//Permet d'avoir des collision qu'avec les checkpoints (sensor)
 	fixtureDef->filter.maskBits = BoxGameObject::CHECKPOINT_MASK;
 	fixtureDef->filter.categoryBits = BoxGameObject::WHEEL_MASK;
 	//fixtureDef->filter.groupIndex = -8;
@@ -43,7 +43,7 @@ void Wheel::update(float delta)
 		
 		float carangle = car_ptr->getBody()->GetAngle();
 
-		if (car_ptr->getlastControl().rotation) // l'utilisateur veut tourner.
+		if (car_ptr->getlastControl().rotation) // l'utilisateur veut tourné.
 		{
 			float angle = car_ptr->getlastControl().rotation * 1.6f * delta;
 

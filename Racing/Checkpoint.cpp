@@ -18,7 +18,7 @@ BoxGameObject(world)
 	fixtureDef->shape = dynamicBox;
 	fixtureDef->filter.categoryBits = BoxGameObject::CHECKPOINT_MASK;
 
-	//actives la detection des collisions seulement pour les roues des voiture
+	//actives la detection des collisions seulement pour les roues des voitures
 	fixtureDef->filter.maskBits = BoxGameObject::WHEEL_MASK;
 
 	// la voiture passe au travers

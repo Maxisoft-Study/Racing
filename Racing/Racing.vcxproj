@@ -147,6 +147,7 @@ xcopy /Y "$(SolutionDir)\ressources" "$(OutDir)\ressources"</Command>
     <ClCompile Include="Checkpoint.cpp" />
     <ClCompile Include="EventHandler.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="GConst.cpp" />
     <ClCompile Include="Ground.cpp" />
     <ClCompile Include="InGameEventHandler.cpp" />
     <ClCompile Include="InGameOverlay.cpp" />
