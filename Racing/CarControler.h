@@ -9,7 +9,7 @@ struct CarControlDef
 	sf::Keyboard::Key RotateLeft;
 	sf::Keyboard::Key RotateRight;
 
-	CarControlDef(sf::Keyboard::Key moveForward = sf::Keyboard::Key::Up,
+	explicit CarControlDef(sf::Keyboard::Key moveForward = sf::Keyboard::Key::Up,
 		sf::Keyboard::Key moveBackWard = sf::Keyboard::Key::Down,
 		sf::Keyboard::Key rotateLeft = sf::Keyboard::Key::Left,
 		sf::Keyboard::Key rotateRight = sf::Keyboard::Key::Right) :
