@@ -3,11 +3,37 @@
 #include "Ground.h"
 #include "Checkpoint.h"
 
+struct TileSetDef
+{
+	std::string image;
+	uint firstgid;
+	uint imageheight;
+	uint imagewidth;
+	uint spacing;
+	uint tileheight;
+	uint tilewidth;
+
+	TileSetDef(std::string img, uint firstgidparam, uint iwidth, uint iheight, uint twidth, uint theight, uint spacingparam) :
+		image(img), firstgid(firstgidparam), imageheight(iheight), imagewidth(iwidth), spacing(spacingparam), tilewidth(twidth), tileheight(theight)
+	{}
+
+	TileSetDef& operator =(const TileSetDef &other)
+	{
+		image = other.image;
+		firstgid = other.firstgid;
+		imageheight = other.imageheight;
+		imagewidth = other.imagewidth;
+		spacing = other.spacing;
+		tileheight = other.tileheight;
+		tilewidth = other.tilewidth;
+		return *this;
+	}
+};
+
 class Level :
-    sf::Drawable
+    virtual public sf::Drawable
 {
 private:
-	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
 	//////////////////////////////////////////////////////////////////////////
 	/// Les tableau de tuiles
@@ -18,6 +44,11 @@ private:
 	/// les checkpoints
 	//////////////////////////////////////////////////////////////////////////
 	std::vector<Checkpoint*> checkpoints;
+
+	//////////////////////////////////////////////////////////////////////////
+	/// La definition des tilesets
+	//////////////////////////////////////////////////////////////////////////
+	std::vector<const TileSetDef> tilesetdefs;
 
 
 	//////////////////////////////////////////////////////////////////////////
@@ -39,4 +70,6 @@ public:
 
 	const sf::Vector2u getRawLenght() const { return lenght; }
 	const sf::Vector2u getLenght() const { return sf::Vector2u(lenght.x * tileLenght.x, lenght.y * tileLenght.y); }
+
+	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 };

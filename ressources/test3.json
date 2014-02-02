@@ -57,7 +57,7 @@
  "tilesets":[
         {
          "firstgid":1,
-         "image":"simpleroads.png",
+         "image":"ressources/simpleroads.png",
          "imageheight":2840,
          "imagewidth":3560,
          "margin":0,
@@ -69,21 +69,6 @@
          "spacing":41,
          "tileheight":679,
          "tilewidth":679
-        }, 
-        {
-         "firstgid":21,
-         "image":"turn.png",
-         "imageheight":1392,
-         "imagewidth":1392,
-         "margin":0,
-         "name":"turn",
-         "properties":
-            {
-
-            },
-         "spacing":34,
-         "tileheight":678,
-         "tilewidth":678
         }],
  "tilewidth":678,
  "version":1,

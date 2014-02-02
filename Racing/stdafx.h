@@ -36,10 +36,12 @@
 //////////////////////////////////////////////////////////////////////////
 /// BOOST HEADERS
 //////////////////////////////////////////////////////////////////////////
-#ifdef _MSC_VER
+/*#ifdef _MSC_VER
 #include <boost/config/compiler/visualc.hpp>
-#endif
+#endif*/
 
+
+#include <boost/algorithm/string/predicate.hpp>
 
 #include <boost/bimap.hpp>
 

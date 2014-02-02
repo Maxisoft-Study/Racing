@@ -9,6 +9,10 @@ Level::Level(void)
 
 Level::~Level(void)
 {
+	for (auto checkpoint : checkpoints)
+	{
+		delete checkpoint;
+	}
 }
 
 
@@ -66,6 +70,55 @@ bool Level::load(const std::string &jsonfilename, b2World *world)
 				}
 			}
 		}
+	}
+
+	for (auto &tileset : pt.get_child("tilesets"))
+	{
+		auto jsonobject = tileset.second;
+		
+		tilesetdefs.emplace_back(
+			jsonobject.get<std::string>("image"),
+			jsonobject.get<uint>("firstgid"),
+			jsonobject.get<uint>("imagewidth"),
+			jsonobject.get<uint>("imageheight"),
+			jsonobject.get<uint>("tilewidth"),
+			jsonobject.get<uint>("tileheight"),
+			jsonobject.get<uint>("spacing")
+			);
+	}
+	//sort de la liste des tuiles defs en fonction de l'id des tuiles
+	std::sort(begin(tilesetdefs), end(tilesetdefs), [](const TileSetDef left, const TileSetDef right) { return left.firstgid < right.firstgid; });
+
+	LOG_DEBUG << begin(tilesetdefs)->firstgid;
+
+	for (auto it = begin(tilesetdefs); it != end(tilesetdefs); ++it)
+	{
+		TileMap curr;
+
+		uint nextgid = -1;
+		auto nextit = it + 1;
+		if (nextit != end(tilesetdefs))
+		{
+			nextgid = nextit->firstgid - 1;
+		}
+
+		auto result = curr.load(
+			it->image,
+			sf::Vector2u(it->tilewidth, it->tileheight),
+			tilemapdata,
+			lenght.x,
+			lenght.y,
+			it->firstgid,
+			nextgid,
+			it->spacing
+			);
+
+		if (!result){
+			return false;
+		}
+
+		tilemaps.push_back(curr);
+
 	}
 
 	return true;

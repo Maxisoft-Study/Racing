@@ -98,9 +98,18 @@ b2Body* createCircle(b2World &world, sf::RenderWindow &window)
 using std::cout;
 using std::vector;
 
+//////////////////////////////////////////////////////////////////////////
+/// GLOABALS
+std::list<EventHandler*> EVENTS_HANDLERS;
+TextureLoader racing::TEXTURE_LOADER;
+YAML::Node racing::CONFIG;
+sf::VideoMode racing::VIDEO_MODE;
+boost::bimap<const std::string, const sf::Keyboard::Key>  racing::STRING_TO_SFML_KEYBOARD_KEY;
+//////////////////////////////////////////////////////////////////////////
+
 
 //////////////////////////////////////////////////////////////////////////
-/// Register and set WORKING_DIRECTORY according to argv parameters.
+/// Register and set working directory according to argv parameters.
 //////////////////////////////////////////////////////////////////////////
 void set_working_dir(char** argv)
 {
@@ -109,15 +118,6 @@ void set_working_dir(char** argv)
 
 	boost::filesystem::current_path(full_path.remove_filename());
 }
-
-
-
-
-std::list<EventHandler*> EVENTS_HANDLERS;
-TextureLoader racing::TEXTURE_LOADER;
-YAML::Node racing::CONFIG;
-sf::VideoMode racing::VIDEO_MODE;
-boost::bimap<const std::string, const sf::Keyboard::Key>  racing::STRING_TO_SFML_KEYBOARD_KEY;
 
 void setup_globals(void)
 {
@@ -229,8 +229,8 @@ void setup_globals(void)
 		{ "Pause", sf::Keyboard::Pause },
 		{ "KeyCount", sf::Keyboard::KeyCount } };
 
+		//charge le tout dans la bimap
 		racing::STRING_TO_SFML_KEYBOARD_KEY.left.insert(string_to_sfml_keyboard_key.begin(), string_to_sfml_keyboard_key.end());
-
 }
 
 
@@ -242,7 +242,7 @@ int main(int argc, char** argv)
 	sf::Clock clock;
 	sf::Clock processingClock;
 
-	b2Vec2 gravity(0.0f, 0.0f);
+	b2Vec2 gravity(0.0f, 0.0f); // désactive la gravité
 	b2World *world = new b2World(gravity);
 	world->SetAllowSleeping(true);
 
@@ -310,77 +310,24 @@ int main(int argc, char** argv)
 	window.setVerticalSyncEnabled(true);
 	EVENTS_HANDLERS.push_back(new BaseEventHandler(&window));
 
-	const int rawlevel[] =
-	{
-		0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-		0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 19, 0, 0, 0, 0, 0, 0,
-		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 19, 0, 0,
-		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-		0, 19, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-		0, 0, 0, 0, 0, 19, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-		0, 0, 0, 0, 0, 0, 0, 0, 0, 19, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 19, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 19, 0, 0, 0, 0, 0, 0, 0, 0,
-		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 19, 0, 0, 0, 0,
-		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 19,
-		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-		0, 0, 0, 19, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-		0, 0, 0, 0, 0, 0, 0, 19, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 19, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 19, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 19, 0, 0, 0, 0, 0, 0,
-		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 19, 0, 0,
-		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-		0, 19, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-		0, 0, 0, 0, 0, 19, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-		0, 0, 0, 0, 0, 0, 0, 0, 0, 19, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 19, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 19, 0, 0, 0, 0, 0, 0, 0, 0,
-		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 19, 19, 19, 19,
-		19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 20, 20, 20,
-		20, 20, 0, 0, 0, 0, 19, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20,
-		20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 0, 0, 0, 20, 20, 20, 20, 20, 20,
-		20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20,
-		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-	};
-	std::vector<uint> level(0);
-	level.assign(rawlevel, rawlevel + (30 * 30));
 
-	uint spacing = 41;
-	std::string imagepath("ressources/simpleroads.png");
-	uint height = 30;
-	uint width = 30;
-	uint tilewidth = 678;
-	uint tileheight = 678;
-
-
-	// on crée la tilemap avec le niveau précédemment défini
-
-	TileMap tmap;
-	if (!tmap.load(imagepath, sf::Vector2u(tilewidth, tileheight), level, width, height, 1, 20, 43))
-		return -1;
+	//construction voitures
 	Car testcar(world, "ressources/voituretest.png");
-	auto controls = racing::CONFIG["controls"].as<CarControlDef>();
-	CarControler ccontroler(&testcar, controls);
-	//ccontroler = CarControler(&testcar, {});
 	Car testcar2(world, "ressources/voituretest.png", 5.f, 5.f);
 
+	const CarControlDef controls(racing::CONFIG["controls"].as<CarControlDef>());
+	CarControler carcontroler(&testcar, controls);
 
-	Level *lvl = new Level();
+
+	Level* lvl = new Level();
 	lvl->load("ressources/test3.json", world);
 	
-	GameContactListener *contactlistener = new GameContactListener();
-	
-	std::shared_ptr<CheckpointContactHandler> checkpointlistener(new CheckpointContactHandler());
-
-	contactlistener->add(checkpointlistener);
+	GameContactListener* contactlistener = new GameContactListener();
 	world->SetContactListener(contactlistener);
+
+	std::shared_ptr<CheckpointContactHandler> checkpointlistener(new CheckpointContactHandler());
+	contactlistener->add(checkpointlistener);
+	
 
 
 	while (window.isOpen())
@@ -520,15 +467,15 @@ int main(int argc, char** argv)
 
 
 		processingClock.restart();
-		sf::Time elapsed = clock.restart();
+		sf::Time elapsed(clock.restart());
 		float elapsedassecond = elapsed.asSeconds();
 		world->Step(elapsedassecond, 20, 20);
 		//world.ClearForces();
 
 
-		const b2Vec2 position = testcar.getBody()->GetWorldCenter();
+		const b2Vec2 position(testcar.getBody()->GetWorldCenter());
 
-		ccontroler.parseKeys();
+		carcontroler.parseKeys();
 
 		elapsedassecond += processingClock.restart().asSeconds();
 		testcar.update(elapsedassecond);
@@ -538,9 +485,7 @@ int main(int argc, char** argv)
 		view.setCenter(Utils::Box2DVectToSfVectPixel(position));
 		window.setView(view);
 
-		window.draw(tmap);
-
-
+		window.draw(*lvl);
 		window.draw(testcar);
 		window.draw(testcar2);
 		//LOG_DEBUG << checkpointlistener->getCheckpointCount(&testcar);

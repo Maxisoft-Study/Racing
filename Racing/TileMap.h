@@ -2,6 +2,7 @@
 #include "stdafx.h"
 #include "TextureLoader.h"
 
+
 //////////////////////////////////////////////////////////////////////////
 /// basée sur http://www.sfml-dev.org/tutorials/2.1/graphics-vertex-array-fr.php
 //////////////////////////////////////////////////////////////////////////
@@ -9,7 +10,7 @@ class TileMap : public sf::Drawable, public sf::Transformable
 {
 public:
 
-	bool load(const std::string& tileset, sf::Vector2u tileSize, const std::vector<uint>& tiles, uint width, uint height, uint min_val, uint max_val, uint spacing = 0)
+	bool load(const std::string& tileset, sf::Vector2u tileSize, const std::vector<int>& tiles, uint width, uint height, uint min_val, int max_val, uint spacing = 0)
 	{
 		// on charge la texture du tileset
 		m_tileset = racing::TEXTURE_LOADER.get(tileset);
@@ -23,10 +24,10 @@ public:
 		for (unsigned int j = 0; j < height; ++j)
 		{
 			// on récupère le numéro de tuile courant
-			const uint tileIndex = i + j * width;
+			const int tileIndex = i + j * width;
 			uint tileNumber = tiles[tileIndex];
 
-			if (tileNumber < min_val || tileNumber > max_val)
+			if (tileNumber < min_val || tileNumber > max_val && max_val != -1)
 			{
 				continue;
 			}

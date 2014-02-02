@@ -5,6 +5,32 @@
 
 typedef std::shared_ptr<sf::Texture> texture_ptr;
 
+
+class TextureNotFoundException : public std::exception
+{
+public:
+	TextureNotFoundException(std::string texturepathparam) : std::exception(), texturepath(texturepathparam)
+	{
+		std::ostringstream oss;
+		oss << "Impossible de charger la texture : \"" << texturepath << "\".";
+		msg = oss.str();
+	}
+
+	virtual ~TextureNotFoundException() throw()
+	{
+
+	}
+
+	virtual const char * what() const throw()
+	{
+		return msg.c_str();
+	}
+
+private:
+	const std::string texturepath;
+	std::string msg;
+};
+
 class TextureLoader
 {
 public:
@@ -19,7 +45,7 @@ public:
 			return it->second;
 
 		if (!load(fs))
-			throw "Impossible de charger la texture.";
+			throw TextureNotFoundException(fs);
 		return textures.at(fs);
 		
 	}
