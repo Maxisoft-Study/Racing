@@ -89,8 +89,7 @@ bool Level::load(const std::string &jsonfilename, b2World *world)
 	//sort de la liste des tuiles defs en fonction de l'id des tuiles
 	std::sort(begin(tilesetdefs), end(tilesetdefs), [](const TileSetDef left, const TileSetDef right) { return left.firstgid < right.firstgid; });
 
-	LOG_DEBUG << begin(tilesetdefs)->firstgid;
-
+	//creation des tilemaps
 	for (auto it = begin(tilesetdefs); it != end(tilesetdefs); ++it)
 	{
 		TileMap curr;
@@ -102,7 +101,7 @@ bool Level::load(const std::string &jsonfilename, b2World *world)
 			nextgid = nextit->firstgid - 1;
 		}
 
-		auto result = curr.load(
+		bool result = curr.load(
 			it->image,
 			sf::Vector2u(it->tilewidth, it->tileheight),
 			tilemapdata,
@@ -113,12 +112,12 @@ bool Level::load(const std::string &jsonfilename, b2World *world)
 			it->spacing
 			);
 
-		if (!result){
+		if (!result)
+		{
 			return false;
 		}
 
 		tilemaps.push_back(curr);
-
 	}
 
 	return true;
