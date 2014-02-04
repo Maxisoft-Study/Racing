@@ -18,7 +18,7 @@ MixedGameObject(world, file), wheels(Wheel::Count), wheelsJoints(Wheel::Count), 
 	YAML::Node caryaml = YAML::LoadFile("ressources/car.yaml");
 	const float scale = caryaml["polygonsscale"].as<float>();
 
-	std::vector<b2Vec2> parsedpolygonpoints(0);
+	std::vector<b2Vec2> parsedpolygonpoints;
 
 	for (YAML::Node polygon : caryaml["polygons"])
 	{
@@ -29,20 +29,19 @@ MixedGameObject(world, file), wheels(Wheel::Count), wheelsJoints(Wheel::Count), 
 		}
 
 		//crée la fixture.
-		b2PolygonShape *dynamicBox = new b2PolygonShape();
+		b2PolygonShape* dynamicBox = new b2PolygonShape();
 		dynamicBox->Set(&(parsedpolygonpoints[0]), parsedpolygonpoints.size());
 
-		b2FixtureDef *fixtureDef = new b2FixtureDef();
-		fixtureDef->shape = dynamicBox;
-		fixtureDef->density = 1.6f;
-		fixtureDef->friction = 0.5f;
-		fixtureDef->filter.categoryBits = BoxGameObject::CAR_MASK;
+		b2FixtureDef fixtureDef;
+		fixtureDef.shape = dynamicBox;
+		fixtureDef.density = 1.6f;
+		fixtureDef.friction = 0.5f;
+		fixtureDef.filter.categoryBits = BoxGameObject::CAR_MASK;
 		//fixtureDef->filter.maskBits |= BoxGameObject::CHECKPOINT_MASK;
 
 
-		body->CreateFixture(fixtureDef);
+		body->CreateFixture(&fixtureDef);
 
-		delete fixtureDef;
 		delete dynamicBox;
 
 		parsedpolygonpoints.clear();
@@ -144,7 +143,7 @@ void Car::draw(sf::RenderTarget& target, sf::RenderStates states) const
 void Car::applyInertia(const float delta)
 {
 	//contrôle de la rotation du véhicule par rapport a son centre d'inertie.
-	getBody()->ApplyAngularImpulse(0.0017f * getBody()->GetInertia() * -getBody()->GetAngularVelocity() * getSpeed(), false);
+	getBody()->ApplyAngularImpulse(0.08f * delta * getBody()->GetInertia() * -getBody()->GetAngularVelocity() * getSpeed(), false);
 
 	//applique une force simulant l'inertie pour les dérapages
 	/*

@@ -26,10 +26,10 @@ namespace YAML {
 		}
 	};
 
-	//CONVERT sf VECTOR2i
+	//CONVERT to CarControlKeysDef
 	template<>
-	struct convert<CarControlDef> {
-		static Node encode(const CarControlDef& rhs) {
+	struct convert<CarControlKeysDef> {
+		static Node encode(const CarControlKeysDef& rhs) {
 			Node node;
 			node["movebackward"] = racing::STRING_TO_SFML_KEYBOARD_KEY.right.find(rhs.MoveBackWard)->second;
 			node["moveforward"] = racing::STRING_TO_SFML_KEYBOARD_KEY.right.find(rhs.MoveForward)->second;
@@ -38,7 +38,7 @@ namespace YAML {
 			return node;
 		}
 
-		static bool decode(const Node& node, CarControlDef& rhs) {
+		static bool decode(const Node& node, CarControlKeysDef& rhs) {
 			rhs.MoveBackWard = racing::STRING_TO_SFML_KEYBOARD_KEY.left.find(node["movebackward"].as<std::string>())->second;
 			rhs.MoveForward = racing::STRING_TO_SFML_KEYBOARD_KEY.left.find(node["moveforward"].as<std::string>())->second;
 			rhs.RotateLeft = racing::STRING_TO_SFML_KEYBOARD_KEY.left.find(node["rotateleft"].as<std::string>())->second;

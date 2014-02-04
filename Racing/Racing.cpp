@@ -304,10 +304,11 @@ int main(int argc, char** argv)
 	
 	sf::RenderWindow window(racing::VIDEO_MODE, "SFML works!", sf::Style::Default, racing::settings);
 	sf::View view(window.getDefaultView());
-	view.zoom(3.2f); // zoom out
+	view.zoom(4.f); // zoom out
 	window.setView(view);
 
 	window.setVerticalSyncEnabled(true);
+	//window.setFramerateLimit(30);
 	EVENTS_HANDLERS.push_back(new BaseEventHandler(&window));
 
 
@@ -315,7 +316,7 @@ int main(int argc, char** argv)
 	Car testcar(world, "ressources/voituretest.png");
 	Car testcar2(world, "ressources/voituretest.png", 5.f, 5.f);
 
-	const CarControlDef controls(racing::CONFIG["controls"].as<CarControlDef>());
+	const CarControlKeysDef controls(racing::CONFIG["controls"].as<CarControlKeysDef>());
 	CarControler carcontroler(&testcar, controls);
 
 

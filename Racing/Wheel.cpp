@@ -15,19 +15,17 @@ wheeltype(type)
 	b2PolygonShape dynamicBox;
 	dynamicBox.SetAsBox(0.1f, 0.3f);
 
-	b2FixtureDef *fixtureDef = new b2FixtureDef();
-	fixtureDef->shape = &dynamicBox;
-	fixtureDef->density = 1.f;
-	fixtureDef->friction = 0.5f;
+	b2FixtureDef fixtureDef;
+	fixtureDef.shape = &dynamicBox;
+	fixtureDef.density = 1.f;
+	fixtureDef.friction = 0.5f;
 
 	//Permet d'avoir des collision qu'avec les checkpoints (sensor)
-	fixtureDef->filter.maskBits = BoxGameObject::CHECKPOINT_MASK;
-	fixtureDef->filter.categoryBits = BoxGameObject::WHEEL_MASK;
+	fixtureDef.filter.maskBits = BoxGameObject::CHECKPOINT_MASK;
+	fixtureDef.filter.categoryBits = BoxGameObject::WHEEL_MASK;
 	//fixtureDef->filter.groupIndex = -8;
 
-	body->CreateFixture(fixtureDef);
-
-	delete fixtureDef;
+	body->CreateFixture(&fixtureDef);
 }
 
 
@@ -43,7 +41,7 @@ void Wheel::update(float delta)
 		
 		float carangle = car_ptr->getBody()->GetAngle();
 
-		if (car_ptr->getlastControl().rotation) // l'utilisateur veut tourné.
+		if (car_ptr->getlastControl().rotation) // l'utilisateur veut tourner.
 		{
 			float angle = car_ptr->getlastControl().rotation * 1.6f * delta;
 
@@ -75,7 +73,7 @@ void Wheel::update(float delta)
 
 		if (car_ptr->getlastControl().direction) //l'utilisateur veut faire fonctionner le moteur
 		{
-			b2Vec2 force(0.f, car_ptr->engine->getBaseImpulseY() * 0.016666666666666666666666666666f * car_ptr->getlastControl().direction);
+			b2Vec2 force(0.f, car_ptr->engine->getBaseImpulseY() * 0.7f * delta * car_ptr->getlastControl().direction);
 			force = Utils::RotateVect(force, getBody()->GetAngle());
 			getBody()->ApplyLinearImpulse(force, getBody()->GetWorldCenter(), true);
 		}
