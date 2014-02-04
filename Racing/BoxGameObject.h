@@ -6,9 +6,11 @@ class BoxGameObject :
 public:
 	
 	enum b2xGameObjectCategory{
-		CAR_MASK = 1,
+		CAR_MASK = 1 << 0,
 		WHEEL_MASK = 1 << 1,
-		CHECKPOINT_MASK = 1 << 2
+		CHECKPOINT_MASK = 1 << 2,
+		GROUND_MASK = 1 << 3,
+		
 	};
 
     b2World* getWorld(void) const;

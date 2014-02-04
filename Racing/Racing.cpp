@@ -8,8 +8,9 @@
 #include "Level.h"
 #include "GameContactListener.h"
 #include "CheckPointContactHandler.h"
+#include "GroundContactHandler.h"
 
-#define _DEBUG_DRAW 
+//#define _DEBUG_DRAW 
 
 
 
@@ -104,7 +105,7 @@ std::list<EventHandler*> EVENTS_HANDLERS;
 TextureLoader racing::TEXTURE_LOADER;
 YAML::Node racing::CONFIG;
 sf::VideoMode racing::VIDEO_MODE;
-boost::bimap<const std::string, const sf::Keyboard::Key>  racing::STRING_TO_SFML_KEYBOARD_KEY;
+boost::bimap<const std::string, const sf::Keyboard::Key> racing::STRING_TO_SFML_KEYBOARD_KEY;
 //////////////////////////////////////////////////////////////////////////
 
 
@@ -329,6 +330,8 @@ int main(int argc, char** argv)
 	std::shared_ptr<CheckpointContactHandler> checkpointlistener(new CheckpointContactHandler());
 	contactlistener->add(checkpointlistener);
 	
+	std::shared_ptr<GroundContactHandler> groundlistener(new GroundContactHandler);
+	contactlistener->add(groundlistener);
 
 
 	while (window.isOpen())

@@ -134,6 +134,9 @@
     <ClInclude Include="CarControler.h">
       <Filter>Fichiers d%27en-tête\GameBase\Car</Filter>
     </ClInclude>
+    <ClInclude Include="GroundContactHandler.h">
+      <Filter>Fichiers d%27en-tête\GameBase</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Racing.cpp">

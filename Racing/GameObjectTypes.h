@@ -16,4 +16,5 @@ enum GameObjectTypes : unsigned long long
 	WheelType = 1 << 5 | MixedGameObjectType,
 
 	CheckpointType = 1 << 6 | BoxGameObjectType,
+	GroundType = 1 << 7 | BoxGameObjectType,
 };

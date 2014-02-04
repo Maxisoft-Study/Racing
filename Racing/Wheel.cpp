@@ -21,7 +21,7 @@ wheeltype(type)
 	fixtureDef.friction = 0.5f;
 
 	//Permet d'avoir des collision qu'avec les checkpoints (sensor)
-	fixtureDef.filter.maskBits = BoxGameObject::CHECKPOINT_MASK;
+	fixtureDef.filter.maskBits = BoxGameObject::CHECKPOINT_MASK | BoxGameObject::GROUND_MASK;
 	fixtureDef.filter.categoryBits = BoxGameObject::WHEEL_MASK;
 	//fixtureDef->filter.groupIndex = -8;
 

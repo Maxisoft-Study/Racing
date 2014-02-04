@@ -11,22 +11,21 @@ BoxGameObject(world)
 	body = world->CreateBody(&bodydef);
 	body->SetUserData(this);
 
-	b2PolygonShape *dynamicBox = new b2PolygonShape();
+	b2PolygonShape* dynamicBox = new b2PolygonShape();
 	dynamicBox->SetAsBox(static_cast<float>(size.x), static_cast<float>(size.y));
 
-	b2FixtureDef *fixtureDef = new b2FixtureDef();
-	fixtureDef->shape = dynamicBox;
-	fixtureDef->filter.categoryBits = BoxGameObject::CHECKPOINT_MASK;
+	b2FixtureDef fixtureDef;
+	fixtureDef.shape = dynamicBox;
+	fixtureDef.filter.categoryBits = BoxGameObject::CHECKPOINT_MASK;
 
 	//actives la detection des collisions seulement pour les roues des voitures
-	fixtureDef->filter.maskBits = BoxGameObject::WHEEL_MASK;
+	fixtureDef.filter.maskBits = BoxGameObject::WHEEL_MASK;
 
 	// la voiture passe au travers
-	fixtureDef->isSensor = true;
+	fixtureDef.isSensor = true;
 
-	body->CreateFixture(fixtureDef);
+	body->CreateFixture(&fixtureDef);
 
-	delete fixtureDef;
 	delete dynamicBox;
 	
 }

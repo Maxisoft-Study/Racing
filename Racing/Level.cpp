@@ -13,6 +13,12 @@ Level::~Level(void)
 	{
 		delete checkpoint;
 	}
+
+	for (unsigned i = 0, k = 0; i < groundmatrix.size1(); ++i)
+		for (unsigned j = 0; j < groundmatrix.size2(); ++j)
+		{
+			delete groundmatrix(j, i);
+		}
 }
 
 
@@ -22,6 +28,8 @@ void Level::draw(sf::RenderTarget& target, sf::RenderStates states) const
 	{
 		target.draw(tm, states);
 	}
+
+
 }
 
 bool Level::load(const std::string &jsonfilename, b2World *world)
@@ -30,7 +38,7 @@ bool Level::load(const std::string &jsonfilename, b2World *world)
 	boost::property_tree::ptree pt;
 	boost::property_tree::read_json(jsonfilename, pt);
 
-
+	// taile en nombre de tuiles
 	lenght = sf::Vector2u(pt.get<uint>("width"), pt.get<uint>("height"));
 
 	std::vector<int> tilemapdata;
@@ -120,5 +128,34 @@ bool Level::load(const std::string &jsonfilename, b2World *world)
 		tilemaps.push_back(curr);
 	}
 
+
+	//remplir la matrice d'objects ground
+	groundmatrix.resize(lenght.x, lenght.y);
+
+	for (unsigned i = 0, k = 0; i < lenght.x; ++i)
+		for (unsigned j = 0; j < lenght.y; ++j)
+		{
+			auto data = tilemapdata[k];
+			const TileSetDef* currDef = searchForTileSetDef(data);
+
+
+			auto position = Utils::SfVectPixelToBox2DVect({ static_cast<float>(i * currDef->tilewidth), static_cast<float>(j * currDef->tilewidth) });
+			groundmatrix(j, i) = new Ground(world, position, currDef->tilewidth, currDef->tileheight);
+			k += 1;
+		}
+
 	return true;
+}
+
+
+const TileSetDef* Level::searchForTileSetDef(const int id) const
+{
+	for (auto it = begin(tilesetdefs); it != end(tilesetdefs); ++it)
+	{
+		if (id < it->firstgid)
+		{
+			return it == begin(tilesetdefs) ?  it._Ptr : (it - 1)._Ptr;
+		}
+	}
+	return begin(tilesetdefs)._Ptr;
 }

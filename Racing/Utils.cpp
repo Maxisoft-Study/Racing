@@ -48,4 +48,9 @@ sf::Vector2f Utils::Box2DVectToSfVectPixel(const b2Vec2 v)
 	return sf::Vector2f(v.x * racing::BOX2D_METERS_TO_PIXEL, v.y * racing::BOX2D_METERS_TO_PIXEL);
 }
 
+b2Vec2 Utils::SfVectPixelToBox2DVect(const sf::Vector2f v)
+{
+	return b2Vec2(v.x / racing::BOX2D_METERS_TO_PIXEL, v.y / racing::BOX2D_METERS_TO_PIXEL);
+}
+
 

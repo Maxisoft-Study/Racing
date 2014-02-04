@@ -2,6 +2,7 @@
 #include "stdafx.h"
 #include "Ground.h"
 #include "Checkpoint.h"
+#include "Ground.h"
 
 struct TileSetDef
 {
@@ -50,6 +51,8 @@ private:
 	//////////////////////////////////////////////////////////////////////////
 	std::vector<const TileSetDef> tilesetdefs;
 
+	boost::numeric::ublas::matrix<Ground*> groundmatrix;
+
 
 	//////////////////////////////////////////////////////////////////////////
 	/// Taille de base des tuiles
@@ -72,4 +75,6 @@ public:
 	const sf::Vector2u getLenght() const { return sf::Vector2u(lenght.x * tileLenght.x, lenght.y * tileLenght.y); }
 
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+
+	const TileSetDef* searchForTileSetDef(const int id) const;
 };

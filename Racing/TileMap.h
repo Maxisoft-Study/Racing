@@ -10,7 +10,7 @@ class TileMap : public sf::Drawable, public sf::Transformable
 {
 public:
 
-	bool load(const std::string& tileset, sf::Vector2u tileSize, const std::vector<int>& tiles, uint width, uint height, uint min_val, int max_val, uint spacing = 0)
+	bool load(const std::string& tileset, sf::Vector2u tileSize, const std::vector<int>& tiles, uint width, uint height, int min_val, int max_val, uint spacing = 0)
 	{
 		// on charge la texture du tileset
 		m_tileset = racing::TEXTURE_LOADER.get(tileset);
@@ -25,7 +25,7 @@ public:
 		{
 			// on récupère le numéro de tuile courant
 			const int tileIndex = i + j * width;
-			uint tileNumber = tiles[tileIndex];
+			int tileNumber = tiles[tileIndex];
 
 			if (tileNumber < min_val || tileNumber > max_val && max_val != -1)
 			{

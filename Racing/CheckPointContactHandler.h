@@ -1,5 +1,7 @@
 #pragma once
 #include "stdafx.h"
+#include "Car.h"
+#include "Wheel.h"
 #include "GameContactListener.h"
 #include "Checkpoint.h"
 #include "LoggerConfig.h"
@@ -9,7 +11,7 @@ class CheckpointContactHandler : public ContactListenerHandler
 
 public:
 
-	bool BeginContact(b2Contact* contact, BoxGameObject* A, BoxGameObject* B)
+	virtual bool BeginContact(b2Contact* contact, BoxGameObject* A, BoxGameObject* B) final
 	{
 		Wheel* wheel = nullptr;
 		Checkpoint* cp = nullptr;

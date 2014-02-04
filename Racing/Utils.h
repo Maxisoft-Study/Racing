@@ -9,6 +9,7 @@ public:
 	static float RadianToDegree(const float angle);
 	static float DegreeToRadian(const float angle);
 	static sf::Vector2f Box2DVectToSfVectPixel(const b2Vec2 v);
+	static b2Vec2 SfVectPixelToBox2DVect(const sf::Vector2f v);
 private:
 	Utils();
 	~Utils();

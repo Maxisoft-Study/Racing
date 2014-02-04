@@ -43,6 +43,7 @@
 
 #include <boost/algorithm/string/predicate.hpp>
 
+#include <boost/numeric/ublas/matrix.hpp>
 #include <boost/bimap.hpp>
 
 //FILESYSTEM
