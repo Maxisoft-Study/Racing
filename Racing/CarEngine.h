@@ -1,7 +1,6 @@
 #pragma once
-class CarEngine;
-
-#include "Car.h"
+#include "stdafx.h"
+class Car;
 
 class CarEngine
 {

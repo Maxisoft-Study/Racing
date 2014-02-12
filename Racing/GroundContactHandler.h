@@ -13,10 +13,10 @@ public:
 	virtual bool BeginContact(b2Contact* contact, BoxGameObject* A, BoxGameObject* B) final
 	{
 		Wheel* wheel = nullptr;
-		Ground* g = nullptr;
+		Ground* ground = nullptr;
 
 		//CAST
-		if (g = dynamic_cast<Ground*>(A))
+		if (ground = dynamic_cast<Ground*>(A))
 		{
 			wheel = dynamic_cast<Wheel*>(B);
 			if (!wheel)
@@ -24,7 +24,7 @@ public:
 				return false;
 			}
 		}
-		else if (g = dynamic_cast<Ground*>(B))
+		else if (ground = dynamic_cast<Ground*>(B))
 		{
 			wheel = dynamic_cast<Wheel*>(A);
 			if (!wheel)
@@ -37,8 +37,10 @@ public:
 			return false;
 		}
 
-		auto world = wheel->getBody()->GetWorld();
 
+		wheel->addGround(ground);
+
+		//auto world = wheel->getBody()->GetWorld();
 		//b2FrictionJointDef* frictiondef = new b2FrictionJointDef();
 		//frictiondef->Initialize(wheel->getBody(), g->getBody(), { 1, 1 });
 		//frictiondef->maxForce = 1.f;
@@ -51,10 +53,10 @@ public:
 	{
 
 		Wheel* wheel = nullptr;
-		Ground* g = nullptr;
+		Ground* ground = nullptr;
 
 		//CAST
-		if (g = dynamic_cast<Ground*>(A))
+		if (ground = dynamic_cast<Ground*>(A))
 		{
 			wheel = dynamic_cast<Wheel*>(B);
 			if (!wheel)
@@ -62,7 +64,7 @@ public:
 				return false;
 			}
 		}
-		else if (g = dynamic_cast<Ground*>(B))
+		else if (ground = dynamic_cast<Ground*>(B))
 		{
 			wheel = dynamic_cast<Wheel*>(A);
 			if (!wheel)
@@ -75,7 +77,7 @@ public:
 			return false;
 		}
 
-
+		wheel->removeGround(ground);
 
 		return true;
 	}

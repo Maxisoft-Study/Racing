@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "CarEngine.h"
-
+#include "Car.h"
 
 CarEngine::CarEngine(Car *carp) : car_ptr(carp), speed_pad(0)
 {

@@ -102,7 +102,6 @@ using std::vector;
 //////////////////////////////////////////////////////////////////////////
 /// GLOABALS
 std::list<EventHandler*> EVENTS_HANDLERS;
-TextureLoader racing::TEXTURE_LOADER;
 YAML::Node racing::CONFIG;
 sf::VideoMode racing::VIDEO_MODE;
 boost::bimap<const std::string, const sf::Keyboard::Key> racing::STRING_TO_SFML_KEYBOARD_KEY;
@@ -305,7 +304,7 @@ int main(int argc, char** argv)
 	
 	sf::RenderWindow window(racing::VIDEO_MODE, "SFML works!", sf::Style::Default, racing::settings);
 	sf::View view(window.getDefaultView());
-	view.zoom(4.f); // zoom out
+	//view.zoom(4.f); // zoom out
 	window.setView(view);
 
 	window.setVerticalSyncEnabled(true);
@@ -327,7 +326,7 @@ int main(int argc, char** argv)
 	GameContactListener* contactlistener = new GameContactListener();
 	world->SetContactListener(contactlistener);
 
-	std::shared_ptr<CheckpointContactHandler> checkpointlistener(new CheckpointContactHandler());
+	std::shared_ptr<CheckpointContactHandler> checkpointlistener(new CheckpointContactHandler);
 	contactlistener->add(checkpointlistener);
 	
 	std::shared_ptr<GroundContactHandler> groundlistener(new GroundContactHandler);
@@ -500,6 +499,7 @@ int main(int argc, char** argv)
 	}
 
 	
+	//TODO Create Game Class and destructor
 
 	return 0;
 }

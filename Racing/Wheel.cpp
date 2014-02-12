@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Wheel.h"
-
+#include "Car.h"
+#include "CarEngine.h"
 
 Wheel::Wheel(b2World *world, Car* car, const WheelType type, const float init_pos_x, const float init_pos_y) :
 BoxGameObject(world),

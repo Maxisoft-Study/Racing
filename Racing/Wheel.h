@@ -1,8 +1,8 @@
 #pragma once
 #include "stdafx.h"
 #include "MixedGameObject.h"
-class Wheel;
-#include "Car.h"
+class Car;
+#include "Ground.h"
 
 class Wheel:
 	public BoxGameObject
@@ -28,11 +28,23 @@ public:
 	virtual void update(float delta) final;
 	const WheelType wheeltype;
 	const virtual GameObjectTypes getGType(void) const final;
-	const Car* getCar(void) const{ return car_ptr; }
+	inline const Car* getCar(void) const{ return car_ptr; }
+	inline void addGround(const Ground* ground) { grounds.emplace(ground); }
+	inline bool removeGround(const Ground* ground) 
+	{
+		auto it = grounds.find(ground);
+		if (it == end(grounds))
+		{
+			return false;
+		}
+		grounds.erase(it);
+		return true;
+	}
 protected:
 	b2Vec2 getLateralVelocity(void) const;
 	void killOrthogonalVelocity(void);
 private:
 	const Car* const car_ptr;
+	std::set<const Ground*> grounds;
 };
 

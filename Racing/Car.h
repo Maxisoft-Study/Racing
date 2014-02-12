@@ -1,9 +1,8 @@
 #pragma once
 #include "stdafx.h"
 #include "MixedGameObject.h"
-#include "Wheel.h"
-#include "CarEngine.h"
-
+class CarEngine;
+class Wheel;
 class CarControler;
 
 struct CarControl
@@ -30,7 +29,6 @@ public:
 	Car(b2World* world, const std::string& file, const float init_pos_x = 0.f, const float init_pos_y = 0.f);
 	~Car(void);
 	virtual void update(float delta) final;
-	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const final;
 	const float getSpeed(void) const;
 	const CarControl getlastControl(void) const;
 	const CarSide getSide(void) const;
@@ -38,12 +36,13 @@ public:
 	const virtual GameObjectTypes getGType(void) const final;
 private:
 	unsigned short weight;
-	float maxfrontwheelsangle;
+	const float maxfrontwheelsangle;
 	float lastspeed;
 	CarEngine* engine;
 	CarControl lastcontrol;
 	std::vector<Wheel*> wheels;
 	std::vector<b2Joint*> wheelsJoints;
 	void applyInertia(const float delta);
+	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const final;
 };
 

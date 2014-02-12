@@ -119,6 +119,7 @@ xcopy /Y "$(SolutionDir)\ressources" "$(OutDir)\ressources"</Command>
     <ClInclude Include="CarEngine.h" />
     <ClInclude Include="Checkpoint.h" />
     <ClInclude Include="CheckPointContactHandler.h" />
+    <ClInclude Include="Game.h" />
     <ClInclude Include="GameContactListener.h" />
     <ClInclude Include="EventHandler.h" />
     <ClInclude Include="GameObject.h" />
@@ -137,6 +138,7 @@ xcopy /Y "$(SolutionDir)\ressources" "$(OutDir)\ressources"</Command>
     <ClInclude Include="SpriteGameObject.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="TextureLoader.h" />
+    <ClInclude Include="TextureNotFoundException.h" />
     <ClInclude Include="TileMap.h" />
     <ClInclude Include="Utils.h" />
     <ClInclude Include="Wheel.h" />
@@ -149,6 +151,7 @@ xcopy /Y "$(SolutionDir)\ressources" "$(OutDir)\ressources"</Command>
     <ClCompile Include="CarEngine.cpp" />
     <ClCompile Include="Checkpoint.cpp" />
     <ClCompile Include="EventHandler.cpp" />
+    <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GConst.cpp" />
     <ClCompile Include="Ground.cpp" />
@@ -163,6 +166,8 @@ xcopy /Y "$(SolutionDir)\ressources" "$(OutDir)\ressources"</Command>
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="TextureLoader.cpp" />
+    <ClCompile Include="TileMap.cpp" />
     <ClCompile Include="Utils.cpp" />
     <ClCompile Include="Wheel.cpp" />
   </ItemGroup>

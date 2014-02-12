@@ -1,5 +1,8 @@
 #include "stdafx.h"
 #include "Car.h"
+#include "Wheel.h"
+#include "CarEngine.h"
+#include "CarControler.h"
 
 Car::Car(b2World* world, const std::string& file, const float init_pos_x, const float init_pos_y) :
 MixedGameObject(world, file), wheels(Wheel::Count), wheelsJoints(Wheel::Count), maxfrontwheelsangle(Utils::DegreeToRadian(38)), lastspeed(-1)

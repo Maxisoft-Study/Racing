@@ -40,7 +40,6 @@
 #include <boost/config/compiler/visualc.hpp>
 #endif*/
 
-
 #include <boost/algorithm/string/predicate.hpp>
 
 #include <boost/numeric/ublas/matrix.hpp>

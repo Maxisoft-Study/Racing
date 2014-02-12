@@ -4,7 +4,7 @@
 
 SpriteGameObject::SpriteGameObject(const std::string &file, bool auto_center) : GameObject()
 {
-	texture = racing::TEXTURE_LOADER.get(file);
+	texture = TextureLoader::Instance().get(file);
     //texture.setSmooth(true);
     base_sprite.setTexture(*texture);
     if (auto_center)

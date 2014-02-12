@@ -137,6 +137,12 @@
     <ClInclude Include="GroundContactHandler.h">
       <Filter>Fichiers d%27en-tête\GameBase</Filter>
     </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureNotFoundException.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Racing.cpp">
@@ -198,6 +204,15 @@
     </ClCompile>
     <ClCompile Include="GConst.cpp">
       <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="TileMap.cpp">
+      <Filter>Fichiers sources\GameBase</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureLoader.cpp">
+      <Filter>Fichiers sources\GameBase</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
