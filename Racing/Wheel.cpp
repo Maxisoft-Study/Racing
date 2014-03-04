@@ -32,6 +32,7 @@ wheeltype(type)
 
 Wheel::~Wheel()
 {
+	grounds.clear();
 }
 
 void Wheel::update(float delta)

@@ -32,6 +32,9 @@ public:
 	inline void addGround(const Ground* ground) { grounds.emplace(ground); }
 	inline bool removeGround(const Ground* ground) 
 	{
+		if (grounds.empty()){
+			return false;
+		}
 		auto it = grounds.find(ground);
 		if (it == end(grounds))
 		{

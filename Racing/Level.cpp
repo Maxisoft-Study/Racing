@@ -129,13 +129,13 @@ bool Level::load(const std::string &jsonfilename, b2World *world)
 	}
 
 
-	//remplir la matrice d'objects ground
+	//remplir la matrice d'objets ground
 	groundmatrix.resize(lenght.x, lenght.y);
 
 	for (unsigned i = 0, k = 0; i < lenght.x; ++i)
 		for (unsigned j = 0; j < lenght.y; ++j)
 		{
-			auto data = tilemapdata[k];
+			int data = tilemapdata[k];
 			const TileSetDef* currDef = searchForTileSetDef(data);
 
 

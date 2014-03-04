@@ -311,6 +311,8 @@ int main(int argc, char** argv)
 	//window.setFramerateLimit(30);
 	EVENTS_HANDLERS.push_back(new BaseEventHandler(&window));
 
+	Level* lvl = new Level();
+	lvl->load("ressources/test3.json", world);
 
 	//construction voitures
 	Car testcar(world, "ressources/voituretest.png");
@@ -318,10 +320,6 @@ int main(int argc, char** argv)
 
 	const CarControlKeysDef controls(racing::CONFIG["controls"].as<CarControlKeysDef>());
 	CarControler carcontroler(&testcar, controls);
-
-
-	Level* lvl = new Level();
-	lvl->load("ressources/test3.json", world);
 	
 	GameContactListener* contactlistener = new GameContactListener();
 	world->SetContactListener(contactlistener);
