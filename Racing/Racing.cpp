@@ -304,7 +304,7 @@ int main(int argc, char** argv)
 	
 	sf::RenderWindow window(racing::VIDEO_MODE, "SFML works!", sf::Style::Default, racing::settings);
 	sf::View view(window.getDefaultView());
-	//view.zoom(4.f); // zoom out
+	view.zoom(3.f); // zoom out
 	window.setView(view);
 
 	window.setVerticalSyncEnabled(true);
