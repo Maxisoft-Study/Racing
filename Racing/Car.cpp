@@ -3,8 +3,10 @@
 #include "Wheel.h"
 #include "CarEngine.h"
 #include "CarControler.h"
+#include "TextureLoader.h"
+#include "YamlConverter.h"
 
-Car::Car(b2World* world, const std::string& file, const float init_pos_x, const float init_pos_y) :
+Car::Car(b2World* world, const std::string& file, const float init_pos_x, const float init_pos_y, const float angle) :
 MixedGameObject(world, file), wheels(Wheel::Count), wheelsJoints(Wheel::Count), maxfrontwheelsangle(Utils::DegreeToRadian(38)), lastspeed(-1)
 {
 	b2BodyDef bodydef;
@@ -12,14 +14,15 @@ MixedGameObject(world, file), wheels(Wheel::Count), wheelsJoints(Wheel::Count), 
 	bodydef.linearDamping = 0.7f;
 	bodydef.angularDamping = 0.7f;
 	bodydef.position.Set(init_pos_x, init_pos_y);
+	//bodydef.angle = Utils::DegreeToRadian(angle);
 	bodydef.bullet = true;
-
+	
 	body = world->CreateBody(&bodydef);
 	body->SetUserData(this);
 
-
 	YAML::Node caryaml = YAML::LoadFile("ressources/car.yaml");
-	const float scale = caryaml["polygonsscale"].as<float>();
+	auto spritesize = TextureLoader::Instance().get(file)->getSize();
+	const float scale = spritesize.x / racing::BOX2D_METERS_TO_PIXEL;
 
 	std::vector<b2Vec2> parsedpolygonpoints;
 
@@ -28,7 +31,7 @@ MixedGameObject(world, file), wheels(Wheel::Count), wheelsJoints(Wheel::Count), 
 		//remplis le vector de points
 		for (YAML::Node point : polygon)
 		{
-			parsedpolygonpoints.emplace_back(point['x'].as<float>() * scale, point['y'].as<float>() * scale);
+			parsedpolygonpoints.emplace_back(scale * point.as<b2Vec2>());
 		}
 
 		//crée la fixture.
@@ -37,7 +40,7 @@ MixedGameObject(world, file), wheels(Wheel::Count), wheelsJoints(Wheel::Count), 
 
 		b2FixtureDef fixtureDef;
 		fixtureDef.shape = dynamicBox;
-		fixtureDef.density = 1.6f;
+		fixtureDef.density = 2.68f;
 		fixtureDef.friction = 0.5f;
 		fixtureDef.filter.categoryBits = BoxGameObject::CAR_MASK;
 		//fixtureDef->filter.maskBits |= BoxGameObject::CHECKPOINT_MASK;
@@ -50,19 +53,22 @@ MixedGameObject(world, file), wheels(Wheel::Count), wheelsJoints(Wheel::Count), 
 		parsedpolygonpoints.clear();
 	}
 		
-	
-	
-
-	b2Vec2 wheelsinitpos[4] = { b2Vec2(-0.65f, -1.f), b2Vec2(0.65f, -1.f), b2Vec2(-0.65f, 1.f), b2Vec2(0.65f, 1.f) };
 	auto bodyworldcenterPos = body->GetWorldCenter();
+
 	//crée le simulateur de moteur
 	engine = new CarEngine(this);
 
+
+	YAML::Node wheelsyml = caryaml["wheels"];
 	//crée les roue
 	for (uint i = 0; i < Wheel::WheelType::Count; ++i)
 	{
-		wheelsinitpos[i] += bodyworldcenterPos;
-		Wheel *curr = new Wheel(getWorld(), this, static_cast<Wheel::WheelType> (i), wheelsinitpos[i].x, wheelsinitpos[i].y);
+		b2Vec2 weelposition = wheelsyml[i].as<b2Vec2>();
+		//LOG_DEBUG << "x :" << weelposition.y;
+		//weelposition = Utils::RotateVect(weelposition, PI);
+		//LOG_DEBUG << "x :" << weelposition.y;
+		weelposition += bodyworldcenterPos;
+		Wheel *curr = new Wheel(getWorld(), this, static_cast<Wheel::WheelType> (i), weelposition.x, weelposition.y);
 		wheels[i] = curr;
 	}
 
@@ -103,6 +109,18 @@ MixedGameObject(world, file), wheels(Wheel::Count), wheelsJoints(Wheel::Count), 
 	rightfrontjoindef->maxMotorTorque = 100;
 	wheelsJoints[Wheel::FRONTRIGHT] = world->CreateJoint(rightfrontjoindef);
 	delete rightfrontjoindef;
+
+
+
+	//on met a jour les angles manuellement
+	auto tmpangle = Utils::DegreeToRadian(angle);
+	getBody()->SetTransform(getBody()->GetPosition(), tmpangle);
+	for (uint i = 0; i < Wheel::WheelType::Count; ++i)
+	{
+		Wheel* curr = wheels[i];
+		curr->getBody()->SetTransform(curr->getBody()->GetPosition(), tmpangle);
+	}
+
 }
 
 
@@ -111,7 +129,7 @@ Car::~Car(void)
 {
 	for (uint i = 0; i < Wheel::Count; ++i)
 	{
-		Wheel *curr = wheels[i];
+		Wheel* curr = wheels[i];
 		delete curr;
 	}
 	delete engine;
@@ -120,9 +138,9 @@ Car::~Car(void)
 
 void Car::update(const float delta)
 {
-	lastspeed = getBody()->GetLinearVelocity().Length() * 3.6f;
-
 	MixedGameObject::update(delta);
+
+	lastspeed = getBody()->GetLinearVelocity().Length() * 3.6f;
 
 	for (Wheel* wheel : wheels)
 	{

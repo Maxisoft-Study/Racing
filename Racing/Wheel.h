@@ -23,7 +23,7 @@ public:
 		Count // nombre de pneu (4)
 	};
 
-	Wheel(b2World* world, Car* car, const WheelType type, const float init_pos_x, const float init_pos_y);
+	Wheel(b2World* world, Car* car, const WheelType type, const float init_pos_x, const float init_pos_y, const float angle = 0.f);
 	~Wheel();
 	virtual void update(float delta) final;
 	const WheelType wheeltype;

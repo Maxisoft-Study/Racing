@@ -13,7 +13,6 @@
 //#define _DEBUG_DRAW 
 
 
-
 #ifdef _DEBUG_DRAW
 #include "SFMLDebugDraw.h"
 
@@ -243,7 +242,7 @@ int main(int argc, char** argv)
 	sf::Clock processingClock;
 
 	b2Vec2 gravity(0.0f, 0.0f); // désactive la gravité
-	b2World *world = new b2World(gravity);
+	b2World* world = new b2World(gravity);
 	world->SetAllowSleeping(true);
 
 #ifdef _DEBUG_DRAW
@@ -302,26 +301,31 @@ int main(int argc, char** argv)
 	//testcar.rotate(90);
 	//testcar.move(sf::Vector2f(1280/2, 600));
 	
-	sf::RenderWindow window(racing::VIDEO_MODE, "SFML works!", sf::Style::Default, racing::settings);
-	sf::View view(window.getDefaultView());
-	view.zoom(3.f); // zoom out
-	window.setView(view);
+	sf::RenderWindow window(
+		racing::VIDEO_MODE, 
+		"Racing", 
+		racing::CONFIG["window"]["fullScreen"].as<bool>() ? sf::Style::Fullscreen : sf::Style::Titlebar | sf::Style::Close,
+		racing::settings
+		);
 
 	window.setVerticalSyncEnabled(true);
 	//window.setFramerateLimit(30);
 	EVENTS_HANDLERS.push_back(new BaseEventHandler(&window));
 
-	Level* lvl = new Level();
-	lvl->load("ressources/test2.json", world);
+
+	//chargement du level
+	Level lvl;
+	lvl.load("ressources/test2.json", world);
 
 	//construction voitures
-	Car testcar(world, "ressources/voituretest.png");
+	auto startPos = lvl.getStartPos(0);
+	Car testcar(world, "ressources/voituretest.png", startPos.pos.x, startPos.pos.y, startPos.angle);
 	Car testcar2(world, "ressources/voituretest.png", 5.f, 5.f);
 
 	const CarControlKeysDef controls(racing::CONFIG["controls"].as<CarControlKeysDef>());
 	CarControler carcontroler(&testcar, controls);
 	
-	GameContactListener* contactlistener = new GameContactListener();
+	GameContactListener* contactlistener = new GameContactListener;
 	world->SetContactListener(contactlistener);
 
 	std::shared_ptr<CheckpointContactHandler> checkpointlistener(new CheckpointContactHandler);
@@ -333,6 +337,7 @@ int main(int argc, char** argv)
 
 	while (window.isOpen())
 	{
+		//gestions des evenements
 		sf::Event event;
 		while (window.pollEvent(event))
 		{
@@ -465,13 +470,13 @@ int main(int argc, char** argv)
 		debugwindow.display();
 #endif // _DEBUG_DRAW
 
-
-
+		//mise a jours des horloges
 		processingClock.restart();
 		sf::Time elapsed(clock.restart());
 		float elapsedassecond = elapsed.asSeconds();
+
+		//mise a jour du monde (box2d)
 		world->Step(elapsedassecond, 20, 20);
-		//world.ClearForces();
 
 
 		const b2Vec2 position(testcar.getBody()->GetWorldCenter());
@@ -481,29 +486,29 @@ int main(int argc, char** argv)
 		elapsedassecond += processingClock.restart().asSeconds();
 		testcar.update(elapsedassecond);
 		testcar2.update(elapsedassecond);
+
+
 		window.clear();
-		//Center
+
+		//calcule du centre. 
 		auto center = Utils::Box2DVectToSfVectPixel(position);
+		//utilise round afin d'avoir des coordonnées sans virgule (fait un décalage de sprite sinon)
 		center.x = std::round(center.x);
 		center.y = std::round(center.y);
-		//printf("%f - %f\n", center.x, center.y);
-		view = window.getDefaultView();
-		view.zoom(1);
+
+		//mise a jour de la vue
+		sf::View view = window.getDefaultView();
 		view.setCenter(center);
 		window.setView(view);
 
-		window.draw(*lvl);
+		//lance l'affichage
+		window.draw(lvl);
 		window.draw(testcar);
 		window.draw(testcar2);
 		//LOG_DEBUG << checkpointlistener->getCheckpointCount(&testcar);
 		
-
-
 		window.display();
 	}
-
-	
-	//TODO Create Game Class and destructor
 
 	return 0;
 }

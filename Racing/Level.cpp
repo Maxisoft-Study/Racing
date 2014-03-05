@@ -44,7 +44,8 @@ bool Level::load(const std::string &jsonfilename, b2World *world)
 	// taile en nombre de tuiles
 	lenght = sf::Vector2u(pt.get<uint>("width"), pt.get<uint>("height"));
 
-	std::vector<int> tilemapdata;
+	std::vector<std::vector<int>> tilemapdata;
+	int tilelayer = 0;
 
 	//Parse 
 	for (auto &layers : pt.get_child("layers"))
@@ -52,12 +53,14 @@ bool Level::load(const std::string &jsonfilename, b2World *world)
 		std::string layertype = layers.second.get<std::string>("type");
 
 
-		if (layertype == "tilelayer" && !tilemapdata.size()) // Parse to tile map
+		if (layertype == "tilelayer") // Parse to tile map
 		{
+			tilemapdata.emplace_back();
 			for (auto &rawdata : layers.second.get_child("data"))
 			{
-				tilemapdata.emplace_back(rawdata.second.get<int>(""));
+				tilemapdata[tilelayer].emplace_back(rawdata.second.get<int>(""));
 			}
+			tilelayer += 1;
 		}
 
 
@@ -72,6 +75,7 @@ bool Level::load(const std::string &jsonfilename, b2World *world)
 				{
 					Checkpoint *newcp = new Checkpoint(
 						world,
+						jsonobject.get<std::string>("name"),
 						jsonobject.get<int>("x") / racing::BOX2D_METERS_TO_PIXEL,
 						jsonobject.get<int>("y") / racing::BOX2D_METERS_TO_PIXEL,
 						sf::Vector2u(static_cast<uint>(jsonobject.get<uint>("width") / racing::BOX2D_METERS_TO_PIXEL),
@@ -79,16 +83,31 @@ bool Level::load(const std::string &jsonfilename, b2World *world)
 
 					checkpoints.push_back(newcp);
 				}
+				else if (objecttype == "start")
+				{
+					startPos.emplace_back(
+						jsonobject.get<int>("x") / racing::BOX2D_METERS_TO_PIXEL,
+						jsonobject.get<int>("y") / racing::BOX2D_METERS_TO_PIXEL,
+						jsonobject.get_child("properties").get<float>("angle")
+						);
+				}
 			}
 		}
 	}
+	LOG_DEBUG << startPos.size();
+
+	//sort de la liste des checkpoints en fonction de leurs nom
+	std::sort(begin(checkpoints), end(checkpoints), [](const Checkpoint* left, const Checkpoint* right) { return left->getName().compare(right->getName()); });
 
 	for (auto &tileset : pt.get_child("tilesets"))
 	{
 		auto jsonobject = tileset.second;
-		
+		auto imagepath = jsonobject.get<std::string>("image");
+		if (!boost::starts_with(imagepath, "ressources/")){
+			imagepath = std::string("ressources/").append(imagepath);
+		}
 		tilesetdefs.emplace_back(
-			jsonobject.get<std::string>("image"),
+			imagepath,
 			jsonobject.get<uint>("firstgid"),
 			jsonobject.get<uint>("imagewidth"),
 			jsonobject.get<uint>("imageheight"),
@@ -97,39 +116,45 @@ bool Level::load(const std::string &jsonfilename, b2World *world)
 			jsonobject.get<uint>("spacing")
 			);
 	}
+
 	//sort de la liste des tuiles defs en fonction de l'id des tuiles
 	std::sort(begin(tilesetdefs), end(tilesetdefs), [](const TileSetDef left, const TileSetDef right) { return left.firstgid < right.firstgid; });
 
-	//creation des tilemaps
-	for (auto it = begin(tilesetdefs); it != end(tilesetdefs); ++it)
+	for (auto layerdata : tilemapdata)
 	{
-		TileMap curr;
-
-		uint nextgid = -1;
-		auto nextit = it + 1;
-		if (nextit != end(tilesetdefs))
+		//creation des tilemaps
+		for (auto it = begin(tilesetdefs); it != end(tilesetdefs); ++it)
 		{
-			nextgid = nextit->firstgid - 1;
+			TileMap curr;
+
+			uint nextgid = -1;
+			auto nextit = it + 1;
+			if (nextit != end(tilesetdefs))
+			{
+				nextgid = nextit->firstgid - 1;
+			}
+
+			bool result = curr.load(
+				it->image,
+				sf::Vector2u(it->tilewidth, it->tileheight),
+				layerdata,
+				lenght.x,
+				lenght.y,
+				it->firstgid,
+				nextgid,
+				it->spacing
+				);
+
+			if (!result)
+			{
+				return false;
+			}
+
+			tilemaps.push_back(curr);
 		}
-
-		bool result = curr.load(
-			it->image,
-			sf::Vector2u(it->tilewidth, it->tileheight),
-			tilemapdata,
-			lenght.x,
-			lenght.y,
-			it->firstgid,
-			nextgid,
-			it->spacing
-			);
-
-		if (!result)
-		{
-			return false;
-		}
-
-		tilemaps.push_back(curr);
 	}
+	
+
 
 
 	//remplir la matrice d'objets ground
@@ -138,7 +163,7 @@ bool Level::load(const std::string &jsonfilename, b2World *world)
 	for (unsigned i = 0, k = 0; i < lenght.x; ++i)
 		for (unsigned j = 0; j < lenght.y; ++j)
 		{
-			int data = tilemapdata[k];
+			int data = tilemapdata[0][k];
 			const TileSetDef* currDef = searchForTileSetDef(data);
 
 

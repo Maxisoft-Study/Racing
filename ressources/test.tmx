@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="30" height="30" tilewidth="322" tileheight="322">
+ <tileset firstgid="1" name="roads" tilewidth="322" tileheight="322" spacing="19">
+  <image source="roads.png" width="1688" height="1347"/>
+ </tileset>
+ <tileset firstgid="21" name="turns" tilewidth="322" tileheight="322">
+  <image source="turns.png" width="1288" height="1288"/>
+ </tileset>
+ <tileset firstgid="37" name="sandpath" tilewidth="322" tileheight="322">
+  <image source="sandpath.png" width="322" height="322"/>
+ </tileset>
+ <tileset firstgid="38" name="sand" tilewidth="322" tileheight="322">
+  <image source="sand.png" width="322" height="322"/>
+ </tileset>
+ <layer name="background" width="30" height="30">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3DAQ0AAAzDoKqZf4kXckhYNVVVVd89JEvYVRAOAAA=
+  </data>
+ </layer>
+ <layer name="Calque de Tile 1" width="30" height="30">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NkgAAmNCwOxBIMtAOMOMSlgViGhvZy4pFjpaG9+MBA2SswQHbTw15hLGIcA2SvPBAr0NheULpmQcPKQKxCY3sHKu2OglEwCkbBKBgFo2AUjALqAAB5tC6XEA4AAA==
+  </data>
+ </layer>
+ <objectgroup name="Start Pos" width="30" height="30">
+  <object name="1" type="start" x="2294" y="832" width="106" height="88">
+   <properties>
+    <property name="angle" value="180"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object name="2" type="start" x="2428" y="714" width="104" height="80">
+   <ellipse/>
+  </object>
+  <object name="3" type="start" x="2290" y="578" width="124" height="86">
+   <properties>
+    <property name="angle" value="180"/>
+   </properties>
+   <ellipse/>
+  </object>
+ </objectgroup>
+</map>

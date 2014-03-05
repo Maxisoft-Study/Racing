@@ -1,2 +1,2 @@
 controls: {movebackward: Down, moveforward: Up, rotateleft: Left, rotateright: Right}
-window: {antialiasing: 2, modeBitsPerPixel: 32, modeHeight: 1000, modeWidth: 1900}
+window: {antialiasing: 2, modeBitsPerPixel: 32, modeHeight: 1000, modeWidth: 1900, fullScreen: false}

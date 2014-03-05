@@ -4,6 +4,14 @@
 #include "Checkpoint.h"
 #include "Ground.h"
 
+
+struct StartPos
+{
+	const b2Vec2 pos;
+	const float angle;
+	explicit StartPos(float x, float y, float a) : pos(x, y), angle(a) {}
+};
+
 struct TileSetDef
 {
 	std::string image;
@@ -64,6 +72,11 @@ private:
 	//////////////////////////////////////////////////////////////////////////
 	sf::Vector2u lenght;
 
+	//////////////////////////////////////////////////////////////////////////
+	/// les positions de départ
+	//////////////////////////////////////////////////////////////////////////
+	std::vector<const StartPos> startPos;
+
 public:
 
 	Level(void);
@@ -71,10 +84,10 @@ public:
 
 	bool load(const std::string& jsonfilename, b2World* world);
 
-	const sf::Vector2u getRawLenght() const { return lenght; }
-	const sf::Vector2u getLenght() const { return sf::Vector2u(lenght.x * tileLenght.x, lenght.y * tileLenght.y); }
+	inline const sf::Vector2u getRawLenght() const { return lenght; }
+	inline const sf::Vector2u getLenght() const { return sf::Vector2u(lenght.x * tileLenght.x, lenght.y * tileLenght.y); }
+	inline const StartPos& getStartPos(const int i) const { return startPos[i]; }
 
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
-
 	const TileSetDef* searchForTileSetDef(const int id) const;
 };

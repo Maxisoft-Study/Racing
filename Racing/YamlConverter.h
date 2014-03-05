@@ -17,11 +17,48 @@ namespace YAML {
 		}
 
 		static bool decode(const Node& node, sf::Vector2i& rhs) {
-			if (!node.IsSequence() || node.size() < 2)
+			if (!node.IsSequence())
 				return false;
 
 			rhs.x = node['x'].as<int>();
 			rhs.y = node['y'].as<int>();
+			return true;
+		}
+	};
+
+	//CONVERT sf VECTOR2f
+	template<>
+	struct convert<sf::Vector2f> {
+		static Node encode(const sf::Vector2f& rhs) {
+			Node node;
+			node['x'] = rhs.x;
+			node['y'] = rhs.y;
+			return node;
+		}
+
+		static bool decode(const Node& node, sf::Vector2f& rhs) {
+			if (!node.IsSequence())
+				return false;
+
+			rhs.x = node['x'].as<float>();
+			rhs.y = node['y'].as<float>();
+			return true;
+		}
+	};
+
+	//CONVERT sf VECTOR2f
+	template<>
+	struct convert<b2Vec2> {
+		static Node encode(const b2Vec2& rhs) {
+			Node node;
+			node['x'] = rhs.x;
+			node['y'] = rhs.y;
+			return node;
+		}
+
+		static bool decode(const Node& node, b2Vec2& rhs) {
+			rhs.x = node['x'].as<float>();
+			rhs.y = node['y'].as<float>();
 			return true;
 		}
 	};

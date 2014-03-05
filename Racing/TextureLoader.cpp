@@ -51,6 +51,7 @@ bool TextureLoader::load(const std::string& s)
 		return false;
 	}
 	texture->setSmooth(true);
+
 	textures[fs] = texture;
 	return true;
 }

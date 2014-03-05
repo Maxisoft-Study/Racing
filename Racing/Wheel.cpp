@@ -3,7 +3,7 @@
 #include "Car.h"
 #include "CarEngine.h"
 
-Wheel::Wheel(b2World *world, Car* car, const WheelType type, const float init_pos_x, const float init_pos_y) :
+Wheel::Wheel(b2World *world, Car* car, const WheelType type, const float init_pos_x, const float init_pos_y, const float angle) :
 BoxGameObject(world),
 car_ptr(car), 
 wheeltype(type)
@@ -11,6 +11,7 @@ wheeltype(type)
 	b2BodyDef bodydef;
 	bodydef.type = b2_dynamicBody;
 	bodydef.position.Set(init_pos_x, init_pos_y);
+	bodydef.angle = Utils::RadianToDegree(angle);
 	body = world->CreateBody(&bodydef);
 	body->SetUserData(this);
 	b2PolygonShape dynamicBox;
