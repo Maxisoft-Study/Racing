@@ -15,8 +15,8 @@ struct CarControl
 
 enum CarSide
 {
-	ahead,
-	back
+	Ahead,
+	Back
 };
 
 class Car :

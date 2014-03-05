@@ -312,7 +312,7 @@ int main(int argc, char** argv)
 	EVENTS_HANDLERS.push_back(new BaseEventHandler(&window));
 
 	Level* lvl = new Level();
-	lvl->load("ressources/test3.json", world);
+	lvl->load("ressources/test2.json", world);
 
 	//construction voitures
 	Car testcar(world, "ressources/voituretest.png");
@@ -483,7 +483,13 @@ int main(int argc, char** argv)
 		testcar2.update(elapsedassecond);
 		window.clear();
 		//Center
-		view.setCenter(Utils::Box2DVectToSfVectPixel(position));
+		auto center = Utils::Box2DVectToSfVectPixel(position);
+		center.x = std::round(center.x);
+		center.y = std::round(center.y);
+		//printf("%f - %f\n", center.x, center.y);
+		view = window.getDefaultView();
+		view.zoom(1);
+		view.setCenter(center);
 		window.setView(view);
 
 		window.draw(*lvl);

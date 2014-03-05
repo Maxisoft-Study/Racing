@@ -39,6 +39,9 @@ bool TileMap::load(const std::string& tileset, sf::Vector2u tileSize, const std:
 			quad[2].position = sf::Vector2f(static_cast<float>((i + 1) * tileSize.x), static_cast<float>((j + 1) * tileSize.y));
 			quad[3].position = sf::Vector2f(static_cast<float>(i * tileSize.x), static_cast<float>((j + 1) * tileSize.y));
 
+			//printf("%f - %f\n", quad[0].position.x, quad[0].position.y);
+			//printf("%f - %f\n", quad[2].position.x, quad[2].position.y);
+
 			// on définit ses quatre coordonnées de texture
 			float spacingx = static_cast<float>(tu * spacing);
 			float spacingy = static_cast<float>(tv * spacing);
@@ -53,6 +56,9 @@ bool TileMap::load(const std::string& tileset, sf::Vector2u tileSize, const std:
 			quad[1].texCoords = sf::Vector2f((tu + 1) * tileSize.x + spacingx, tv * tileSize.y + spacingy);
 			quad[2].texCoords = sf::Vector2f((tu + 1) * tileSize.x + spacingx, (tv + 1) * tileSize.y + spacingy);
 			quad[3].texCoords = sf::Vector2f(tu * tileSize.x + spacingx, (tv + 1) * tileSize.y + spacingy);
+
+			//printf("%f - %f\n", quad[0].texCoords.x, quad[0].texCoords.y);
+			//printf("%f - %f\n", quad[2].texCoords.x, quad[2].texCoords.y);
 		}
 
 	return true;

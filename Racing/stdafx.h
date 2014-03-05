@@ -48,9 +48,7 @@
 //FILESYSTEM
 #include "boost/filesystem/operations.hpp"
 #include "boost/filesystem/path.hpp"
-//JSON
-#include <boost/property_tree/ptree.hpp>
-#include <boost/property_tree/json_parser.hpp>
+
 //LOG
 #include <boost/log/sources/basic_logger.hpp>
 #include <boost/log/sources/record_ostream.hpp>

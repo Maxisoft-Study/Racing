@@ -190,7 +190,7 @@ const CarSide Car::getSide(void) const
 	b2Vec2 v1 = getBody()->GetLinearVelocity();
 	b2Vec2 v2 = getBody()->GetTransform().q.GetYAxis();
 
-	return b2Dot(v1, v2) > 0 ? CarSide::back : CarSide::ahead;
+	return b2Dot(v1, v2) > 0 ? CarSide::Back : CarSide::Ahead;
 }
 
 
