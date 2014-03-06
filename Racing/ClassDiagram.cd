@@ -1,72 +1,368 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
-  <Comment CommentText="Singletons&#xD;&#xA;coeff glissement ?">
-    <Position X="13.344" Y="6.083" Height="0.76" Width="1.7" />
-  </Comment>
-  <Comment CommentText="A serialiser &#xD;&#xA;&#xD;&#xA;Pour affichage,&#xD;&#xA;voir tutoriel vertex Array dernier exemple">
-    <Position X="14.062" Y="3.552" Height="1.162" Width="1.7" />
-  </Comment>
   <Class Name="sf::Drawable">
-    <Position X="12" Y="0.5" Width="1.5" />
+    <Position X="4" Y="0.5" Width="1.5" />
     <Members>
       <Method Name="~Drawable" Hidden="true" />
     </Members>
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAIABAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>c:\users\i5\documents\visual studio 2013\projects\racing\vs-2012-sfml-2.1\include\sfml\graphics\drawable.hpp</FileName>
+      <FileName>c:\users\i5\documents\visual studio 2013\projects\racing\vs-2013-sfml-2.1\include\sfml\graphics\drawable.hpp</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Ground">
-    <Position X="11.5" Y="5.75" Width="1.75" />
+  <Class Name="GameObject">
+    <Position X="2.5" Y="2" Width="2.75" />
     <Members>
-      <Method Name="~Ground" Hidden="true" />
-      <Method Name="Ground" Hidden="true" />
+      <Method Name="~GameObject" Hidden="true" />
+      <Method Name="GameObject" Hidden="true" />
+      <Method Name="IsTypeOf" Hidden="true" />
     </Members>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAECA=</HashCode>
-      <FileName>Ground.h</FileName>
+      <HashCode>ABAAAAAEAABAAAAAAAAAAAAAAAAAAAAIAAAAAAIAAAA=</HashCode>
+      <FileName>GameObject.h</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="game" />
+    </ShowAsAssociation>
   </Class>
-  <Class Name="Level" HideInheritanceLine="true">
-    <Position X="11.25" Y="3" Width="2.75" />
-    <Members>
-      <Method Name="~Level" Hidden="true" />
-      <Method Name="Level" Hidden="true" />
-    </Members>
-    <InheritanceLine Type="sf::Drawable" IsHidden="true" />
+  <Class Name="Game">
+    <Position X="7.75" Y="0.75" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>AACAAAAAAAAAAAAAAAIAAAAAAAAQAAABIgAAAAAAAAA=</HashCode>
-      <FileName>Level.h</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Car">
-    <Position X="5.25" Y="7.75" Width="2.5" />
-    <Members>
-      <Method Name="~Car" Hidden="true" />
-      <Method Name="Car" Hidden="true" />
-    </Members>
-    <TypeIdentifier>
-      <HashCode>CAAAAAAAAAQAAAAAAAIAAAAAAAAAEABgAAAAFAAEIAI=</HashCode>
-      <FileName>Car.h</FileName>
+      <HashCode>AAAAEAAQAAAAAgAAAAIAAABAAAmAAAAAAAIAAAAAAAA=</HashCode>
+      <FileName>Game.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SpriteGameObject">
-    <Position X="5.5" Y="4" Width="2" />
+    <Position X="1.75" Y="4.5" Width="2.5" />
     <Members>
       <Method Name="~SpriteGameObject" Hidden="true" />
       <Method Name="SpriteGameObject" Hidden="true" />
     </Members>
+    <InheritanceLine Type="GameObject">
+      <InheritanceModifierLabel ManuallyPlaced="true">
+        <Position X="-0.848" Y="0.096" />
+      </InheritanceModifierLabel>
+    </InheritanceLine>
+    <InheritanceLine Type="sf::Drawable">
+      <InheritanceModifierLabel ManuallyPlaced="true">
+        <Position X="0.134" Y="0.084" />
+      </InheritanceModifierLabel>
+    </InheritanceLine>
     <TypeIdentifier>
-      <HashCode>AIAAAAAAAEAACAAAAAICCAAAAAAAAgAAAAQEAAAEAAA=</HashCode>
+      <HashCode>AIAAAAAAAEAACAAAAAICCAIAAAAAAgAAAAQEAAAEAAA=</HashCode>
       <FileName>SpriteGameObject.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BoxGameObject">
-    <Position X="1" Y="3.75" Width="2.25" />
+    <Position X="5.25" Y="4.5" Width="3.75" />
+    <Members>
+      <Method Name="~BoxGameObject" Hidden="true" />
+      <Method Name="BoxGameObject" Hidden="true" />
+    </Members>
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="BoxGameObject::b2xGameObjectCategory">
+        <TypeIdentifier>
+          <NewMemberFileName>BoxGameObject.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
     <TypeIdentifier>
-      <HashCode>AQAAAAAEAAAQAABAAAAAAAAAAQAAAAEAAAAAAAAAAAA=</HashCode>
+      <HashCode>AQAAAAAEAAAQAAAAAAAAAAAAAQAAAAEAAAAAAAAAAAA=</HashCode>
       <FileName>BoxGameObject.h</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="MixedGameObject">
+    <Position X="2.25" Y="10" Width="2.75" />
+    <Members>
+      <Method Name="~MixedGameObject" Hidden="true" />
+      <Method Name="MixedGameObject" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAABAAEAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAEAAA=</HashCode>
+      <FileName>MixedGameObject.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Level">
+    <Position X="12.5" Y="0.5" Width="3.25" />
+    <Members>
+      <Method Name="~Level" Hidden="true" />
+      <Method Name="Level" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>CACAIAAEQIAAAAAAAAICAAAAAAAAAAQBAABgAAQAgAo=</HashCode>
+      <FileName>Level.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Car">
+    <Position X="1.5" Y="13.25" Width="4" />
+    <Members>
+      <Method Name="~Car" Hidden="true" />
+      <Method Name="Car" Hidden="true" />
+    </Members>
+    <InheritanceLine Type="MixedGameObject" ManuallyRouted="true" FixedToPoint="true">
+      <Path>
+        <Point X="3.625" Y="11.554" />
+        <Point X="3.625" Y="13.126" />
+        <Point X="3.625" Y="13.126" />
+        <Point X="3.625" Y="13.25" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEhIQAAAAgAAYAAAAAAAAAQAAhAAAAEAQEIAI=</HashCode>
+      <FileName>Car.h</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="engine" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="CarControler">
+    <Position X="0.5" Y="18.75" Width="2.75" />
+    <Members>
+      <Method Name="CarControler" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAAAAAAAAAAgAAAgAAAAAAAAAAAAgA=</HashCode>
+      <FileName>CarControler.h</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="car_ptr" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="CarEngine">
+    <Position X="5.25" Y="18.25" Width="3" />
+    <Members>
+      <Method Name="~CarEngine" Hidden="true" />
+      <Method Name="CarEngine" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>BAAACAAAACAEAAAAAAAAAAAAAAAAAAgAAAAAAAAAAgA=</HashCode>
+      <FileName>CarEngine.h</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="car_ptr" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="BaseEventHandler">
+    <Position X="16" Y="11.5" Width="2.5" />
+    <Members>
+      <Method Name="~BaseEventHandler" Hidden="true" />
+      <Method Name="BaseEventHandler" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAAAAAAAAACAAAAAABAAEAAAAAAA=</HashCode>
+      <FileName>BaseEventHandler.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameContactListener">
+    <Position X="16.75" Y="0.5" Width="3.25" />
+    <Members>
+      <Method Name="~GameContactListener" Hidden="true" />
+      <Method Name="GameContactListener" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAEAABAAAAAAAAAAABAEAIAAAACAAA=</HashCode>
+      <FileName>GameContactListener.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InGameOverlay" Collapsed="true" HideInheritanceLine="true">
+    <Position X="13.5" Y="10.5" Width="1.5" />
+    <Members>
+      <Method Name="~InGameOverlay" Hidden="true" />
+      <Method Name="InGameOverlay" Hidden="true" />
+    </Members>
+    <InheritanceLine Type="sf::Drawable" IsHidden="true" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAgAAAAAAAA=</HashCode>
+      <FileName>InGameOverlay.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InGameEventHandler" Collapsed="true">
+    <Position X="20.25" Y="12.5" Width="1.75" />
+    <InheritanceLine Type="EventHandler" FixedToPoint="true">
+      <Path>
+        <Point X="21" Y="10.853" />
+        <Point X="21" Y="12.5" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAQAAAAAAAAAAAACAAAEAAAAAAA=</HashCode>
+      <FileName>InGameEventHandler.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EventHandler">
+    <Position X="20.25" Y="9.75" Width="1.5" />
+    <Members>
+      <Method Name="~EventHandler" Hidden="true" />
+      <Method Name="EventHandler" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAA=</HashCode>
+      <FileName>EventHandler.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GroundContactHandler" Collapsed="true">
+    <Position X="20.25" Y="6.5" Width="2" />
+    <InheritanceLine Type="ContactListenerHandler" ManuallyRouted="true">
+      <Path>
+        <Point X="18.25" Y="4.796" />
+        <Point X="18.25" Y="6.295" />
+        <Point X="21.25" Y="6.295" />
+        <Point X="21.25" Y="6.5" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAEAAAAAAAAAA=</HashCode>
+      <FileName>GroundContactHandler.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ContactListenerHandler">
+    <Position X="17.25" Y="3.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAEAAAAAAAAAA=</HashCode>
+      <FileName>GameContactListener.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CheckpointContactHandler">
+    <Position X="17.25" Y="7" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CheckPointContactHandler.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TextureLoader">
+    <Position X="10" Y="9" Width="3" />
+    <Members>
+      <Method Name="~TextureLoader" Hidden="true" />
+      <Method Name="TextureLoader" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAMAAAAAAQIAAQAAAAAFAAAAAQAAAAAAAABQ=</HashCode>
+      <FileName>TextureLoader.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TileMap">
+    <Position X="10" Y="5.25" Width="2.75" />
+    <InheritanceLine Type="sf::Drawable" ManuallyRouted="true">
+      <Path>
+        <Point X="4.75" Y="1.603" />
+        <Point X="4.75" Y="1.872" />
+        <Point X="6.471" Y="1.872" />
+        <Point X="6.471" Y="3.909" />
+        <Point X="11.375" Y="3.909" />
+        <Point X="11.375" Y="5.25" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAACAAAABIAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>TileMap.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Utils">
+    <Position X="13.25" Y="7.75" Width="2.5" />
+    <Members>
+      <Method Name="~Utils" Hidden="true" />
+      <Method Name="Utils" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgIAAAQAAAAAAAAAAAAAAAAgAAAQEAABAA=</HashCode>
+      <FileName>Utils.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Wheel">
+    <Position X="12" Y="14" Width="2.75" />
+    <Members>
+      <Method Name="~Wheel" Hidden="true" />
+      <Method Name="Wheel" Hidden="true" />
+    </Members>
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="Wheel::WheelType">
+        <TypeIdentifier>
+          <NewMemberFileName>Wheel.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAQAAAAAAAABAAAAAAAQAAIQAgAAIAAFAgI=</HashCode>
+      <FileName>Wheel.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BarrierLimit" HideInheritanceLine="true">
+    <Position X="9.25" Y="14" Width="1.5" />
+    <Members>
+      <Method Name="~BarrierLimit" Hidden="true" />
+      <Method Name="BarrierLimit" Hidden="true" />
+    </Members>
+    <InheritanceLine Type="sf::Drawable" IsHidden="true" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEACAAAAYAAAIAIAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>BarrierLimit.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Checkpoint">
+    <Position X="6.25" Y="14" Width="1.5" />
+    <Members>
+      <Method Name="~Checkpoint" Hidden="true" />
+      <Method Name="Checkpoint" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAgAAAAAAAAAAAAAEAEAAAAAEAAAAAAA=</HashCode>
+      <FileName>Checkpoint.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ground">
+    <Position X="15.75" Y="14" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAAAAAAAAAAAAAAAAQAAAAEAAAAAAECA=</HashCode>
+      <FileName>Ground.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="CarControl">
+    <Position X="24.5" Y="6" Width="1.5" />
+    <Members>
+      <Method Name="~CarControl" Hidden="true" />
+      <Method Name="CarControl" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAIAAAAACAAAAAAAAAAAAAAAAAAgAAAAA=</HashCode>
+      <FileName>Car.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="CarControlKeysDef">
+    <Position X="24.5" Y="8" Width="2.25" />
+    <Members>
+      <Method Name="CarControlKeysDef" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAgAAAAAAAAAABAAAAEAAAAAAAAAAAAAIAA=</HashCode>
+      <FileName>CarControler.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="StartPos">
+    <Position X="24.5" Y="10.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>Level.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Enum Name="CarSide">
+    <Position X="24.5" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Car.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="GameObjectTypes">
+    <Position X="24.5" Y="14.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAABEAAAAAgAAAAAACAAAAAAAEQAAEgAAAAEAAAAAE=</HashCode>
+      <FileName>GameObjectTypes.h</FileName>
+    </TypeIdentifier>
+  </Enum>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>
