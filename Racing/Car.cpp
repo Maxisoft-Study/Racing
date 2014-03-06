@@ -7,7 +7,10 @@
 #include "YamlConverter.h"
 
 Car::Car(b2World* world, const std::string& file, const float init_pos_x, const float init_pos_y, const float angle) :
-MixedGameObject(world, file), wheels(Wheel::Count), wheelsJoints(Wheel::Count), maxfrontwheelsangle(Utils::DegreeToRadian(38)), lastspeed(-1)
+MixedGameObject(world, file),
+wheels(Wheel::Count),
+wheelsJoints(Wheel::Count),
+maxfrontwheelsangle(Utils::DegreeToRadian(38)), lastspeed(-1)
 {
 	b2BodyDef bodydef;
 	bodydef.type = b2_dynamicBody;

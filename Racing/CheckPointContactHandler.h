@@ -15,21 +15,24 @@ public:
 	{
 		Wheel* wheel = nullptr;
 		Checkpoint* cp = nullptr;
-
 		//CAST
-		if (cp = dynamic_cast<Checkpoint*>(A))
+		if (A->getGType() == GameObjectTypes::CheckpointType && B->getGType() == GameObjectTypes::WheelType)
 		{
+			cp = dynamic_cast<Checkpoint*>(A);
 			wheel = dynamic_cast<Wheel*>(B);
-			if (!wheel)
+			if (!wheel || !cp)
 			{
+				LOG_ERR << "1 - Failed to cast !";
 				return false;
 			}
 		}
-		else if (cp = dynamic_cast<Checkpoint*>(B))
+		else if (B->getGType() == GameObjectTypes::CheckpointType && A->getGType() == GameObjectTypes::WheelType)
 		{
+			cp = dynamic_cast<Checkpoint*>(B);
 			wheel = dynamic_cast<Wheel*>(A);
-			if (!wheel)
+			if (!wheel || !cp)
 			{
+				LOG_ERR << "2 - Failed to cast !";
 				return false;
 			}
 		}

@@ -1,7 +1,7 @@
 #pragma once
 #include "GameObject.h"
 class BoxGameObject :
-	virtual public GameObject
+	public GameObject
 {
 public:
 	
@@ -10,14 +10,15 @@ public:
 		WHEEL_MASK = 1 << 1,
 		CHECKPOINT_MASK = 1 << 2,
 		GROUND_MASK = 1 << 3,
+		BARRIERLIMIT_MASK = 1 << 4,
 		
 	};
 
     b2World* getWorld(void) const;
     b2Body* getBody(void) const;
-	//const virtual GameObject::GameObjectTypes getGType(void) const;
+	const virtual GameObjectTypes getGType(void) const = 0;
 protected:
 	explicit BoxGameObject(b2World* world);
-    ~BoxGameObject();
+    virtual ~BoxGameObject();
     b2Body* body;
 };

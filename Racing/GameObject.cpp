@@ -14,3 +14,8 @@ bool GameObject::IsTypeOf(const GameObject &gobj, const GameObjectTypes t)
 {
 	return (gobj.getGType() & t) != 0;
 }
+
+bool GameObject::IsTypeOf(const GameObject* gobj, const GameObjectTypes t)
+{
+	return (gobj->getGType() & t) != 0;
+}

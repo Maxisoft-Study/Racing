@@ -2,7 +2,7 @@
 #include "BoxGameObject.h"
 
 
-BoxGameObject::BoxGameObject(b2World *world) : GameObject(), body(NULL)
+BoxGameObject::BoxGameObject(b2World *world) : GameObject(), body(nullptr)
 {
 }
 

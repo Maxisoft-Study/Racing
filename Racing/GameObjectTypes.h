@@ -17,4 +17,5 @@ enum GameObjectTypes : unsigned long long
 
 	CheckpointType = 1 << 6 | BoxGameObjectType,
 	GroundType = 1 << 7 | BoxGameObjectType,
+	BarrierLimitType = 1 << 8 | BoxGameObjectType,
 };

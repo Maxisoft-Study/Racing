@@ -19,24 +19,33 @@
  </layer>
  <layer name="Calque de Tile 1" width="30" height="30">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NkgAAmNCwOxBIMtAOMOMSlgViGhvZy4pFjpaG9+MBA2SswQHbTw15hLGIcA2SvPBAr0NheULpmQcPKQKxCY3sHKu2OglEwCkbBKBgFo2AUjALqAAB5tC6XEA4AAA==
+   H4sIAAAAAAAAC+2V7QrCMAxFAyo4xSnze7q5qe//jLt/CtK1tibZBtILB8qgOaOkKVHKrzmCEziDy4jeKyjBDdxH9C486+R1x/TH3CLUL1Kv6Q87oX6RevPI2trePdO7+Vh/+3dtbxFZg+OtQO34/gDNgN4WPKnf6y/wFnozxh6NGtJZY5+5ptc1W9ZgR/0z1/T6ZoskMd6ZsjPWu5zIO8Q7N5XXN5NMuPckFDOTVuBgsSX+PUlJ+fd0mYyOvhAOAAA=
   </data>
  </layer>
  <objectgroup name="Start Pos" width="30" height="30">
-  <object name="1" type="start" x="2294" y="832" width="106" height="88">
+  <object name="1" type="start" x="6472" y="3135" width="106" height="88">
    <properties>
     <property name="angle" value="180"/>
    </properties>
    <ellipse/>
   </object>
-  <object name="2" type="start" x="2428" y="714" width="104" height="80">
-   <ellipse/>
-  </object>
-  <object name="3" type="start" x="2290" y="578" width="124" height="86">
+  <object name="2" type="start" x="6646" y="2998" width="104" height="80">
    <properties>
     <property name="angle" value="180"/>
    </properties>
    <ellipse/>
   </object>
+  <object name="3" type="start" x="6459" y="2847" width="124" height="86">
+   <properties>
+    <property name="angle" value="180"/>
+   </properties>
+   <ellipse/>
+  </object>
+ </objectgroup>
+ <objectgroup name="Limit" width="30" height="30">
+  <object type="limit" x="0" y="144" width="9648" height="288"/>
+  <object type="limit" x="7448" y="192" width="248" height="8008"/>
+  <object type="limit" x="-232" y="7920" width="9888" height="368"/>
+  <object type="limit" x="584" y="216" width="272" height="8056"/>
  </objectgroup>
 </map>

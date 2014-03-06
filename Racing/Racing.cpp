@@ -10,8 +10,6 @@
 #include "CheckPointContactHandler.h"
 #include "GroundContactHandler.h"
 
-//#define _DEBUG_DRAW 
-
 
 #ifdef _DEBUG_DRAW
 #include "SFMLDebugDraw.h"
@@ -320,7 +318,8 @@ int main(int argc, char** argv)
 	//construction voitures
 	auto startPos = lvl.getStartPos(0);
 	Car testcar(world, "ressources/voituretest.png", startPos.pos.x, startPos.pos.y, startPos.angle);
-	Car testcar2(world, "ressources/voituretest.png", 5.f, 5.f);
+	auto startPos1 = lvl.getStartPos(1);
+	Car testcar2(world, "ressources/voituretest.png", startPos1.pos.x, startPos1.pos.y, startPos1.angle);
 
 	const CarControlKeysDef controls(racing::CONFIG["controls"].as<CarControlKeysDef>());
 	CarControler carcontroler(&testcar, controls);
@@ -349,6 +348,7 @@ int main(int argc, char** argv)
 				}
 			}
 		}
+
 
 #ifdef _DEBUG_DRAW
 		sf::Time deltaTime = deltaClock.restart();

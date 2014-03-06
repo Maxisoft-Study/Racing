@@ -20,8 +20,17 @@ Level::~Level(void)
 	for (unsigned i = 0, k = 0; i < groundmatrix.size1(); ++i)
 		for (unsigned j = 0; j < groundmatrix.size2(); ++j)
 		{
-			delete groundmatrix(j, i);
+			auto ground = groundmatrix(j, i);
+			if (ground)
+			{
+				delete ground;
+			}
 		}
+
+	for (auto barrier : barriers)
+	{
+		delete barrier;
+	}
 }
 
 
@@ -32,10 +41,14 @@ void Level::draw(sf::RenderTarget& target, sf::RenderStates states) const
 		target.draw(tm, states);
 	}
 
+	for (auto barrier : barriers)
+	{
+		target.draw(*barrier, states);
+	}
 
 }
 
-bool Level::load(const std::string &jsonfilename, b2World *world)
+bool Level::load(const std::string &jsonfilename, b2World* world)
 {
 
 	boost::property_tree::ptree pt;
@@ -90,6 +103,16 @@ bool Level::load(const std::string &jsonfilename, b2World *world)
 						jsonobject.get<int>("y") / racing::BOX2D_METERS_TO_PIXEL,
 						jsonobject.get_child("properties").get<float>("angle")
 						);
+				}
+				else if (objecttype == "limit")
+				{
+					auto barriere = new BarrierLimit(
+						world,
+						jsonobject.get<float>("width"),
+						jsonobject.get<float>("height"),
+						jsonobject.get<float>("x"),
+						jsonobject.get<float>("y"));
+					barriers.push_back(barriere);
 				}
 			}
 		}
@@ -163,12 +186,25 @@ bool Level::load(const std::string &jsonfilename, b2World *world)
 	for (unsigned i = 0, k = 0; i < lenght.x; ++i)
 		for (unsigned j = 0; j < lenght.y; ++j)
 		{
-			int data = tilemapdata[0][k];
+			int data = tilemapdata[1][k];
 			const TileSetDef* currDef = searchForTileSetDef(data);
 
 
-			auto position = Utils::SfVectPixelToBox2DVect({ static_cast<float>(i * currDef->tilewidth), static_cast<float>(j * currDef->tilewidth) });
+			auto position = Utils::SfVectPixelToBox2DVect({ static_cast<float>(j * currDef->tilewidth), static_cast<float>(i * currDef->tilewidth) });
+#ifdef DISABLETERRAIN
+			if (data && data != 38)
+			{
+				LOG_DEBUG << currDef->tilewidth;
+				LOG_DEBUG << currDef->tileheight;
+				groundmatrix(j, i) = new Ground(world, position, currDef->tilewidth, currDef->tileheight);
+			}
+			else
+			{
+				groundmatrix(j, i) = nullptr;
+			}
+#else
 			groundmatrix(j, i) = new Ground(world, position, currDef->tilewidth, currDef->tileheight);
+#endif // DEBUG_DEBUG_DRAW		
 			k += 1;
 		}
 

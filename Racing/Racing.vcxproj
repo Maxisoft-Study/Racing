@@ -112,6 +112,7 @@ xcopy /Y "$(SolutionDir)\ressources" "$(OutDir)\ressources"</Command>
     <Text Include="..\TODO.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BarrierLimit.h" />
     <ClInclude Include="BaseEventHandler.h" />
     <ClInclude Include="BoxGameObject.h" />
     <ClInclude Include="Car.h" />
@@ -145,6 +146,7 @@ xcopy /Y "$(SolutionDir)\ressources" "$(OutDir)\ressources"</Command>
     <ClInclude Include="YamlConverter.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BarrierLimit.cpp" />
     <ClCompile Include="BaseEventHandler.cpp" />
     <ClCompile Include="BoxGameObject.cpp" />
     <ClCompile Include="Car.cpp" />

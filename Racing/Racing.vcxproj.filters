@@ -143,6 +143,9 @@
     <ClInclude Include="TextureNotFoundException.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
+    <ClInclude Include="BarrierLimit.h">
+      <Filter>Fichiers d%27en-tête\GameBase</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Racing.cpp">
@@ -212,6 +215,9 @@
       <Filter>Fichiers sources\GameBase</Filter>
     </ClCompile>
     <ClCompile Include="TextureLoader.cpp">
+      <Filter>Fichiers sources\GameBase</Filter>
+    </ClCompile>
+    <ClCompile Include="BarrierLimit.cpp">
       <Filter>Fichiers sources\GameBase</Filter>
     </ClCompile>
   </ItemGroup>

@@ -5,14 +5,16 @@
 Ground::Ground(b2World* world, const b2Vec2& pos, const uint tilewidth, const uint tileheight, const float friction) : BoxGameObject(world), frictionCoeff(friction)
 {
 	b2BodyDef bodydef;
-	bodydef.position.Set(pos.x, pos.y);
+	auto halfwidth = tilewidth / racing::BOX2D_METERS_TO_PIXEL / 2;
+	auto halfheight = tileheight / racing::BOX2D_METERS_TO_PIXEL / 2;
+	bodydef.position.Set(pos.x + halfwidth, pos.y + halfheight);
 
 	body = world->CreateBody(&bodydef);
 	body->SetUserData(this);
 
 	b2PolygonShape* dynamicBox = new b2PolygonShape();
-	dynamicBox->SetAsBox(tilewidth / racing::BOX2D_METERS_TO_PIXEL, tileheight / racing::BOX2D_METERS_TO_PIXEL);
 
+	dynamicBox->SetAsBox(halfwidth, halfheight);
 	b2FixtureDef fixtureDef;
 	fixtureDef.shape = dynamicBox;
 	fixtureDef.filter.categoryBits = BoxGameObject::GROUND_MASK;
