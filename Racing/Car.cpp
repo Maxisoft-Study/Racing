@@ -142,8 +142,17 @@ Car::~Car(void)
 void Car::update(const float delta)
 {
 	MixedGameObject::update(delta);
-
+	float globalfriction = 0.f;
+	for (const Wheel* wheel : wheels)
+	{
+		auto ground = wheel->searchMaxGroundFriction();
+		globalfriction += ground ? ground->FrictionCoeff() : 1.f;
+	}
+	globalfriction /= Wheel::WheelType::Count;
+	getBody()->SetLinearVelocity(globalfriction * getBody()->GetLinearVelocity());
 	lastspeed = getBody()->GetLinearVelocity().Length() * 3.6f;
+
+
 
 	for (Wheel* wheel : wheels)
 	{
@@ -153,6 +162,7 @@ void Car::update(const float delta)
 	applyInertia(delta);
 
 	lastcontrol = {}; //reset
+
 	
 	//printf("Vitesse : %f\n", lastspeed);
 

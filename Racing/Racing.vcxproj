@@ -141,6 +141,7 @@ xcopy /Y "$(SolutionDir)\ressources" "$(OutDir)\ressources"</Command>
     <ClInclude Include="TextureLoader.h" />
     <ClInclude Include="TextureNotFoundException.h" />
     <ClInclude Include="TileMap.h" />
+    <ClInclude Include="Updatable.h" />
     <ClInclude Include="Utils.h" />
     <ClInclude Include="Wheel.h" />
     <ClInclude Include="YamlConverter.h" />

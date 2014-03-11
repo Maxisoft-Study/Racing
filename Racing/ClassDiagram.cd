@@ -104,7 +104,7 @@
     </Members>
     <InheritanceLine Type="MixedGameObject" ManuallyRouted="true" FixedToPoint="true">
       <Path>
-        <Point X="3.625" Y="11.554" />
+        <Point X="3.625" Y="11.683" />
         <Point X="3.625" Y="13.126" />
         <Point X="3.625" Y="13.126" />
         <Point X="3.625" Y="13.25" />
@@ -169,13 +169,9 @@
   </Class>
   <Class Name="InGameOverlay" Collapsed="true" HideInheritanceLine="true">
     <Position X="13.5" Y="10.5" Width="1.5" />
-    <Members>
-      <Method Name="~InGameOverlay" Hidden="true" />
-      <Method Name="InGameOverlay" Hidden="true" />
-    </Members>
     <InheritanceLine Type="sf::Drawable" IsHidden="true" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAgAAAAAAAA=</HashCode>
+      <HashCode>AAAABAAAAAAAAgAAAAIAAAAAQAAAAAAAAAgAAAAEACA=</HashCode>
       <FileName>InGameOverlay.h</FileName>
     </TypeIdentifier>
   </Class>
@@ -288,7 +284,7 @@
       </Enum>
     </NestedTypes>
     <TypeIdentifier>
-      <HashCode>AAAAAAAEAAQAAAAAAAABAAAAAAAQAAIQAgAAIAAFAgI=</HashCode>
+      <HashCode>AAAAAAAEAAQAAACAAAABAAAAAAAQAAIQAgAAIAAFAgI=</HashCode>
       <FileName>Wheel.h</FileName>
     </TypeIdentifier>
   </Class>

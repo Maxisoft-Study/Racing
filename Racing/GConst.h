@@ -2,8 +2,8 @@
 #include "stdafx.h"
 #include "EventHandler.h"
 
-#define _DEBUG_DRAW 
-#define  DISABLETERRAIN
+//#define _DEBUG_DRAW 
+//#define  DISABLETERRAIN
 
 namespace racing{
 	extern const sf::ContextSettings settings;

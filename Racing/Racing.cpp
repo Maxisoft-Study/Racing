@@ -9,6 +9,7 @@
 #include "GameContactListener.h"
 #include "CheckPointContactHandler.h"
 #include "GroundContactHandler.h"
+#include "InGameOverlay.h"
 
 
 #ifdef _DEBUG_DRAW
@@ -233,8 +234,15 @@ void setup_globals(void)
 
 int main(int argc, char** argv)
 {
+
 	set_working_dir(argv);
 	setup_globals();
+
+	sf::Font mainFont;
+	if (!mainFont.loadFromFile("ressources/Franchise-Bold-hinted.ttf")) // Set path to your font
+	{
+		return 1;
+	}
 
 	sf::Clock clock;
 	sf::Clock processingClock;
@@ -310,6 +318,7 @@ int main(int argc, char** argv)
 	//window.setFramerateLimit(30);
 	EVENTS_HANDLERS.push_back(new BaseEventHandler(&window));
 
+	
 
 	//chargement du level
 	Level lvl;
@@ -320,6 +329,9 @@ int main(int argc, char** argv)
 	Car testcar(world, "ressources/voituretest.png", startPos.pos.x, startPos.pos.y, startPos.angle);
 	auto startPos1 = lvl.getStartPos(1);
 	Car testcar2(world, "ressources/voituretest.png", startPos1.pos.x, startPos1.pos.y, startPos1.angle);
+
+
+	InGameOverlay overlay(window, &testcar);
 
 	const CarControlKeysDef controls(racing::CONFIG["controls"].as<CarControlKeysDef>());
 	CarControler carcontroler(&testcar, controls);
@@ -486,6 +498,7 @@ int main(int argc, char** argv)
 		elapsedassecond += processingClock.restart().asSeconds();
 		testcar.update(elapsedassecond);
 		testcar2.update(elapsedassecond);
+		overlay.update(elapsedassecond);
 
 
 		window.clear();
@@ -505,8 +518,11 @@ int main(int argc, char** argv)
 		window.draw(lvl);
 		window.draw(testcar);
 		window.draw(testcar2);
-		//LOG_DEBUG << checkpointlistener->getCheckpointCount(&testcar);
-		
+
+		//reset la vue pour dessiner les overlays
+		window.setView(sf::View());
+		window.draw(overlay);
+
 		window.display();
 	}
 

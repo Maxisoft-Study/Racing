@@ -46,7 +46,7 @@ void Wheel::update(float delta)
 
 		if (car_ptr->getlastControl().rotation) // l'utilisateur veut tourner.
 		{
-			float angle = car_ptr->getlastControl().rotation * 1.6f * delta;
+			float angle = car_ptr->getlastControl().rotation * 1.55f * delta;
 
 			angle += getBody()->GetAngle();
 
@@ -59,7 +59,7 @@ void Wheel::update(float delta)
 		//auto centrage des pneux
 		float angle = getBody()->GetAngle();
 		const float diffangle = angle - carangle;
-		b2RevoluteJoint *joint = static_cast<b2RevoluteJoint *> (car_ptr->wheelsJoints[wheeltype]);
+		b2RevoluteJoint *joint = static_cast<b2RevoluteJoint*> (car_ptr->wheelsJoints[wheeltype]);
 		if (diffangle > 0.005f)
 		{
 			joint->SetMotorSpeed(-1.2f);
@@ -76,6 +76,9 @@ void Wheel::update(float delta)
 
 		if (car_ptr->getlastControl().direction) //l'utilisateur veut faire fonctionner le moteur
 		{
+			const Ground* ground = searchMaxGroundFriction();
+			const float friction = ground ? ground->FrictionCoeff() : 1.f;
+			LOG_DEBUG << friction << "ptr: " << ground;
 			b2Vec2 force(0.f, car_ptr->engine->getBaseImpulseY() * 0.7f * delta * car_ptr->getlastControl().direction);
 			force = Utils::RotateVect(force, getBody()->GetAngle());
 			getBody()->ApplyLinearImpulse(force, getBody()->GetWorldCenter(), true);
@@ -100,6 +103,15 @@ void Wheel::killOrthogonalVelocity(void)
 	sidewayaxis *= b2Dot(velocity, sidewayaxis);
 	getBody()->SetLinearVelocity(sidewayaxis);
 }
+
+const Ground* Wheel::searchMaxGroundFriction(void) const{
+	auto ret = std::max_element(
+		begin(grounds),
+		end(grounds),
+		[](const Ground* left, const Ground* right) { return left->FrictionCoeff() < right->FrictionCoeff(); });
+	return ret == end(grounds) ? nullptr : *ret;
+}
+
 
 const GameObjectTypes Wheel::getGType(void) const
 {

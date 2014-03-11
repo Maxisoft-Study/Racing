@@ -28,6 +28,7 @@ public:
 	virtual void update(float delta) final;
 	const WheelType wheeltype;
 	const virtual GameObjectTypes getGType(void) const final;
+	const Ground* searchMaxGroundFriction(void) const;
 	inline const Car* getCar(void) const{ return car_ptr; }
 	inline void addGround(const Ground* ground) { grounds.emplace(ground); }
 	inline bool removeGround(const Ground* ground) 

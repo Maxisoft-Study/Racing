@@ -18,10 +18,10 @@ Game::~Game()
 
 void Game::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-	target.draw(level);
-	for (auto car : cars)
+	target.draw(level, states);
+	for (const auto car : cars)
 	{
-		target.draw(*car);
+		target.draw(*car, states);
 	}
 }
 

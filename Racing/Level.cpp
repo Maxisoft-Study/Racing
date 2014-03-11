@@ -203,7 +203,8 @@ bool Level::load(const std::string &jsonfilename, b2World* world)
 				groundmatrix(j, i) = nullptr;
 			}
 #else
-			groundmatrix(j, i) = new Ground(world, position, currDef->tilewidth, currDef->tileheight);
+			LOG_DEBUG << data;
+			groundmatrix(j, i) = new Ground(world, position, currDef->tilewidth, currDef->tileheight, !data ? 0.95f : 1.f);
 #endif // DEBUG_DEBUG_DRAW		
 			k += 1;
 		}

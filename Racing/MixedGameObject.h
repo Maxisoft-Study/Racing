@@ -4,7 +4,8 @@
 
 class MixedGameObject :
 	public SpriteGameObject,
-	public BoxGameObject
+	public BoxGameObject,
+	public virtual Updatable
 {
 	friend class sf::RenderTarget;
 public:
