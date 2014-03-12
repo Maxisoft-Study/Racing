@@ -138,7 +138,7 @@ MixedGameObject(world, file),
 	bodydef.type = b2_dynamicBody;
 	bodydef.linearDamping = 0.7f;
 	bodydef.angularDamping = 0.7f;
-	bodydef.position.Set(startpos.pos.x, startpos.pos.x);
+	bodydef.position.Set(startpos.pos.x, startpos.pos.y);
 	//bodydef.angle = Utils::DegreeToRadian(angle);
 	bodydef.bullet = true;
 
