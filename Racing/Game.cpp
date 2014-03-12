@@ -21,7 +21,7 @@ Game::Game(const std::string& levelname) : world({ 0, 0 }), overlay(nullptr)
 		throw std::exception((std::string("pas de repertoire : Levels/") + levelname).c_str());
 	}
 	level.load((p/"tiled.json").generic_string(), &world);
-	checkpointContactHandler = contact_listner_ptr(new CheckpointContactHandler(level));
+	checkpointContactHandler = contact_listner_ptr(new CheckpointContactHandler(&level));
 	contactlistener.add(checkpointContactHandler);
 }
 

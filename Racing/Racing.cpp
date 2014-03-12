@@ -337,7 +337,7 @@ int main(int argc, char** argv)
 
 	LOG_DEBUG << "MASSSSSSSSSSSSSSSSSSS" << testcar.getBody()->GetMass();
 
-	//Game game("1");
+	Game* game = new Game("1");
 
 	const CarControlKeysDef controls(racing::CONFIG["controls"].as<CarControlKeysDef>());
 	CarControler carcontroler(&testcar, controls);
@@ -345,7 +345,7 @@ int main(int argc, char** argv)
 	GameContactListener* contactlistener = new GameContactListener;
 	world->SetContactListener(contactlistener);
 
-	std::shared_ptr<CheckpointContactHandler> checkpointlistener(new CheckpointContactHandler(lvl));
+	std::shared_ptr<CheckpointContactHandler> checkpointlistener(new CheckpointContactHandler(&lvl));
 	contactlistener->add(checkpointlistener);
 	
 	std::shared_ptr<GroundContactHandler> groundlistener(new GroundContactHandler);
