@@ -28,7 +28,7 @@
   <Class Name="Game">
     <Position X="7.75" Y="0.75" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>AAAAEAAQAAAAAgAAAAIAgBBAAAmAAAAAAAIAAAAAAAA=</HashCode>
+      <HashCode>AAAAEAAQAAAAAgAEAAIAgBBAAAmAAAGAACIAAAAEAAA=</HashCode>
       <FileName>Game.h</FileName>
     </TypeIdentifier>
   </Class>
@@ -81,7 +81,7 @@
       <Method Name="MixedGameObject" Hidden="true" />
     </Members>
     <TypeIdentifier>
-      <HashCode>AAAABAAEAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAEAAA=</HashCode>
+      <HashCode>AgAABAAEAAAAAAAgAAAAAAAAAAAAAAAgAAAAAAAEAgA=</HashCode>
       <FileName>MixedGameObject.h</FileName>
     </TypeIdentifier>
   </Class>
@@ -102,16 +102,8 @@
       <Method Name="~Car" Hidden="true" />
       <Method Name="Car" Hidden="true" />
     </Members>
-    <InheritanceLine Type="MixedGameObject" ManuallyRouted="true" FixedToPoint="true">
-      <Path>
-        <Point X="3.625" Y="11.683" />
-        <Point X="3.625" Y="13.126" />
-        <Point X="3.625" Y="13.126" />
-        <Point X="3.625" Y="13.25" />
-      </Path>
-    </InheritanceLine>
     <TypeIdentifier>
-      <HashCode>AgAAAAAEhIQAAAAgAAYAAAAAAAAAQAABAAAAEAQEIAI=</HashCode>
+      <HashCode>AAAAAAAEhIQAAAAgAAYAAAAAAAAAQAAhAAAAEAQEIAI=</HashCode>
       <FileName>Car.h</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>

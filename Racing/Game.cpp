@@ -5,14 +5,15 @@
 using namespace boost::filesystem;
 
 
-Game::Game(const std::string& levelname) : world({ 0, 0 }), overlay(nullptr)
+Game::Game(const std::string& levelname) : world({ 0, 0 }), overlay(nullptr), groundlistener(new GroundContactHandler)
 {
+	world.SetAllowSleeping(true);
 	world.SetContactListener(&contactlistener);
 	
 	path p("./Levels");
 	if (!exists(p) || !is_directory(p))
 	{
-		throw std::exception("pas de repertoire Levels.");
+		throw std::exception("pas de repertoire Levels");
 	}
 	LOG_DEBUG << "OK";
 	p /= levelname;
@@ -23,6 +24,7 @@ Game::Game(const std::string& levelname) : world({ 0, 0 }), overlay(nullptr)
 	level.load((p/"tiled.json").generic_string(), &world);
 	checkpointContactHandler = contact_listner_ptr(new CheckpointContactHandler(&level));
 	contactlistener.add(checkpointContactHandler);
+	contactlistener.add(groundlistener);
 }
 
 
@@ -45,18 +47,23 @@ void Game::draw(sf::RenderTarget& target, sf::RenderStates states) const
 	{
 		target.draw(*car, states);
 	}
+
 	if (overlay){
+		sf::View old = target.getView();
+		//reset la vue pour dessiner les overlays
+		target.setView(sf::View());
 		target.draw(*overlay, states);
+		target.setView(old);
 	}
 }
 
 
-Car* Game::createCar(const std::string& name)
+Car* Game::createCar(const std::string& name, bool roundCoordinate)
 {
 	path p("./Cars");
 	if (!exists(p) || !is_directory(p))
 	{
-		throw std::exception("pas de repertoire Cars.");
+		throw std::exception("pas de repertoire Cars");
 	}
 	p /= name;
 	if (!exists(p) || !is_directory(p))
@@ -77,5 +84,37 @@ Car* Game::createCar(const std::string& name)
 	
 	Car* ret = new Car(&world, imgpath.generic_string(), yamlpath.generic_string(), level.getStartPos(cars.size()));
 	cars.push_back(ret);
+	ret->setRoundCoordinate(roundCoordinate);
 	return ret;
+}
+
+CarControler& Game::createCarControler(Car* car, const CarControlKeysDef& controlkeys)
+{
+	carcontrolers.emplace_back(car, controlkeys);
+	return carcontrolers.back();
+}
+
+void Game::update(float delta)
+{
+	sf::Clock processingClock;
+
+	//mise a jour du monde (box2d)
+	world.Step(delta, 20, 20);
+
+	for (auto& carcontroler : carcontrolers)
+	{
+		carcontroler.parseKeys();
+	}
+
+	delta += processingClock.restart().asSeconds();
+
+	for (auto car : cars)
+	{
+		car->update(delta);
+	}
+
+	if (overlay)
+	{
+		overlay->update(delta);
+	}
 }

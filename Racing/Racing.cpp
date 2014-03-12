@@ -239,18 +239,7 @@ int main(int argc, char** argv)
 	set_working_dir(argv);
 	setup_globals();
 
-	sf::Font mainFont;
-	if (!mainFont.loadFromFile("ressources/Franchise-Bold-hinted.ttf")) // Set path to your font
-	{
-		return 1;
-	}
-
 	sf::Clock clock;
-	sf::Clock processingClock;
-
-	b2Vec2 gravity(0.0f, 0.0f); // désactive la gravité
-	b2World* world = new b2World(gravity);
-	world->SetAllowSleeping(true);
 
 #ifdef _DEBUG_DRAW
 	/* Create window */
@@ -319,36 +308,11 @@ int main(int argc, char** argv)
 	window.setFramerateLimit(60);
 	EVENTS_HANDLERS.push_back(new BaseEventHandler(&window));
 
-	
-
-	//chargement du level
-	Level lvl;
-	lvl.load("ressources/test2.json", world);
-
-	//construction voitures
-	auto startPos = lvl.getStartPos(0);
-	Car testcar(world, "ressources/voituretest.png", startPos.pos.x, startPos.pos.y, startPos.angle);
-	testcar.setRoundCoordinate(true);
-	auto startPos1 = lvl.getStartPos(1);
-	Car testcar2(world, "ressources/voituretest.png", startPos1.pos.x, startPos1.pos.y, startPos1.angle);
-
-
-	InGameOverlay overlay(window, &testcar);
-
 
 	Game* game = new Game("1");
 
-	const CarControlKeysDef controls(racing::CONFIG["controls"].as<CarControlKeysDef>());
-	CarControler carcontroler(&testcar, controls);
-	
-	GameContactListener* contactlistener = new GameContactListener;
-	world->SetContactListener(contactlistener);
-
-	std::shared_ptr<CheckpointContactHandler> checkpointlistener(new CheckpointContactHandler(&lvl));
-	contactlistener->add(checkpointlistener);
-	
-	std::shared_ptr<GroundContactHandler> groundlistener(new GroundContactHandler);
-	contactlistener->add(groundlistener);
+	auto maincar = game->createCar("Lotus Evora", true);
+	game->createCarControler(maincar, racing::CONFIG["controls"].as<CarControlKeysDef>());
 
 
 	while (window.isOpen())
@@ -357,7 +321,7 @@ int main(int argc, char** argv)
 		sf::Event event;
 		while (window.pollEvent(event))
 		{
-			for(auto handler : EVENTS_HANDLERS) // TEST C++11
+			for(auto handler : EVENTS_HANDLERS)
 			{
 				if (handler->on_event(event))
 				{
@@ -488,29 +452,20 @@ int main(int argc, char** argv)
 #endif // _DEBUG_DRAW
 
 		//mise a jours des horloges
-		processingClock.restart();
 		sf::Time elapsed(clock.restart());
 
 		float elapsedassecond = elapsed.asSeconds();
 
-		//mise a jour du monde (box2d)
-		world->Step(elapsedassecond, 20, 20);
 
+		game->update(elapsedassecond);
 
-		const b2Vec2 position(testcar.getBody()->GetWorldCenter());
-
-		carcontroler.parseKeys();
-
-		elapsedassecond += processingClock.restart().asSeconds();
-		testcar.update(elapsedassecond);
-		testcar2.update(elapsedassecond);
-		overlay.update(elapsedassecond);
-
+		const b2Vec2 position(maincar->getBody()->GetWorldCenter());
 
 		window.clear();
 
 		//calcule du centre. 
 		auto center = Utils::Box2DVectToSfVectPixel(position);
+
 		//utilise round afin d'avoir des coordonnées sans virgule (fait un décalage de sprite sinon)
 		center.x = std::round(center.x);
 		center.y = std::round(center.y);
@@ -521,13 +476,7 @@ int main(int argc, char** argv)
 		window.setView(view);
 
 		//lance l'affichage
-		window.draw(lvl);
-		window.draw(testcar);
-		window.draw(testcar2);
-
-		//reset la vue pour dessiner les overlays
-		window.setView(sf::View());
-		window.draw(overlay);
+		window.draw(*game);
 
 		window.display();
 	}

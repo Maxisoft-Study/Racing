@@ -39,13 +39,6 @@ public:
 
 
 		wheel->addGround(ground);
-
-		//auto world = wheel->getBody()->GetWorld();
-		//b2FrictionJointDef* frictiondef = new b2FrictionJointDef();
-		//frictiondef->Initialize(wheel->getBody(), g->getBody(), { 1, 1 });
-		//frictiondef->maxForce = 1.f;
-		//world->CreateJoint(frictiondef);
-		//delete frictiondef;
 		return true;
 	}
 

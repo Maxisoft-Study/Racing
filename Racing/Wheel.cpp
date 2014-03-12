@@ -100,7 +100,8 @@ void Wheel::killOrthogonalVelocity(void)
 	getBody()->SetLinearVelocity(sidewayaxis);
 }
 
-const Ground* Wheel::searchMaxGroundFriction(void) const{
+const Ground* Wheel::searchMaxGroundFriction(void) const
+{
 	auto ret = std::max_element(
 		begin(grounds),
 		end(grounds),
