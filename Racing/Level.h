@@ -4,14 +4,7 @@
 #include "Checkpoint.h"
 #include "Ground.h"
 #include "BarrierLimit.h"
-
-
-struct StartPos
-{
-	const b2Vec2 pos;
-	const float angle;
-	explicit StartPos(float x, float y, float a) : pos(x, y), angle(a) {}
-};
+#include "StartPos.h"
 
 struct TileSetDef
 {
@@ -59,7 +52,7 @@ private:
 	//////////////////////////////////////////////////////////////////////////
 	/// les checkpoints
 	//////////////////////////////////////////////////////////////////////////
-	std::vector<Checkpoint*> checkpoints;
+	std::set<Checkpoint*, CheckpointPtrComp> checkpoints;
 
 	//////////////////////////////////////////////////////////////////////////
 	/// La definition des tilesets
@@ -90,6 +83,9 @@ public:
 	~Level(void);
 
 	bool load(const std::string& jsonfilename, b2World* world);
+	
+	const Checkpoint* getFirstCheckpoint() const;
+	const Checkpoint* getNextCheckpoint(Checkpoint* cp) const;
 
 	inline const sf::Vector2u getRawLenght() const { return lenght; }
 	inline const sf::Vector2u getLenght() const { return sf::Vector2u(lenght.x * tileLenght.x, lenght.y * tileLenght.y); }

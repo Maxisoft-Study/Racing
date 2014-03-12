@@ -1,6 +1,7 @@
 #pragma once
 #include "stdafx.h"
 #include "MixedGameObject.h"
+#include "StartPos.h"
 class CarEngine;
 class Wheel;
 class CarControler;
@@ -27,6 +28,7 @@ class Car :
 	friend class Wheel;
 public:
 	Car(b2World* world, const std::string& file, const float init_pos_x = 0.f, const float init_pos_y = 0.f, const float angle = 0.f);
+	Car(b2World* world, const std::string& file, const std::string yml, const StartPos& startpos);
 	~Car(void);
 	virtual void update(float delta) final;
 	const float getSpeed(void) const;

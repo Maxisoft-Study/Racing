@@ -71,7 +71,11 @@
     <PostBuildEvent>
       <Command>xcopy /Y  "$(SolutionDir)\VS-2013-SFML-2.1\bin\*.dll" "$(OutDir)"
 mkdir "$(OutDir)\ressources"
-xcopy /Y "$(SolutionDir)\ressources" "$(OutDir)\ressources"</Command>
+xcopy /Y  /E "$(SolutionDir)\ressources" "$(OutDir)\ressources"
+mkdir "$(OutDir)\Levels"
+xcopy /Y  /E "$(SolutionDir)\Levels" "$(OutDir)\Levels"
+mkdir "$(OutDir)\Cars"
+xcopy /Y  /E "$(SolutionDir)\Cars" "$(OutDir)\Cars"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -103,7 +107,9 @@ xcopy /Y "$(SolutionDir)\ressources" "$(OutDir)\ressources"</Command>
     <PostBuildEvent>
       <Command>xcopy /Y  "$(SolutionDir)\VS-2013-SFML-2.1\bin\*.dll" "$(OutDir)"
 mkdir "$(OutDir)\ressources"
-xcopy /Y "$(SolutionDir)\ressources" "$(OutDir)\ressources"</Command>
+xcopy /Y "$(SolutionDir)\ressources" "$(OutDir)\ressources"
+mkdir "$(OutDir)\Cars"
+xcopy /Y "$(SolutionDir)\Cars" "$(OutDir)\Cars"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -137,6 +143,7 @@ xcopy /Y "$(SolutionDir)\ressources" "$(OutDir)\ressources"</Command>
     <ClInclude Include="Obstacle.h" />
     <ClInclude Include="SFMLDebugDraw.h" />
     <ClInclude Include="SpriteGameObject.h" />
+    <ClInclude Include="StartPos.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="TextureLoader.h" />
     <ClInclude Include="TextureNotFoundException.h" />

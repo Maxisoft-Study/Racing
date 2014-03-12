@@ -8,10 +8,19 @@ public:
 	~Checkpoint(void);
 	const virtual GameObjectTypes getGType(void) const final;
 
-	inline const std::string getName() const{
+	inline const std::string& getName() const{
 		return name;
 	}
+
+	bool operator<(const Checkpoint& c)const{ return name.compare(c.getName()) < 0; }
+
 private:
 	std::string name;
+};
+
+
+struct CheckpointPtrComp
+{
+	bool operator()(const Checkpoint* lhs, const Checkpoint* rhs) const  { return lhs->getName().compare(rhs->getName()) < 0; }
 };
 

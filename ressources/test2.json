@@ -137,6 +137,56 @@
          "width":30,
          "x":0,
          "y":0
+        },
+		{
+         "height":30,
+         "name":"Checkpoint",
+         "objects":[
+                {
+                 "height":606,
+                 "name":"3",
+                 "properties":
+                    {
+
+                    },
+                 "type":"checkpoint",
+                 "visible":true,
+                 "width":842,
+                 "x":6176,
+                 "y":1285
+                }, 
+                {
+                 "height":791,
+                 "name":"1",
+                 "properties":
+                    {
+
+                    },
+                 "type":"checkpoint",
+                 "visible":true,
+                 "width":952,
+                 "x":6239,
+                 "y":4109
+                }, 
+                {
+                 "height":891,
+                 "name":"2",
+                 "properties":
+                    {
+
+                    },
+                 "type":"checkpoint",
+                 "visible":true,
+                 "width":1300,
+                 "x":4591,
+                 "y":4976
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "width":30,
+         "x":0,
+         "y":0
         }],
  "orientation":"orthogonal",
  "properties":

@@ -137,9 +137,6 @@
     <ClInclude Include="GroundContactHandler.h">
       <Filter>Fichiers d%27en-tête\GameBase</Filter>
     </ClInclude>
-    <ClInclude Include="Game.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
     <ClInclude Include="TextureNotFoundException.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
@@ -147,6 +144,12 @@
       <Filter>Fichiers d%27en-tête\GameBase</Filter>
     </ClInclude>
     <ClInclude Include="Updatable.h">
+      <Filter>Fichiers d%27en-tête\GameBase</Filter>
+    </ClInclude>
+    <ClInclude Include="StartPos.h">
+      <Filter>Fichiers d%27en-tête\GameBase\Car</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
       <Filter>Fichiers d%27en-tête\GameBase</Filter>
     </ClInclude>
   </ItemGroup>
@@ -211,9 +214,6 @@
     <ClCompile Include="GConst.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="Game.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
     <ClCompile Include="TileMap.cpp">
       <Filter>Fichiers sources\GameBase</Filter>
     </ClCompile>
@@ -221,6 +221,9 @@
       <Filter>Fichiers sources\GameBase</Filter>
     </ClCompile>
     <ClCompile Include="BarrierLimit.cpp">
+      <Filter>Fichiers sources\GameBase</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
       <Filter>Fichiers sources\GameBase</Filter>
     </ClCompile>
   </ItemGroup>

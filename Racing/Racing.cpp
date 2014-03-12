@@ -10,6 +10,7 @@
 #include "CheckPointContactHandler.h"
 #include "GroundContactHandler.h"
 #include "InGameOverlay.h"
+#include "Game.h"
 
 
 #ifdef _DEBUG_DRAW
@@ -333,13 +334,18 @@ int main(int argc, char** argv)
 
 	InGameOverlay overlay(window, &testcar);
 
+
+	LOG_DEBUG << "MASSSSSSSSSSSSSSSSSSS" << testcar.getBody()->GetMass();
+
+	//Game game("1");
+
 	const CarControlKeysDef controls(racing::CONFIG["controls"].as<CarControlKeysDef>());
 	CarControler carcontroler(&testcar, controls);
 	
 	GameContactListener* contactlistener = new GameContactListener;
 	world->SetContactListener(contactlistener);
 
-	std::shared_ptr<CheckpointContactHandler> checkpointlistener(new CheckpointContactHandler);
+	std::shared_ptr<CheckpointContactHandler> checkpointlistener(new CheckpointContactHandler(lvl));
 	contactlistener->add(checkpointlistener);
 	
 	std::shared_ptr<GroundContactHandler> groundlistener(new GroundContactHandler);
@@ -485,6 +491,7 @@ int main(int argc, char** argv)
 		//mise a jours des horloges
 		processingClock.restart();
 		sf::Time elapsed(clock.restart());
+
 		float elapsedassecond = elapsed.asSeconds();
 
 		//mise a jour du monde (box2d)

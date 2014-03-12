@@ -94,7 +94,7 @@ bool Level::load(const std::string &jsonfilename, b2World* world)
 						sf::Vector2u(static_cast<uint>(jsonobject.get<uint>("width") / racing::BOX2D_METERS_TO_PIXEL),
 							static_cast<uint>(jsonobject.get<uint>("height") / racing::BOX2D_METERS_TO_PIXEL)));
 
-					checkpoints.push_back(newcp);
+					checkpoints.emplace(newcp);
 				}
 				else if (objecttype == "start")
 				{
@@ -118,9 +118,6 @@ bool Level::load(const std::string &jsonfilename, b2World* world)
 		}
 	}
 	LOG_DEBUG << startPos.size();
-
-	//sort de la liste des checkpoints en fonction de leurs nom
-	std::sort(begin(checkpoints), end(checkpoints), [](const Checkpoint* left, const Checkpoint* right) { return left->getName().compare(right->getName()); });
 
 	for (auto &tileset : pt.get_child("tilesets"))
 	{
@@ -194,8 +191,6 @@ bool Level::load(const std::string &jsonfilename, b2World* world)
 #ifdef DISABLETERRAIN
 			if (data && data != 38)
 			{
-				LOG_DEBUG << currDef->tilewidth;
-				LOG_DEBUG << currDef->tileheight;
 				groundmatrix(j, i) = new Ground(world, position, currDef->tilewidth, currDef->tileheight);
 			}
 			else
@@ -203,7 +198,6 @@ bool Level::load(const std::string &jsonfilename, b2World* world)
 				groundmatrix(j, i) = nullptr;
 			}
 #else
-			LOG_DEBUG << data;
 			groundmatrix(j, i) = new Ground(world, position, currDef->tilewidth, currDef->tileheight, !data ? 0.95f : 1.f);
 #endif // DEBUG_DEBUG_DRAW		
 			k += 1;
@@ -223,4 +217,28 @@ const TileSetDef* Level::searchForTileSetDef(const int id) const
 		}
 	}
 	return begin(tilesetdefs)._Ptr;
+}
+
+
+const Checkpoint* Level::getNextCheckpoint(Checkpoint* cp) const
+{
+	auto res (checkpoints.find(cp));
+	if (res == end(checkpoints)){
+		return nullptr;
+	}
+	++res;
+	if (res == end(checkpoints)){
+		return nullptr;
+	}
+	return *res;
+}
+
+
+const Checkpoint* Level::getFirstCheckpoint() const
+{
+	const auto ret = checkpoints.begin();
+	if (ret == end(checkpoints)){
+		return nullptr;
+	}
+	return *ret;
 }

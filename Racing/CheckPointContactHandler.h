@@ -11,6 +11,10 @@ class CheckpointContactHandler : public ContactListenerHandler
 
 public:
 
+	CheckpointContactHandler(const Level& lvl) : ContactListenerHandler(), level(lvl)
+	{
+	}
+
 	virtual bool BeginContact(b2Contact* contact, BoxGameObject* A, BoxGameObject* B) final
 	{
 		Wheel* wheel = nullptr;
@@ -41,9 +45,28 @@ public:
 			return false;
 		}
 
-		savedcheckpoints[wheel->getCar()].emplace(cp);
+		auto& checkpoints = savedcheckpoints[wheel->getCar()];
+		if (checkpoints.empty()){
+			const Checkpoint* comparecp = level.getFirstCheckpoint();
+			if (comparecp == cp){ // on regarde si le checkpoint cp est bien le premier de la liste
+				LOG_DEBUG << "First checkpoint OK";
+				checkpoints.emplace(cp);
+				return true;
+			}
+			return false;
+		}
 
-		return true;
+		auto endit = checkpoints.rbegin();
+		const Checkpoint* comparecp = level.getNextCheckpoint(*endit);
+
+		if (endit != checkpoints.rend() && comparecp == cp){ // on regarde si le checkpoint cp est bien le suivant de la liste
+			LOG_DEBUG << "checkpoint OK";
+			checkpoints.emplace(cp);
+			return true;
+		}
+		
+		return false;
+		
 	}
 
 	//////////////////////////////////////////////////////////////////////////
@@ -58,5 +81,6 @@ private:
 	//////////////////////////////////////////////////////////////////////////
 	/// Sauvegarde des checkpoints par voiture
 	//////////////////////////////////////////////////////////////////////////
-	std::unordered_map<const Car*, std::set<const Checkpoint*>> savedcheckpoints;
+	std::unordered_map<const Car*, std::set<Checkpoint*, CheckpointPtrComp>> savedcheckpoints;
+	const Level level;
 };
