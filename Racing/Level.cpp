@@ -48,7 +48,7 @@ void Level::draw(sf::RenderTarget& target, sf::RenderStates states) const
 
 }
 
-bool Level::load(const std::string &jsonfilename, b2World* world)
+bool Level::load(const std::string &jsonfilename, b2World* world, boost::filesystem::path path)
 {
 
 	boost::property_tree::ptree pt;
@@ -211,7 +211,7 @@ const TileSetDef* Level::searchForTileSetDef(const int id) const
 {
 	for (auto it = begin(tilesetdefs); it != end(tilesetdefs); ++it)
 	{
-		if (id < it->firstgid)
+		if (static_cast<uint>(id) < it->firstgid)
 		{
 			return it == begin(tilesetdefs) ?  it._Ptr : (it - 1)._Ptr;
 		}
