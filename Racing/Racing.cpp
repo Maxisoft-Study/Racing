@@ -259,11 +259,11 @@ int main(int argc, char** argv)
 	//debugwindow.setVerticalSyncEnabled(true);
 
 	/* Initialize font */
-	sf::Font mainFont;
+	/*sf::Font mainFont;
 	if (!mainFont.loadFromFile("ressources\\Franchise-Bold-hinted.ttf")) // Set path to your font
 	{
 		return 1;
-	}
+	}*/
 	/* Initialize debug text */
 	sf::Text fpsCounter;
 	fpsCounter.setFont(mainFont);
@@ -328,6 +328,7 @@ int main(int argc, char** argv)
 	//construction voitures
 	auto startPos = lvl.getStartPos(0);
 	Car testcar(world, "ressources/voituretest.png", startPos.pos.x, startPos.pos.y, startPos.angle);
+	testcar.setRoundCoordinate(true);
 	auto startPos1 = lvl.getStartPos(1);
 	Car testcar2(world, "ressources/voituretest.png", startPos1.pos.x, startPos1.pos.y, startPos1.angle);
 

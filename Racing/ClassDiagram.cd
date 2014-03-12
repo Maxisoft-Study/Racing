@@ -92,7 +92,7 @@
       <Method Name="Level" Hidden="true" />
     </Members>
     <TypeIdentifier>
-      <HashCode>CACAIAAEQIAAAAAAAAICAAAAAAAAAAQBAABgAAQAgAo=</HashCode>
+      <HashCode>CACAIAAEQIAAAAAAAAICAAAAAAIgAAQBAABgAAQAgAo=</HashCode>
       <FileName>Level.h</FileName>
     </TypeIdentifier>
   </Class>
@@ -111,7 +111,7 @@
       </Path>
     </InheritanceLine>
     <TypeIdentifier>
-      <HashCode>AAAAAAAEhIQAAAAgAAYAAAAAAAAAQAAhAAAAEAQEIAI=</HashCode>
+      <HashCode>AgAAAAAEhIQAAAAgAAYAAAAAAAAAQAABAAAAEAQEIAI=</HashCode>
       <FileName>Car.h</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -224,7 +224,7 @@
   <Class Name="CheckpointContactHandler">
     <Position X="17.25" Y="7" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAACAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAACAAAAAAAAgAAAAgAAAAAAAAEAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>CheckPointContactHandler.h</FileName>
     </TypeIdentifier>
   </Class>
@@ -307,7 +307,7 @@
       <Method Name="Checkpoint" Hidden="true" />
     </Members>
     <TypeIdentifier>
-      <HashCode>AAAAAAAEAAAAAgAAAAAAAAAAAAAEAEAAAAAEAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAEAAAAAgAAAAAAAAAAAAAEAEAAAAAkAAAAAAA=</HashCode>
       <FileName>Checkpoint.h</FileName>
     </TypeIdentifier>
   </Class>
