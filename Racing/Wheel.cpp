@@ -47,16 +47,9 @@ void Wheel::update(float delta)
 		if (car_ptr->getlastControl().rotation) // l'utilisateur veut tourner.
 		{
 			float angle = car_ptr->getlastControl().rotation * 1.55f * delta;
-
 			angle += getBody()->GetAngle();
-
-			if (std::abs(angle - carangle) <= car_ptr->getMaxFrontWheelsAngle()) // verification de l'angle max que peut avoir un pneu par rapport a la voiture
-			{
-				getBody()->SetTransform(getBody()->GetPosition(), angle);
-			}
-			else {
-				//getBody()->SetTransform(getBody()->GetPosition(), carangle + (angle - carangle > 0) ? car_ptr->getMaxFrontWheelsAngle() : -car_ptr->getMaxFrontWheelsAngle());
-			}
+			getBody()->SetTransform(getBody()->GetPosition(), angle);
+			
 		}
 
 		//auto centrage des pneux

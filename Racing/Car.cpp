@@ -224,6 +224,8 @@ MixedGameObject(world, file),
 	leftfrontjoindef->Initialize(getBody(), tmpbody, tmpbody->GetWorldCenter());
 	leftfrontjoindef->enableMotor = true;
 	leftfrontjoindef->maxMotorTorque = 100;
+	leftfrontjoindef->lowerAngle = Utils::DegreeToRadian(-maxfrontwheelsangle);
+	leftfrontjoindef->upperAngle = Utils::DegreeToRadian(maxfrontwheelsangle);
 	wheelsJoints[Wheel::FRONTLEFT] = world->CreateJoint(leftfrontjoindef);
 	delete leftfrontjoindef;
 
@@ -232,6 +234,8 @@ MixedGameObject(world, file),
 	rightfrontjoindef->Initialize(getBody(), tmpbody, tmpbody->GetWorldCenter());
 	rightfrontjoindef->enableMotor = true;
 	rightfrontjoindef->maxMotorTorque = 100;
+	rightfrontjoindef->lowerAngle = Utils::DegreeToRadian(-maxfrontwheelsangle);
+	rightfrontjoindef->upperAngle = Utils::DegreeToRadian(maxfrontwheelsangle);
 	wheelsJoints[Wheel::FRONTRIGHT] = world->CreateJoint(rightfrontjoindef);
 	delete rightfrontjoindef;
 
