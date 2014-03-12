@@ -54,6 +54,9 @@ void Wheel::update(float delta)
 			{
 				getBody()->SetTransform(getBody()->GetPosition(), angle);
 			}
+			else {
+				//getBody()->SetTransform(getBody()->GetPosition(), carangle + (angle - carangle > 0) ? car_ptr->getMaxFrontWheelsAngle() : -car_ptr->getMaxFrontWheelsAngle());
+			}
 		}
 
 		//auto centrage des pneux
@@ -78,7 +81,7 @@ void Wheel::update(float delta)
 		{
 			const Ground* ground = searchMaxGroundFriction();
 			const float friction = ground ? ground->FrictionCoeff() : 1.f;
-			//LOG_DEBUG << friction << " ptr: " << ground;
+			//LOG_DEBUG << friction << "ptr: " << ground;
 			b2Vec2 force(0.f, car_ptr->engine->getBaseImpulseY() * 0.7f * delta * car_ptr->getlastControl().direction);
 			force = Utils::RotateVect(force, getBody()->GetAngle());
 			getBody()->ApplyLinearImpulse(force, getBody()->GetWorldCenter(), true);

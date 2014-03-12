@@ -315,8 +315,8 @@ int main(int argc, char** argv)
 		racing::settings
 		);
 
-	window.setVerticalSyncEnabled(true);
-	//window.setFramerateLimit(30);
+	//window.setVerticalSyncEnabled(true);
+	window.setFramerateLimit(60);
 	EVENTS_HANDLERS.push_back(new BaseEventHandler(&window));
 
 	
@@ -334,8 +334,6 @@ int main(int argc, char** argv)
 
 	InGameOverlay overlay(window, &testcar);
 
-
-	LOG_DEBUG << "MASSSSSSSSSSSSSSSSSSS" << testcar.getBody()->GetMass();
 
 	Game* game = new Game("1");
 
