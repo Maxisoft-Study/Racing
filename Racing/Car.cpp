@@ -118,10 +118,10 @@ maxfrontwheelsangle(Utils::DegreeToRadian(38)), lastspeed(-1)
 	//on met a jour les angles manuellement
 	auto tmpangle = Utils::DegreeToRadian(angle);
 	getBody()->SetTransform(getBody()->GetPosition(), tmpangle);
-	for (uint i = 0; i < Wheel::WheelType::Count; ++i)
+	for (Wheel* curr : wheels)
 	{
-		Wheel* curr = wheels[i];
 		curr->getBody()->SetTransform(curr->getBody()->GetPosition(), tmpangle);
+
 	}
 
 }
@@ -244,10 +244,10 @@ MixedGameObject(world, file),
 	//on met a jour les angles manuellement
 	auto tmpangle = Utils::DegreeToRadian(startpos.angle);
 	getBody()->SetTransform(getBody()->GetPosition(), tmpangle);
-	for (uint i = 0; i < Wheel::WheelType::Count; ++i)
+	for (Wheel* curr : wheels)
 	{
-		Wheel* curr = wheels[i];
 		curr->getBody()->SetTransform(curr->getBody()->GetPosition(), tmpangle);
+
 	}
 
 }
@@ -259,9 +259,8 @@ MixedGameObject(world, file),
 
 Car::~Car(void)
 {
-	for (uint i = 0; i < Wheel::Count; ++i)
+	for (Wheel* curr : wheels)
 	{
-		Wheel* curr = wheels[i];
 		delete curr;
 	}
 	delete engine;
