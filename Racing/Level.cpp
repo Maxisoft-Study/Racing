@@ -277,7 +277,7 @@ bool Level::load(const std::string &jsonfilename, b2World* world, boost::filesys
 
 
 	//remplir la matrice d'objets ground
-	groundmatrix.resize(lenght.x, lenght.y);
+	groundmatrix.resize(lenght.y, lenght.x);
 
 	for (unsigned i = 0, k = 0; i < lenght.x; ++i)
 		for (unsigned j = 0; j < lenght.y; ++j)
