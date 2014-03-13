@@ -32,7 +32,7 @@ maxfrontwheelsangle(Utils::DegreeToRadian(38)), lastspeed(-1)
 	for (YAML::Node polygon : caryaml["polygons"])
 	{
 		//remplis le vector de points
-		for (YAML::Node point : polygon)
+		for (YAML::Node& point : polygon)
 		{
 			parsedpolygonpoints.emplace_back(scale * point.as<b2Vec2>());
 		}
@@ -166,7 +166,7 @@ MixedGameObject(world, file),
 		b2FixtureDef fixtureDef;
 		fixtureDef.shape = dynamicBox;
 		fixtureDef.density = 2.68f;
-		fixtureDef.friction = 0.5f;
+		fixtureDef.friction = 0.1f;
 		fixtureDef.filter.categoryBits = BoxGameObject::CAR_MASK;
 		//fixtureDef->filter.maskBits |= BoxGameObject::CHECKPOINT_MASK;
 

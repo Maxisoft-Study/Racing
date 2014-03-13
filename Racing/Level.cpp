@@ -30,6 +30,29 @@ struct rangecmp {
 typedef std::map<range, TileSetDef*, rangecmp> rangemap;
 // END UTILS RANGE CONTENER
 
+
+//Utils fonction
+std::vector<std::vector<b2Vec2>> loadPolygons(boost::filesystem::path& p, const float scale)
+{
+	auto pstr = p.generic_string();
+	YAML::Node node = YAML::LoadFile(pstr);
+	std::vector<std::vector<b2Vec2>> ret;
+	for (YAML::Node& polygon : node["polygons"])
+	{
+		std::vector<b2Vec2> parsedpolygonpoints;
+		//remplis le vector de points
+		for (YAML::Node& point : polygon)
+		{
+			parsedpolygonpoints.emplace_back(scale * point.as<b2Vec2>());
+		}
+
+		ret.push_back(parsedpolygonpoints);
+	}
+	return ret;
+}
+//
+
+
 Level::Level(void)
 {
 }
@@ -101,6 +124,7 @@ std::unordered_map<int, boost::filesystem::path> Level::listYmlGroundDefFiles(bo
 
 bool Level::load(const std::string &jsonfilename, b2World* world, boost::filesystem::path& p)
 {
+	std::map<boost::filesystem::path, std::vector<std::vector<b2Vec2>>> polygonsmap;
 	rangemap tiledefmap;
 	auto ymlgroundDef = listYmlGroundDefFiles(p);
 
@@ -265,9 +289,35 @@ bool Level::load(const std::string &jsonfilename, b2World* world, boost::filesys
 				{
 					continue;
 				}
-				const TileSetDef* currDef = tiledefmap[make_range(data, data)];
 
+				const TileSetDef* currDef = tiledefmap[make_range(data, data)];
+				
 				auto position = Utils::SfVectPixelToBox2DVect({ static_cast<float>(j * currDef->tilewidth), static_cast<float>(i * currDef->tilewidth) });
+				auto coeff = frictionTable[data];
+				coeff = coeff ? coeff : 1.f; //default value
+
+				//on cherche si il existe un fichier yaml qui definit les polygones
+				auto it = ymlgroundDef.find(data);
+				if (it != end(ymlgroundDef)) //  trouvé
+				{
+					const float scale = currDef->tilewidth / racing::BOX2D_METERS_TO_PIXEL;
+					boost::filesystem::path path = it->second;
+					//on regarde si les polygones sont deja dans le cache
+					auto& polygons = polygonsmap[path];
+					if (polygons.empty()) //construct
+					{
+						auto newpolygons = loadPolygons(path, scale);
+						polygons.assign(begin(newpolygons), end(newpolygons));
+					}
+					groundmatrix(j, i).push_back(new Ground(world, position, polygons, currDef->tilewidth, currDef->tileheight, coeff));
+
+				}
+				else
+				{
+					groundmatrix(j, i).push_back(new Ground(world, position, currDef->tilewidth, currDef->tileheight, coeff));
+				}
+
+				
 #ifdef DISABLETERRAIN
 				if (data && data != 38)
 				{
@@ -278,9 +328,8 @@ bool Level::load(const std::string &jsonfilename, b2World* world, boost::filesys
 					groundmatrix(j, i) = nullptr;
 				}
 #else
-				auto coeff = frictionTable[data];
-				coeff = coeff ? coeff : 1.f; //default value
-				groundmatrix(j, i).push_back(new Ground(world, position, currDef->tilewidth, currDef->tileheight, coeff));
+
+				
 #endif // DISABLETERRAIN		
 			}
 
