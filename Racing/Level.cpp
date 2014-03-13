@@ -195,6 +195,7 @@ bool Level::load(const std::string &jsonfilename, b2World* world, boost::filesys
 	//sort de la liste des tuiles defs en fonction de l'id des tuiles
 	std::sort(begin(tilesetdefs), end(tilesetdefs), [](const TileSetDef left, const TileSetDef right) { return left.firstgid < right.firstgid; });
 
+	//ajout dans la map pour une recherche rapide (log n)
 	for (auto it = begin(tilesetdefs); it != end(tilesetdefs); ++it)
 	{
 		auto nextit = it + 1;
