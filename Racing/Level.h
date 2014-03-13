@@ -94,5 +94,4 @@ public:
 	inline const StartPos& getStartPos(const int i) const { return startPos[i]; }
 
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
-	const TileSetDef* searchForTileSetDef(const int id) const;
 };

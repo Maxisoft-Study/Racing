@@ -8,6 +8,28 @@
 
 using namespace boost::filesystem;
 
+//UTILS RANGE CONTENER
+typedef std::pair<int, int> range;
+range make_range(int lower, int upper) {
+	if (upper < lower) {
+		return std::make_pair(upper, lower);
+	}
+	return std::make_pair(lower, upper);
+}
+
+
+
+struct rangecmp {
+	bool operator()(range const& a, range const& b) {
+		if (a.second < b.first) return true;
+		return false;
+	}
+};
+
+
+typedef std::map<range, TileSetDef*, rangecmp> rangemap;
+// END UTILS RANGE CONTENER
+
 Level::Level(void)
 {
 }
@@ -79,7 +101,7 @@ std::unordered_map<int, boost::filesystem::path> Level::listYmlGroundDefFiles(bo
 
 bool Level::load(const std::string &jsonfilename, b2World* world, boost::filesystem::path& p)
 {
-
+	rangemap tiledefmap;
 	auto ymlgroundDef = listYmlGroundDefFiles(p);
 
 	YAML::Node frictionyaml = YAML::LoadFile((p / "friction.yml").string());
@@ -94,7 +116,7 @@ bool Level::load(const std::string &jsonfilename, b2World* world, boost::filesys
 	std::vector<std::vector<int>> tilemapdata;
 	int tilelayer = 0;
 
-	//Parse 
+	//Parse layers
 	for (auto &layers : pt.get_child("layers"))
 	{
 		std::string layertype = layers.second.get<std::string>("type");
@@ -151,7 +173,6 @@ bool Level::load(const std::string &jsonfilename, b2World* world, boost::filesys
 			}
 		}
 	}
-	LOG_DEBUG << startPos.size();
 
 	for (auto &tileset : pt.get_child("tilesets"))
 	{
@@ -173,6 +194,25 @@ bool Level::load(const std::string &jsonfilename, b2World* world, boost::filesys
 
 	//sort de la liste des tuiles defs en fonction de l'id des tuiles
 	std::sort(begin(tilesetdefs), end(tilesetdefs), [](const TileSetDef left, const TileSetDef right) { return left.firstgid < right.firstgid; });
+
+	for (auto it = begin(tilesetdefs); it != end(tilesetdefs); ++it)
+	{
+		auto nextit = it + 1;
+		int min = it->firstgid;
+		int max;
+		if (nextit == end(tilesetdefs))
+		{
+			max = INT_MAX;
+		}
+		else
+		{
+			max = nextit->firstgid - 1;
+		}
+		tiledefmap[make_range(min, max)] = it._Ptr;
+	}
+
+
+
 
 	for (auto layerdata : tilemapdata)
 	{
@@ -224,7 +264,7 @@ bool Level::load(const std::string &jsonfilename, b2World* world, boost::filesys
 				{
 					continue;
 				}
-				const TileSetDef* currDef = searchForTileSetDef(data);
+				const TileSetDef* currDef = tiledefmap[make_range(data, data)];
 
 				auto position = Utils::SfVectPixelToBox2DVect({ static_cast<float>(j * currDef->tilewidth), static_cast<float>(i * currDef->tilewidth) });
 #ifdef DISABLETERRAIN
@@ -248,19 +288,6 @@ bool Level::load(const std::string &jsonfilename, b2World* world, boost::filesys
 		}
 
 	return true;
-}
-
-
-const TileSetDef* Level::searchForTileSetDef(const int id) const
-{
-	for (auto it = begin(tilesetdefs); it != end(tilesetdefs); ++it)
-	{
-		if (static_cast<uint>(id) < it->firstgid)
-		{
-			return it == begin(tilesetdefs) ?  it._Ptr : (it - 1)._Ptr;
-		}
-	}
-	return begin(tilesetdefs)._Ptr;
 }
 
 
