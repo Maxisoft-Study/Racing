@@ -7,7 +7,6 @@
 #include "TextureLoader.h"
 #include "Level.h"
 #include "GameContactListener.h"
-#include "CheckPointContactHandler.h"
 #include "GroundContactHandler.h"
 #include "InGameOverlay.h"
 #include "Game.h"
@@ -229,8 +228,8 @@ void setup_globals(void)
 		{ "Pause", sf::Keyboard::Pause },
 		{ "KeyCount", sf::Keyboard::KeyCount } };
 
-		//charge le tout dans la bimap
-		racing::STRING_TO_SFML_KEYBOARD_KEY.left.insert(string_to_sfml_keyboard_key.begin(), string_to_sfml_keyboard_key.end());
+	//charge le tout dans la bimap
+	racing::STRING_TO_SFML_KEYBOARD_KEY.left.insert(string_to_sfml_keyboard_key.begin(), string_to_sfml_keyboard_key.end());
 }
 
 
@@ -242,13 +241,13 @@ int main(int argc, char** argv)
 
 	sf::Clock clock;
 
-	
+
 	//testcar.rotate(90);
 	//testcar.move(sf::Vector2f(1280/2, 600));
-	
+
 	sf::RenderWindow window(
-		racing::VIDEO_MODE, 
-		"Racing", 
+		racing::VIDEO_MODE,
+		"Racing",
 		racing::CONFIG["window"]["fullScreen"].as<bool>() ? sf::Style::Fullscreen : sf::Style::Titlebar | sf::Style::Close,
 		racing::settings
 		);
@@ -259,7 +258,7 @@ int main(int argc, char** argv)
 	EVENTS_HANDLERS.push_back(basehandler);
 
 
-	Game* game = new Game("1");
+	Game* game = new Game("1", window);
 
 	auto maincar = game->createCar("Lotus Evora", true);
 	game->createCarControler(maincar, racing::CONFIG["controls"].as<CarControlKeysDef>());
@@ -272,8 +271,8 @@ int main(int argc, char** argv)
 		return 1;
 	}
 	auto &world = game->getWorld();
-		/* Create window */
-		sf::RenderWindow debugwindow(sf::VideoMode(1024, 768, 32), "Box2D - SFML Debug Draw Test");
+	/* Create window */
+	sf::RenderWindow debugwindow(sf::VideoMode(1024, 768, 32), "Box2D - SFML Debug Draw Test");
 	float debugviewzoom = 1;
 	//debugwindow.setVerticalSyncEnabled(true);
 
@@ -330,7 +329,7 @@ int main(int argc, char** argv)
 		sf::Event event;
 		while (window.pollEvent(event))
 		{
-			for(auto handler : EVENTS_HANDLERS)
+			for (auto handler : EVENTS_HANDLERS)
 			{
 				if (handler->on_event(event))
 				{
@@ -445,7 +444,7 @@ int main(int argc, char** argv)
 		fpsCounter.setString(sstream.str());
 		debugwindow.draw(fpsCounter);
 		sstream.str("");
-		
+
 
 		if (helpTextEnabled)
 		{

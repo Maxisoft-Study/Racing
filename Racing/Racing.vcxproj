@@ -129,7 +129,6 @@ xcopy /Y  /E "$(SolutionDir)\Cars" "$(OutDir)\Cars"</Command>
     <ClInclude Include="CarControler.h" />
     <ClInclude Include="CarEngine.h" />
     <ClInclude Include="Checkpoint.h" />
-    <ClInclude Include="CheckPointContactHandler.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameContactListener.h" />
     <ClInclude Include="EventHandler.h" />

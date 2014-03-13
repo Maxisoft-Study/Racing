@@ -11,7 +11,7 @@ class Wheel:
 	friend class Car;
 public:
 	////////////////////////////////////////////////////////////
-	/// \brief Enumeration des pneux
+	/// \brief Enumeration des pneus
 	///
 	////////////////////////////////////////////////////////////
 	enum WheelType : unsigned char
@@ -29,7 +29,7 @@ public:
 	const WheelType wheeltype;
 	const virtual GameObjectTypes getGType(void) const final;
 	const Ground* searchMaxGroundFriction(void) const;
-	inline const Car* getCar(void) const{ return car_ptr; }
+	inline Car* getCar(void) const{ return car_ptr; }
 	inline void addGround(const Ground* ground) { grounds.emplace(ground); }
 	inline bool removeGround(const Ground* ground) 
 	{
@@ -48,7 +48,8 @@ protected:
 	b2Vec2 getLateralVelocity(void) const;
 	void killOrthogonalVelocity(void);
 private:
-	const Car* const car_ptr;
+	inline b2Joint* getMainJoint(void) const { return car_ptr->wheelsJoints[wheeltype]; }
+	Car* const car_ptr;
 	std::multiset<const Ground*> grounds;
 };
 

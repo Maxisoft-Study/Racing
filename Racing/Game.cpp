@@ -5,7 +5,7 @@
 using namespace boost::filesystem;
 
 
-Game::Game(const std::string& levelname) : world({ 0, 0 }), overlay(nullptr), groundlistener(new GroundContactHandler), pause(false)
+Game::Game(const std::string& levelname, sf::RenderWindow& window) : world({ 0, 0 }), mainwindow(window), overlay(nullptr), groundlistener(new GroundContactHandler), pause(false)
 {
 	world.SetAllowSleeping(true);
 	world.SetContactListener(&contactlistener);
@@ -22,10 +22,9 @@ Game::Game(const std::string& levelname) : world({ 0, 0 }), overlay(nullptr), gr
 		throw std::exception((std::string("pas de repertoire : Levels/") + levelname).c_str());
 	}
 	level.load((p/"tiled.json").generic_string(), &world, p);
-	checkpointContactHandler = contact_listner_ptr(new CheckpointContactHandler(&level));
+	checkpointContactHandler = contact_listner_ptr(new CheckpointContactHandler(this, &level));
 	contactlistener.add(checkpointContactHandler);
 	contactlistener.add(groundlistener);
-	
 }
 
 
@@ -90,6 +89,13 @@ void Game::setMainCar(Car* carparam)
 	{
 		throw std::exception("la voiture n'a pas été trouver dans le jeux.");
 	}
+	if (overlay)
+	{
+		delete overlay;
+	}
+
+	overlay = new InGameOverlay(mainwindow, carparam);
+
 	mainCar = carparam;
 	mainCar->setRoundCoordinate(true);
 }

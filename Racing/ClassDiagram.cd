@@ -18,17 +18,14 @@
       <Method Name="IsTypeOf" Hidden="true" />
     </Members>
     <TypeIdentifier>
-      <HashCode>ABAAAAAEAABAAAAAAAAAAAAAAAAAAAAIAAAAAAIAAAA=</HashCode>
+      <HashCode>ABAAAAAEAABAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAA=</HashCode>
       <FileName>GameObject.h</FileName>
     </TypeIdentifier>
-    <ShowAsAssociation>
-      <Field Name="game" />
-    </ShowAsAssociation>
   </Class>
   <Class Name="Game">
     <Position X="7.75" Y="0.75" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>AAAAEAAQAAAAAgAEAAIAgBBAAAmAAAGAACKCAAAEIAA=</HashCode>
+      <HashCode>AAAAEAAQAAAAggAEAAIAgBBAAAmAAAGAACKCAABEIAA=</HashCode>
       <FileName>Game.h</FileName>
     </TypeIdentifier>
   </Class>
@@ -92,7 +89,7 @@
       <Method Name="Level" Hidden="true" />
     </Members>
     <TypeIdentifier>
-      <HashCode>CACAIAAEQIAAAAAAAAICAAAAAAIgAAUBAABgAAQAgAo=</HashCode>
+      <HashCode>CACCIAAEQIAAAAAAAAICAAAAAAIgAAUBAABgAAQAgAI=</HashCode>
       <FileName>Level.h</FileName>
     </TypeIdentifier>
   </Class>
@@ -213,13 +210,6 @@
       <FileName>GameContactListener.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="CheckpointContactHandler">
-    <Position X="17.25" Y="7" Width="2" />
-    <TypeIdentifier>
-      <HashCode>AAACAAAAAAAAgAAAAgAAAAAAAAEAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>CheckPointContactHandler.h</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="TextureLoader">
     <Position X="10" Y="9" Width="3" />
     <Members>
@@ -276,7 +266,7 @@
       </Enum>
     </NestedTypes>
     <TypeIdentifier>
-      <HashCode>AAAAAAAEAAQAAACAAAABAAAAAAAQAAIQAgAAIAAFAgI=</HashCode>
+      <HashCode>AAAAAAAEAAQAAACAAAABgAAAAAAQAAIQAgAAIAAFAgI=</HashCode>
       <FileName>Wheel.h</FileName>
     </TypeIdentifier>
   </Class>
@@ -308,6 +298,13 @@
     <TypeIdentifier>
       <HashCode>AAAAAAAEAAAAAAAAAAAAAAAAAAAAQAAAAEAAAAAAECA=</HashCode>
       <FileName>Ground.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CheckpointContactHandler">
+    <Position X="17.25" Y="7" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAgAAAAAAAAAAAAAEAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Game.h</FileName>
     </TypeIdentifier>
   </Class>
   <Struct Name="CarControl">

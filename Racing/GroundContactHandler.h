@@ -36,8 +36,6 @@ public:
 		{
 			return false;
 		}
-		LOG_DEBUG << "Added";
-
 		wheel->addGround(ground);
 		return true;
 	}
@@ -69,7 +67,6 @@ public:
 		{
 			return false;
 		}
-		LOG_DEBUG << "Removed";
 		wheel->removeGround(ground);
 
 		return true;

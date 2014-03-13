@@ -48,9 +48,14 @@ void Wheel::update(float delta)
 		if (car_ptr->getlastControl().rotation) // l'utilisateur veut tourner.
 		{
 			float angle = car_ptr->getlastControl().rotation * 1.55f * delta;
+			float angle2 = angle;
+			auto join = static_cast<b2RevoluteJoint*>(getMainJoint());
+			angle2 += join->GetJointAngle();
 			angle += getBody()->GetAngle();
-			getBody()->SetTransform(getBody()->GetPosition(), angle);
-			
+			if (std::abs(angle2) <= car_ptr->getMaxFrontWheelsAngle())
+			{
+				getBody()->SetTransform(getBody()->GetPosition(), angle);
+			}
 		}
 
 		//auto centrage des pneux
@@ -107,7 +112,6 @@ const Ground* Wheel::searchMaxGroundFriction(void) const
 		begin(grounds),
 		end(grounds),
 		[](const Ground* left, const Ground* right) { return left->FrictionCoeff() < right->FrictionCoeff(); });
-	LOG_DEBUG << (**ret).FrictionCoeff();
 	return ret == end(grounds) ? nullptr : *ret;
 }
 

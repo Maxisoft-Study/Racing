@@ -88,6 +88,7 @@ public:
 	
 	const Checkpoint* getFirstCheckpoint() const;
 	const Checkpoint* getNextCheckpoint(Checkpoint* cp) const;
+	inline int getCheckPointCount(void) const { return checkpoints.size(); }
 
 	inline const sf::Vector2u getRawLenght() const { return lenght; }
 	inline const sf::Vector2u getLenght() const { return sf::Vector2u(lenght.x * tileLenght.x, lenght.y * tileLenght.y); }

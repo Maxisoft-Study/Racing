@@ -10,5 +10,5 @@ public:
 protected:
 	GameObject();
 	virtual ~GameObject(void);
-	Game* game;
+
 };
