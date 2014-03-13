@@ -49,6 +49,6 @@ protected:
 	void killOrthogonalVelocity(void);
 private:
 	const Car* const car_ptr;
-	std::set<const Ground*> grounds;
+	std::multiset<const Ground*> grounds;
 };
 

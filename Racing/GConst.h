@@ -2,7 +2,7 @@
 #include "stdafx.h"
 #include "EventHandler.h"
 
-//#define _DEBUG_DRAW 
+#define _DEBUG_DRAW 
 //#define  DISABLETERRAIN
 
 namespace racing{

@@ -166,7 +166,7 @@ MixedGameObject(world, file),
 		b2FixtureDef fixtureDef;
 		fixtureDef.shape = dynamicBox;
 		fixtureDef.density = 2.68f;
-		fixtureDef.friction = 0.1f;
+		fixtureDef.friction = 0.5f;
 		fixtureDef.filter.categoryBits = BoxGameObject::CAR_MASK;
 		//fixtureDef->filter.maskBits |= BoxGameObject::CHECKPOINT_MASK;
 

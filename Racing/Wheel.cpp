@@ -12,6 +12,7 @@ wheeltype(type)
 	bodydef.type = b2_dynamicBody;
 	bodydef.position.Set(init_pos_x, init_pos_y);
 	bodydef.angle = Utils::RadianToDegree(angle);
+	bodydef.bullet = true;
 	body = world->CreateBody(&bodydef);
 	body->SetUserData(this);
 	b2PolygonShape dynamicBox;
@@ -106,6 +107,7 @@ const Ground* Wheel::searchMaxGroundFriction(void) const
 		begin(grounds),
 		end(grounds),
 		[](const Ground* left, const Ground* right) { return left->FrictionCoeff() < right->FrictionCoeff(); });
+	LOG_DEBUG << (**ret).FrictionCoeff();
 	return ret == end(grounds) ? nullptr : *ret;
 }
 

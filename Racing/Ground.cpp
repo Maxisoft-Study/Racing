@@ -33,9 +33,7 @@ Ground::Ground(b2World* world, const b2Vec2& pos, const uint tilewidth, const ui
 Ground::Ground(b2World* world, const b2Vec2& pos, std::vector<std::vector<b2Vec2>>& polygons, const uint tilewidth, const uint tileheight, const float friction) : BoxGameObject(world), frictionCoeff(friction)
 {
 	b2BodyDef bodydef;
-	auto halfwidth = tilewidth / racing::BOX2D_METERS_TO_PIXEL / 2;
-	auto halfheight = tileheight / racing::BOX2D_METERS_TO_PIXEL / 2;
-	bodydef.position.Set(pos.x /*+ halfwidth*/, pos.y /*+ halfheight*/);
+	bodydef.position.Set(pos.x, pos.y);
 
 	body = world->CreateBody(&bodydef);
 	body->SetUserData(this);
