@@ -118,9 +118,10 @@ void set_working_dir(char** argv)
 	boost::filesystem::current_path(full_path.remove_filename());
 }
 
+
 void setup_globals(void)
 {
-	racing::CONFIG = YAML::LoadFile("ressources/config.yml");
+	racing::CONFIG = YAML::LoadFile("config.yml");
 	racing::VIDEO_MODE = sf::VideoMode(racing::CONFIG["window"]["modeWidth"].as<uint>(), racing::CONFIG["window"]["modeHeight"].as<uint>());
 
 	const std::map<const std::string, const sf::Keyboard::Key> string_to_sfml_keyboard_key = {
@@ -241,9 +242,38 @@ int main(int argc, char** argv)
 
 	sf::Clock clock;
 
+	
+	//testcar.rotate(90);
+	//testcar.move(sf::Vector2f(1280/2, 600));
+	
+	sf::RenderWindow window(
+		racing::VIDEO_MODE, 
+		"Racing", 
+		racing::CONFIG["window"]["fullScreen"].as<bool>() ? sf::Style::Fullscreen : sf::Style::Titlebar | sf::Style::Close,
+		racing::settings
+		);
+
+	window.setVerticalSyncEnabled(true);
+	//window.setFramerateLimit(100);
+	auto basehandler = new BaseEventHandler(&window);
+	EVENTS_HANDLERS.push_back(basehandler);
+
+
+	Game* game = new Game("1");
+
+	auto maincar = game->createCar("Lotus Evora", true);
+	game->createCarControler(maincar, racing::CONFIG["controls"].as<CarControlKeysDef>());
+
+
 #ifdef _DEBUG_DRAW
-	/* Create window */
-	sf::RenderWindow debugwindow(sf::VideoMode(1024, 768, 32), "Box2D - SFML Debug Draw Test");
+	sf::Font mainFont;
+	if (!mainFont.loadFromFile("ressources/Franchise-Bold-hinted.ttf")) // Set path to your font
+	{
+		return 1;
+	}
+	auto &world = game->getWorld();
+		/* Create window */
+		sf::RenderWindow debugwindow(sf::VideoMode(1024, 768, 32), "Box2D - SFML Debug Draw Test");
 	float debugviewzoom = 1;
 	//debugwindow.setVerticalSyncEnabled(true);
 
@@ -251,7 +281,7 @@ int main(int argc, char** argv)
 	/*sf::Font mainFont;
 	if (!mainFont.loadFromFile("ressources\\Franchise-Bold-hinted.ttf")) // Set path to your font
 	{
-		return 1;
+	return 1;
 	}*/
 	/* Initialize debug text */
 	sf::Text fpsCounter;
@@ -278,7 +308,7 @@ int main(int argc, char** argv)
 	std::stringstream sstream;
 	/* Initialize SFML Debug Draw */
 	SFMLDebugDraw debugDraw(debugwindow);
-	world->SetDebugDraw(&debugDraw);
+	world.SetDebugDraw(&debugDraw);
 
 	/* Set initial flags for what to draw */
 	debugDraw.SetFlags(b2Draw::e_shapeBit); //Only draw shapes
@@ -286,33 +316,12 @@ int main(int argc, char** argv)
 	/* Mouse Joint */
 	b2MouseJoint* mouseJoint = nullptr;
 	b2BodyDef bodyDef;
-	b2Body* ground = world->CreateBody(&bodyDef); //This is not the body of the bounding box
+	b2Body* ground = world.CreateBody(&bodyDef); //This is not the body of the bounding box
 	//This body exists to serve as an anchor point for the mouse joint
 	bool helpTextEnabled = true;
 	std::vector<b2Body*> bodies;
 	sf::Clock deltaClock; //Clock used to measure FPS
 #endif // _DEBUG_DRAW
-
-	
-	//testcar.rotate(90);
-	//testcar.move(sf::Vector2f(1280/2, 600));
-	
-	sf::RenderWindow window(
-		racing::VIDEO_MODE, 
-		"Racing", 
-		racing::CONFIG["window"]["fullScreen"].as<bool>() ? sf::Style::Fullscreen : sf::Style::Titlebar | sf::Style::Close,
-		racing::settings
-		);
-
-	//window.setVerticalSyncEnabled(true);
-	window.setFramerateLimit(60);
-	EVENTS_HANDLERS.push_back(new BaseEventHandler(&window));
-
-
-	Game* game = new Game("1");
-
-	auto maincar = game->createCar("Lotus Evora", true);
-	game->createCarControler(maincar, racing::CONFIG["controls"].as<CarControlKeysDef>());
 
 
 	while (window.isOpen())
@@ -359,11 +368,11 @@ int main(int argc, char** argv)
 			}
 			else if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Num1)
 			{
-				bodies.push_back(createSquare(*world, debugwindow));
+				bodies.push_back(createSquare(world, debugwindow));
 			}
 			else if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Num2)
 			{
-				bodies.push_back(createCircle(*world, debugwindow));
+				bodies.push_back(createCircle(world, debugwindow));
 			}
 			else if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Subtract)
 			{
@@ -381,7 +390,7 @@ int main(int argc, char** argv)
 			{
 				if (!bodies.empty())
 				{
-					world->DestroyBody(bodies.back());
+					world.DestroyBody(bodies.back());
 					bodies.pop_back();
 				}
 			}
@@ -402,7 +411,7 @@ int main(int argc, char** argv)
 
 				// Query the world for overlapping shapes.
 				QueryCallback callback(mousePos);
-				world->QueryAABB(&callback, aabb);
+				world.QueryAABB(&callback, aabb);
 
 				if (callback.m_fixture)
 				{
@@ -412,7 +421,7 @@ int main(int argc, char** argv)
 					md.bodyB = body;
 					md.target = mousePos;
 					md.maxForce = 1000.0f * body->GetMass();
-					mouseJoint = (b2MouseJoint*)world->CreateJoint(&md);
+					mouseJoint = (b2MouseJoint*)world.CreateJoint(&md);
 					body->SetAwake(true);
 				}
 			}
@@ -423,7 +432,7 @@ int main(int argc, char** argv)
 			}
 			else if (event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left && mouseJoint != nullptr)
 			{
-				world->DestroyJoint(mouseJoint);
+				world.DestroyJoint(mouseJoint);
 				mouseJoint = nullptr;
 			}
 		}
@@ -442,44 +451,27 @@ int main(int argc, char** argv)
 		{
 			debugwindow.draw(helpText);
 		}
-		auto tmp = testcar.getBody()->GetWorldCenter();
+		auto tmp = maincar->getBody()->GetWorldCenter();
 		contentview.setCenter(sf::Vector2f(tmp.x * sfdd::SCALE, tmp.y * sfdd::SCALE));
 		contentview.zoom(debugviewzoom);
 		debugwindow.setView(contentview);
-		world->DrawDebugData();
+		world.DrawDebugData();
 
 		debugwindow.display();
 #endif // _DEBUG_DRAW
 
-		//mise a jours des horloges
-		sf::Time elapsed(clock.restart());
 
-		float elapsedassecond = elapsed.asSeconds();
-
-
-		game->update(elapsedassecond);
-
-		const b2Vec2 position(maincar->getBody()->GetWorldCenter());
-
+		game->update(clock.restart().asSeconds());
 		window.clear();
 
-		//calcule du centre. 
-		auto center = Utils::Box2DVectToSfVectPixel(position);
-
-		//utilise round afin d'avoir des coordonnées sans virgule (fait un décalage de sprite sinon)
-		center.x = std::round(center.x);
-		center.y = std::round(center.y);
-
-		//mise a jour de la vue
-		sf::View view = window.getDefaultView();
-		view.setCenter(center);
-		window.setView(view);
-
-		//lance l'affichage
+		//affiche le jeu
 		window.draw(*game);
 
+		//lance l'affichage
 		window.display();
 	}
+
+	delete basehandler;
 
 	return 0;
 }

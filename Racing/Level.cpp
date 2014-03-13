@@ -36,7 +36,7 @@ Level::~Level(void)
 
 void Level::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-	for (TileMap tm : tilemaps)
+	for (auto& tm : tilemaps)
 	{
 		target.draw(tm, states);
 	}
@@ -48,7 +48,7 @@ void Level::draw(sf::RenderTarget& target, sf::RenderStates states) const
 
 }
 
-bool Level::load(const std::string &jsonfilename, b2World* world, boost::filesystem::path path)
+bool Level::load(const std::string &jsonfilename, b2World* world, boost::filesystem::path& path)
 {
 
 	boost::property_tree::ptree pt;

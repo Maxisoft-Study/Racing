@@ -8,6 +8,8 @@ class Car;
 #include "CarControler.h"
 #include "GroundContactHandler.h"
 
+
+
 class Game : public virtual sf::Drawable, public virtual Updatable
 {
 	friend class sf::RenderTarget;
@@ -25,16 +27,23 @@ public:
 
 	inline b2World& getWorld(void) { return world; }
 
-	Car* createCar(const std::string& name, bool roundCoordinate=false);
+	Car* createCar(const std::string& name, bool maincar=false);
 	CarControler& createCarControler(Car* car, const CarControlKeysDef& controlkeys);
 
-	virtual void update(float delta) final;
-
+	
+	
+	void update(float delta);
+	void setMainCar(Car* car);
 
 
 private:
 	b2World world;
 	std::vector<Car*> cars;
+	Car* mainCar;
+
+	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const final;
+
+	bool pause;
 
 	Level level;
 	std::vector<CarControler> carcontrolers;
@@ -42,7 +51,6 @@ private:
 
 	contact_listner_ptr checkpointContactHandler;
 	const contact_listner_ptr groundlistener;
-	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const final;
 
 	InGameOverlay* overlay;
 };

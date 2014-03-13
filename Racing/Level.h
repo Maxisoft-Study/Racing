@@ -82,7 +82,7 @@ public:
 	Level(void);
 	~Level(void);
 
-	bool load(const std::string& jsonfilename, b2World* world, boost::filesystem::path path=boost::filesystem::path("./"));
+	bool load(const std::string& jsonfilename, b2World* world, boost::filesystem::path& path=boost::filesystem::path("./"));
 	
 	const Checkpoint* getFirstCheckpoint() const;
 	const Checkpoint* getNextCheckpoint(Checkpoint* cp) const;

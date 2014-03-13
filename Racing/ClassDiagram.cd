@@ -28,7 +28,7 @@
   <Class Name="Game">
     <Position X="7.75" Y="0.75" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>AAAAEAAQAAAAAgAEAAIAgBBAAAmAAAGAACIAAAAEAAA=</HashCode>
+      <HashCode>AAAAEAAQAAAAAgAEAAIAgBBAAAmAAAGAACKCAAAEIAA=</HashCode>
       <FileName>Game.h</FileName>
     </TypeIdentifier>
   </Class>

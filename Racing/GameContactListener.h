@@ -53,7 +53,7 @@ public:
 			if (contactListener->BeginContact(contact, A, B)) // => evenement gerer
 				return;
 		}
-		LOG_DEBUG << "Unhandled Begin Contact Event.";
+		//LOG_DEBUG << "Unhandled Begin Contact Event.";
 	}
 
 	virtual void EndContact(b2Contact* contact)
@@ -75,7 +75,7 @@ public:
 			if (contactListener->EndContact(contact, A, B)) // => evenement gerer
 				return;
 		}
-		LOG_DEBUG << "Unhandled End Contact Event.";
+		//LOG_DEBUG << "Unhandled End Contact Event.";
 	}
 
 	/*

@@ -18,7 +18,9 @@
 
 
 //#include <memory>
-//#include <thread>
+#include <thread>
+#include <mutex>
+
 
 #include <sstream>
 
@@ -77,5 +79,5 @@ inline void dassert(bool b)
 #include "GameObject.h"
 #include "TileMap.h"
 
-#include "YamlConverter.h"
+#include "YamlConverters.h"
 //////////////////////////////////////////////////////////////////////////

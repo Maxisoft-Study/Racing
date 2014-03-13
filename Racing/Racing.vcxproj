@@ -69,7 +69,8 @@
       <SuppressStartupBanner>true</SuppressStartupBanner>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /Y  "$(SolutionDir)\VS-2013-SFML-2.1\bin\*.dll" "$(OutDir)"
+      <Command>xcopy  "$(SolutionDir)config.yml" "$(OutDir)"
+xcopy /Y  "$(SolutionDir)\VS-2013-SFML-2.1\bin\*.dll" "$(OutDir)"
 mkdir "$(OutDir)\ressources"
 xcopy /Y  /E "$(SolutionDir)\ressources" "$(OutDir)\ressources"
 mkdir "$(OutDir)\Levels"
@@ -105,7 +106,8 @@ xcopy /Y  /E "$(SolutionDir)\Cars" "$(OutDir)\Cars"</Command>
       <AdditionalDependencies>sfml-audio.lib;sfml-graphics.lib;sfml-main.lib;sfml-network.lib;sfml-system.lib;sfml-window.lib;Box2D.lib;FreeGLUT.lib;GLUI.lib;libyaml-cpp.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /Y  "$(SolutionDir)\VS-2013-SFML-2.1\bin\*.dll" "$(OutDir)"
+      <Command>xcopy /Y  "$(SolutionDir)\config.yml" "$(OutDir)"
+xcopy /Y  "$(SolutionDir)\VS-2013-SFML-2.1\bin\*.dll" "$(OutDir)"
 mkdir "$(OutDir)\ressources"
 xcopy /Y  /E "$(SolutionDir)\ressources" "$(OutDir)\ressources"
 mkdir "$(OutDir)\Levels"
@@ -153,7 +155,7 @@ xcopy /Y  /E "$(SolutionDir)\Cars" "$(OutDir)\Cars"</Command>
     <ClInclude Include="Updatable.h" />
     <ClInclude Include="Utils.h" />
     <ClInclude Include="Wheel.h" />
-    <ClInclude Include="YamlConverter.h" />
+    <ClInclude Include="YamlConverters.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BarrierLimit.cpp" />

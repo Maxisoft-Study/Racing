@@ -116,9 +116,6 @@
     <ClInclude Include="TextureLoader.h">
       <Filter>Fichiers d%27en-tête\GameBase</Filter>
     </ClInclude>
-    <ClInclude Include="YamlConverter.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
     <ClInclude Include="LoggerConfig.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
@@ -151,6 +148,9 @@
     </ClInclude>
     <ClInclude Include="Game.h">
       <Filter>Fichiers d%27en-tête\GameBase</Filter>
+    </ClInclude>
+    <ClInclude Include="YamlConverters.h">
+      <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
