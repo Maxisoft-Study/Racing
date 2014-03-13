@@ -59,7 +59,7 @@ private:
 	//////////////////////////////////////////////////////////////////////////
 	std::vector<const TileSetDef> tilesetdefs;
 
-	boost::numeric::ublas::matrix<Ground*> groundmatrix;
+	boost::numeric::ublas::matrix<std::vector<Ground*>> groundmatrix;
 
 
 	//////////////////////////////////////////////////////////////////////////
@@ -77,12 +77,14 @@ private:
 	//////////////////////////////////////////////////////////////////////////
 	std::vector<const StartPos> startPos;
 
+	std::unordered_map<int, boost::filesystem::path> listYmlGroundDefFiles(boost::filesystem::path& p) const;
+
 public:
 
 	Level(void);
 	~Level(void);
 
-	bool load(const std::string& jsonfilename, b2World* world, boost::filesystem::path& path=boost::filesystem::path("./"));
+	bool load(const std::string& jsonfilename, b2World* world, boost::filesystem::path& p=boost::filesystem::path("./"));
 	
 	const Checkpoint* getFirstCheckpoint() const;
 	const Checkpoint* getNextCheckpoint(Checkpoint* cp) const;

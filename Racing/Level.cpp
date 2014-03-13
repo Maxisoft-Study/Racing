@@ -1,9 +1,12 @@
 #include "stdafx.h"
+#include <regex>
 #include "Level.h"
 
 //JSON
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/json_parser.hpp>
+
+using namespace boost::filesystem;
 
 Level::Level(void)
 {
@@ -20,10 +23,13 @@ Level::~Level(void)
 	for (unsigned i = 0, k = 0; i < groundmatrix.size1(); ++i)
 		for (unsigned j = 0; j < groundmatrix.size2(); ++j)
 		{
-			auto ground = groundmatrix(j, i);
-			if (ground)
+			auto grounds = groundmatrix(j, i);
+			for (auto ground : grounds)
 			{
-				delete ground;
+				if (ground)
+				{
+					delete ground;
+				}
 			}
 		}
 
@@ -48,8 +54,36 @@ void Level::draw(sf::RenderTarget& target, sf::RenderStates states) const
 
 }
 
-bool Level::load(const std::string &jsonfilename, b2World* world, boost::filesystem::path& path)
+
+
+std::unordered_map<int, boost::filesystem::path> Level::listYmlGroundDefFiles(boost::filesystem::path& p) const
 {
+	std::unordered_map<int, boost::filesystem::path> ret;
+	directory_iterator end_iter;
+	for (directory_iterator itr(p); itr != end_iter; ++itr)
+	{
+		auto fpath = path(*itr);
+		auto file = fpath.filename();
+		auto filestring = file.string();
+		if (std::regex_match(filestring, std::regex("^\\d+\\.y[a]?ml$")))
+		{
+			std::stringstream os(filestring);
+			int val;
+			os >> val;
+			ret[val] = fpath;
+		}
+	}
+	return ret;
+}
+
+
+bool Level::load(const std::string &jsonfilename, b2World* world, boost::filesystem::path& p)
+{
+
+	auto ymlgroundDef = listYmlGroundDefFiles(p);
+
+	YAML::Node frictionyaml = YAML::LoadFile((p / "friction.yml").string());
+	auto frictionTable = frictionyaml.as<std::map<int, float>>();
 
 	boost::property_tree::ptree pt;
 	boost::property_tree::read_json(jsonfilename, pt);
@@ -183,23 +217,33 @@ bool Level::load(const std::string &jsonfilename, b2World* world, boost::filesys
 	for (unsigned i = 0, k = 0; i < lenght.x; ++i)
 		for (unsigned j = 0; j < lenght.y; ++j)
 		{
-			int data = tilemapdata[1][k];
-			const TileSetDef* currDef = searchForTileSetDef(data);
+			for (auto& tilemap : tilemapdata)
+			{
+				int data = tilemap[k];
+				if (data == 0)
+				{
+					continue;
+				}
+				const TileSetDef* currDef = searchForTileSetDef(data);
 
-
-			auto position = Utils::SfVectPixelToBox2DVect({ static_cast<float>(j * currDef->tilewidth), static_cast<float>(i * currDef->tilewidth) });
+				auto position = Utils::SfVectPixelToBox2DVect({ static_cast<float>(j * currDef->tilewidth), static_cast<float>(i * currDef->tilewidth) });
 #ifdef DISABLETERRAIN
-			if (data && data != 38)
-			{
-				groundmatrix(j, i) = new Ground(world, position, currDef->tilewidth, currDef->tileheight);
-			}
-			else
-			{
-				groundmatrix(j, i) = nullptr;
-			}
+				if (data && data != 38)
+				{
+					groundmatrix(j, i) = new Ground(world, position, currDef->tilewidth, currDef->tileheight);
+				}
+				else
+				{
+					groundmatrix(j, i) = nullptr;
+				}
 #else
-			groundmatrix(j, i) = new Ground(world, position, currDef->tilewidth, currDef->tileheight, !data ? 0.95f : 1.f);
-#endif // DEBUG_DEBUG_DRAW		
+				auto coeff = frictionTable[data];
+				coeff = coeff ? coeff : 1.f; //default value
+				groundmatrix(j, i).push_back(new Ground(world, position, currDef->tilewidth, currDef->tileheight, coeff));
+#endif // DISABLETERRAIN		
+			}
+
+			
 			k += 1;
 		}
 

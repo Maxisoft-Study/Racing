@@ -92,7 +92,7 @@
       <Method Name="Level" Hidden="true" />
     </Members>
     <TypeIdentifier>
-      <HashCode>CACAIAAEQIAAAAAAAAICAAAAAAIgAAQBAABgAAQAgAo=</HashCode>
+      <HashCode>CACAIAAEQIAAAAAAAAICAAAAAAIgAAUBAABgAAQAgAo=</HashCode>
       <FileName>Level.h</FileName>
     </TypeIdentifier>
   </Class>
